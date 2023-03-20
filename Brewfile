@@ -1,4 +1,5 @@
 tap "homebrew/bundle"
+tap "homebrew/cask-fonts"
 tap "mvndaemon/mvnd"
 tap "romkatv/powerlevel10k"
 # Search tool like grep, but optimized for programmers
@@ -39,10 +40,10 @@ brew "trivy"
 brew "ultralist"
 # JavaScript package manager
 brew "yarn"
-# Zeebe CLI client
-brew "zbctl"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
+# Zeebe CLI client
+brew "zbctl"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Maven Daemon
@@ -67,6 +68,8 @@ cask "discord"
 cask "docker"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
+# Developer targeted fonts with a high number of glyphs
+cask "font-hack-nerd-font"
 # Free and open-source image editor
 cask "gimp"
 # IDE for Java development - community edition
