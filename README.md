@@ -24,3 +24,21 @@ You may also need to install Rosetta on your machine to be able to use non-arm b
 ```sh
 softwareupdate --install-rosetta --agree-to-license
 ```
+
+## Usage
+
+Install and update packages
+
+```sh
+brew bundle --verbose
+git commit -a -m 'Update packages'
+git push
+```
+
+Dump newly installed packages into Brewfile
+
+```sh
+brew bundle dump --force --describe
+git commit -a -m 'Add new package'
+git push
+```
