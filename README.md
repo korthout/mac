@@ -16,3 +16,11 @@ If you want to protect yourself more, first download the file, verify a checksum
 /bin/bash -c "$(curl -fsSL \
  https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
+## Install Rosetta
+
+You may also need to install Rosetta on your machine to be able to use non-arm binaries.
+
+```sh
+softwareupdate --install-rosetta --agree-to-license
+```
