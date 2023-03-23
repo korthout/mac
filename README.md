@@ -1,55 +1,16 @@
 # Mac
 
-Before you can use this, you'll need to install some things:
+Homebrew is the main way to manage packages from this repo.
+An overview of all installed packages can be found in `Brewfile` (the exact versions are specified in `Brewfile.lock.json`).
 
-## Install Nix
+Originally, I looked into using Nix and nix-darwin to manage packages, but this was too cumbersome compared to Brew.
 
-We're gonna need Nix to install other packages.
-Make sure to follow any instructions given by the installer.
-
-```sh
-sh <(curl -L https://nixos.org/nix/install)
-```
-
-Check if you have access to packages:
-
-```sh
-nix-env -qaP
-```
-
-If you don't, you'll need to add nixpkgs:
-
-```sh
-nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-nix-channel --update
-```
-
-We'll also need to install nix-darwin:
-
-```sh
-nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-./result/bin/darwin-installer
-```
-
-This may require us to move `/etc/nix/nix.conf` if you see the following
-warning:
-
-> warning: not linking environment.etc."nix/nix.conf" because /etc/nix/nix.conf
-> exists, skipping...
-
-Just run:
-
-```sh
-sudo mv /etc/nix/nix.conf /etc/nix/nix.conf_old
-```
-
-With `nix-darwin` installed, we'll be able to declaratively configure macOS
-using the files in this repo.
+Before you can use the rest of this repo, you'll need to install some things:
 
 ## Install Homebrew
 
-Homebrew is also used see (see [ARCHITECTURE.md](#ARCHITECTURE.md)), but cannot
-yet be installed through Nix.
+You can install Homebrew pretty in an unsafe way.
+If you want to protect yourself more, first download the file, verify a checksum, and inspect the contents before executing it.
 
 ```sh
 /bin/bash -c "$(curl -fsSL \
