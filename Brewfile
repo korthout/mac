@@ -22,6 +22,8 @@ brew "imagemagick"
 brew "jenv"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Shell command parallelization utility
