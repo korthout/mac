@@ -1,3 +1,11 @@
 [user]
 	name = Nico Korthout
 	email = nicokorthout@gmail.com
+	signingkey = E1BAA90A7AFB5894
+
+[core]
+	editor = nvim
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[commit]
+	gpgsign = true
