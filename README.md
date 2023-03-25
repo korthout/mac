@@ -55,14 +55,14 @@ Install and update packages
 
 ```sh
 brew bundle --verbose
-git commit -a -m 'Update packages'
-git push
+config commit -a -m 'Update packages'
+config push
 ```
 
 Dump newly installed packages into Brewfile
 
 ```sh
 brew bundle dump --force --describe
-git commit -a -m 'Add new package'
-git push
+config commit -a -m 'Add new package'
+config push
 ```
