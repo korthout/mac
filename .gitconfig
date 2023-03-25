@@ -9,3 +9,5 @@
 	program = /opt/homebrew/bin/gpg
 [commit]
 	gpgsign = true
+[alias]
+	cm = checkout main
