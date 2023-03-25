@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-eval $(/opt/homebrew/bin/brew shellenv)
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
-
 # Correctly save history in zsh https://unix.stackexchange.com/a/575102
 HISTFILE=~/.zsh_history
 HISTSIZE=500000
@@ -17,8 +14,8 @@ setopt appendhistory
 setopt SHARE_HISTORY # Share history between all sessions
 setopt INC_APPEND_HISTORY # Write to file immediately, not when shell exits
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# docker and idea are installed here
+export PATH=/usr/local/bin:$PATH
 
 # Source my personal aliases
 source $HOME/.aliases
@@ -27,10 +24,9 @@ source $HOME/.aliases
 # e.g. git show head^ now actually works without escaping
 unsetopt nomatch
 
-# docker and idea are installed here
-export PATH=/usr/local/bin:$PATH
-
+eval $(/opt/homebrew/bin/brew shellenv)
 if type brew &>/dev/null; then
+
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   #what about /opt/homebrew/share/zsh/site-functions
 
@@ -47,3 +43,7 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
