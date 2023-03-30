@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function config() {
+    git --git-dir=$HOME/.cfg/ --work-tree=$HOME
+}
+
+# Make sure foreground process group can be terminated
+trap 'echo Terminated $0; cd - && exit' INT;
+
+config pull
+
+brew bundle --verbose --global
+
+config commit -a -m 'Update packages'
+config push
+
+# return
+cd -

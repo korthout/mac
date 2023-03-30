@@ -17,6 +17,9 @@ setopt INC_APPEND_HISTORY # Write to file immediately, not when shell exits
 # docker and idea are installed here
 export PATH=/usr/local/bin:$PATH
 
+# personal binaries
+export PATH=$HOME/bin:$PATH
+
 # Source my personal aliases
 source $HOME/.aliases
 
