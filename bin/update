@@ -13,5 +13,7 @@ config pull
 
 brew bundle --verbose --file=$HOME/Brewfile
 
-config commit -a -m 'Update packages'
+config add $HOME/Brewfile
+config add $HOME/Brewfile.lock.json
+config commit
 config push
