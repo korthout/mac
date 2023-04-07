@@ -27,6 +27,9 @@ source $HOME/.aliases
 # e.g. git show head^ now actually works without escaping
 unsetopt nomatch
 
+# Add GH SSH key to ssh agent
+ssh-add -K ~/.ssh/id_ed25519 2>/dev/null
+
 eval $(/opt/homebrew/bin/brew shellenv)
 if type brew &>/dev/null; then
 
