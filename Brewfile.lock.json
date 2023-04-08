@@ -1176,6 +1176,12 @@
         "options": {
           "full_name": "font-hack-nerd-font"
         }
+      },
+      "steam": {
+        "version": "4.0",
+        "options": {
+          "full_name": "steam"
+        }
       }
     }
   },

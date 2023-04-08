@@ -104,6 +104,8 @@ cask "slack"
 cask "spotify"
 # System monitor for the menu bar
 cask "stats"
+# Video game digital distribution service
+cask "steam"
 # Backup, recovery and cloning software
 cask "superduper"
 # Remote access and connectivity software focused on security
