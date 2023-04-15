@@ -70,6 +70,8 @@ cask "discord"
 cask "docker"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
+# Launcher for *Epic Games* games
+cask "epic-games"
 # Developer targeted fonts with a high number of glyphs
 cask "font-hack-nerd-font"
 # Free and open-source image editor
