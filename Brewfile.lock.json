@@ -986,7 +986,7 @@
         }
       },
       "brave-browser": {
-        "version": "1.50.114.0,150.114",
+        "version": "1.50.119.0,150.119",
         "options": {
           "full_name": "brave-browser"
         }
@@ -1182,6 +1182,12 @@
         "options": {
           "full_name": "steam"
         }
+      },
+      "epic-games": {
+        "version": "14.6.2",
+        "options": {
+          "full_name": "epic-games"
+        }
       }
     }
   },
@@ -1193,7 +1199,7 @@
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.0.0.1.1679647830",
         "Xcode": "14.3",
-        "macOS": "13.3"
+        "macOS": "13.3.1"
       }
     }
   }
