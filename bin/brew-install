@@ -29,6 +29,5 @@ brew install "$package"
 brew bundle dump -f --describe --file=$HOME/Brewfile
 
 config add $HOME/Brewfile
-config add $HOME/Brewfile.lock.json
 config commit -m "Install-$package"
 config push
