@@ -20,6 +20,7 @@
 	dca = diff --cached
 	f = fetch
 	fa = fetch --all --prune
+	ff = fetch --all --prune --prune-tags --force
 	l = log --oneline --graph
 	la = log --oneline --graph --all
 	p = push
