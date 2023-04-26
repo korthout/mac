@@ -12,4 +12,18 @@
 [push]
 	autoSetupRemote = true
 [alias]
+	a = add
+	c = commit
+	ca = commit --amend
 	cm = checkout main
+	d = diff
+	dca = diff --cached
+	f = fetch
+	fa = fetch --all --prune
+	l = log --oneline --graph
+	la = log --oneline --graph --all
+	p = push
+	pf = push --force
+	st = status
+	swc = switch --create
+	up = pull --rebase
