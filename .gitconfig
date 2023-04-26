@@ -9,5 +9,7 @@
 	program = /opt/homebrew/bin/gpg
 [commit]
 	gpgsign = true
+[push]
+	autoSetupRemote = true
 [alias]
 	cm = checkout main
