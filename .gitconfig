@@ -25,6 +25,8 @@
 	la = log --oneline --graph --all
 	p = push
 	pf = push --force
+	rb = rebase
+	sh = show
 	st = status
 	swc = switch --create
 	up = pull --rebase
