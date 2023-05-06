@@ -15,6 +15,7 @@
 	a = add
 	c = commit
 	ca = commit --amend
+	cfu = commit --fixup
 	cm = checkout main
 	d = diff
 	dca = diff --cached
@@ -26,6 +27,8 @@
 	p = push
 	pf = push --force
 	rb = rebase
+	rbi = rebase --interactive
+	rbia = rebase --interactive --autosquash
 	rh = reset head
 	sh = show
 	st = status
