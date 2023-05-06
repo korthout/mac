@@ -26,6 +26,7 @@
 	p = push
 	pf = push --force
 	rb = rebase
+	rh = reset head
 	sh = show
 	st = status
 	swc = switch --create
