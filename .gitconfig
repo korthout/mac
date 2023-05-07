@@ -29,7 +29,8 @@
 	rb = rebase
 	rbi = rebase --interactive
 	rbia = rebase --interactive --autosquash
-	rh = reset head
+	rh = reset
+	rhh = reset --hard
 	sh = show
 	st = status
 	swc = switch --create
