@@ -66,3 +66,23 @@ brew bundle dump --force --describe
 config commit -a -m 'Add new package'
 config push
 ```
+
+## Additional installations
+
+Some installations require manual effort.
+
+### VS Code Extensions
+
+Dump extensions into a file
+
+```sh
+code --list-extensions > vscode-extensions.list
+```
+
+Install extensions
+
+```sh
+cat vscode-extensions.list | xargs -L 1 code --install-extension
+```
+
+> Source: https://stackoverflow.com/a/54467390
