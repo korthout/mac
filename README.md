@@ -11,13 +11,21 @@ This repo should be used as a bare git repository to work on the `~` home folder
 
 Before you can use the rest of this repo, you'll need to install some things:
 
+### Install Command Line Tools
+
+In order to use `git` we'll need the Command Line Tools.
+
+```sh
+xcode-select --install
+```
+
 ### Bare repository clone and checkout
 
 To start using this repo on a new machine, we need to run the following in a new shell.
 This idea was taken from: https://www.atlassian.com/git/tutorials/dotfiles.
 
 ```sh
-git clone --bare git@github.com:korthout/mac.git $HOME/.cfg
+git clone --bare https://github.com/korthout/mac.git $HOME/.cfg
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 mkdir -p .config-backup
 config checkout
@@ -86,3 +94,30 @@ cat vscode-extensions.list | xargs -L 1 code --install-extension
 ```
 
 > Source: https://stackoverflow.com/a/54467390
+
+### Stats config
+
+These can be exported using:
+
+```sh
+defaults read eu.exelban.Stats > ~/configs/stats.json
+```
+
+And can be imported using:
+
+```sh
+defaults import eu.exelban.Stats ~/configs/stats.json
+```
+
+### Rectangle config
+
+The config can be imported and exported using the Rectangle Settings UI.
+
+- `configs/RectangleConfig.json`
+
+### iTerm config
+
+The config can be imported and exported using the iTerm Settings UI.
+
+- Profile: `config/iterm2-profile.json`
+- Keymap: `config/iterm2.itermkeymap`
