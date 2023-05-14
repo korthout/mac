@@ -7,4 +7,6 @@ for al in `git --list-cmds=alias`; do
     alias g$al="git $al"
 done
 
+alias cdc='cd $HOME/gh/camunda'
+alias cdk='cd $HOME/gh/korthout'
 alias cdba='cd $HOME/gh/korthout/backport-action'
