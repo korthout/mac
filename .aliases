@@ -1,5 +1,6 @@
 # vim: set filetype=zsh: 
 
+alias aliases='vim $HOME/.aliases'
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Load Git aliases under g<alias> https://gist.github.com/mwhite/6887990
@@ -8,5 +9,12 @@ for al in `git --list-cmds=alias`; do
 done
 
 alias cdc='cd $HOME/gh/camunda'
+alias cdz='cd $HOME/gh/camunda/zeebe'
 alias cdk='cd $HOME/gh/korthout'
 alias cdba='cd $HOME/gh/korthout/backport-action'
+
+alias mvncom='mvnd compile -DskipChecks'
+alias mvncomp='mvncom'
+alias mvncist='mvnd clean install -DskipTests'
+alias mvncists='mvncist -DskipChecks -Djacoco.skip'
+alias mvnt='mvnd test -DforkCount=4'
