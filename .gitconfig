@@ -23,8 +23,8 @@
 	f = fetch
 	fa = fetch --all --prune
 	ff = fetch --all --prune --prune-tags --force
-	l = log --oneline --graph
-	la = log --oneline --graph --all
+	l = log --graph --date=relative --pretty=format:'%C(yellow)%h %C(auto)%d %C(auto)%s %C(green)%aN %C(red)%cd %C(reset)' --color=always
+	la = log --graph --date=relative --pretty=format:'%C(yellow)%h %C(auto)%d %C(auto)%s %C(green)%aN %C(red)%cd %C(reset)' --color=always --all
 	p = push
 	pf = push --force
 	rb = rebase
