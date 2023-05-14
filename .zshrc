@@ -14,6 +14,9 @@ setopt appendhistory
 setopt SHARE_HISTORY # Share history between all sessions
 setopt INC_APPEND_HISTORY # Write to file immediately, not when shell exits
 
+# Make sure that GPG knows where to look
+export GPG_TTY=$(tty)
+
 # docker and idea are installed here
 export PATH=/usr/local/bin:$PATH
 
