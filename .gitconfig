@@ -1,7 +1,8 @@
 [user]
 	name = Nico Korthout
 	email = nicokorthout@gmail.com
-	signingkey = E1BAA90A7AFB5894
+[includeIf "gitdir:~/gh/camunda/"]
+	path = ~/gh/camunda/.gitconfig
 
 [core]
 	editor = nvim
