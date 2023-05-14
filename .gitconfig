@@ -14,6 +14,9 @@
 	autoSetupRemote = true
 [alias]
 	a = add
+	aN = add --intent-to-add
+	anc = ! git merge-base $1 --is-ancestor $2 && echo yes || echo no
+	anch = ! echo 'usage: ganc <ancestor> <descendant>'
 	c = commit
 	ca = commit --amend
 	cfu = commit --fixup
@@ -25,8 +28,10 @@
 	ff = fetch --all --prune --prune-tags --force
 	l = log --graph --date=relative --pretty=format:'%C(yellow)%h %C(auto)%d %C(auto)%s %C(green)%aN %C(red)%cd %C(reset)' --color=always
 	la = log --graph --date=relative --pretty=format:'%C(yellow)%h %C(auto)%d %C(auto)%s %C(green)%aN %C(red)%cd %C(reset)' --color=always --all
+	mn = merge --no-ff --no-commit
 	p = push
 	pf = push --force
+	prune = ! git branch --merged main | grep -v '^[ *]*main$' | xargs git branch -d
 	rb = rebase
 	rba = rebase --abort
 	rbc = rebase --continue
