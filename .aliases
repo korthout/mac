@@ -8,10 +8,23 @@ for al in `git --list-cmds=alias`; do
     alias g$al="git $al"
 done
 
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
 alias cdc='cd $HOME/gh/camunda'
 alias cdz='cd $HOME/gh/camunda/zeebe'
 alias cdk='cd $HOME/gh/korthout'
 alias cdba='cd $HOME/gh/korthout/backport-action'
+
+alias lsa='ls -lah'
+alias l='ls -lah'
+alias ll='ls -lh'
+alias la='ls -lAh'
+
+alias v='vim'
+alias vim='nvim'
 
 alias mvncom='mvnd compile -DskipChecks'
 alias mvncomp='mvncom'
