@@ -42,5 +42,7 @@
 	rhh = reset --hard
 	sh = show
 	st = status
+	sw = switch
 	swc = switch --create
+	sw10 = ! git branch --sort=-committerdate | head -n 10 | fzf --header \"Switch to recent branch\" | xargs git switch
 	up = pull --rebase
