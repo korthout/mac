@@ -34,6 +34,8 @@ brew "openjdk"
 brew "parallel"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
 # Crypto and x509 Swiss-Army-Knife
 brew "step"
 # Simplified and community-driven man pages
