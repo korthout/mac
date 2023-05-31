@@ -4,6 +4,10 @@ tap "mvndaemon/mvnd"
 tap "romkatv/powerlevel10k"
 # Search tool like grep, but optimized for programmers
 brew "ack"
+# Run your GitHub Actions locally 🚀
+brew "act"
+# Static checker for GitHub Actions workflow files
+brew "actionlint"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Command-line fuzzy finder written in Go
