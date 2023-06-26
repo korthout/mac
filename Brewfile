@@ -4,7 +4,7 @@ tap "mvndaemon/mvnd"
 tap "romkatv/powerlevel10k"
 # Search tool like grep, but optimized for programmers
 brew "ack"
-# Run your GitHub Actions locally 🚀
+# Run your GitHub Actions locally
 brew "act"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
@@ -18,6 +18,8 @@ brew "gh"
 brew "git"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
+# OpenType text shaping engine
+brew "harfbuzz"
 # Kubernetes package manager
 brew "helm"
 # Tools and libraries to manipulate images in many formats
@@ -98,6 +100,8 @@ cask "keybase"
 cask "knockknock"
 # Wallet desktop application to maintain multiple cryptocurrencies
 cask "ledger-live"
+# Privacy-first, open-source platform for knowledge sharing and management
+cask "logseq"
 # Tool to control external monitor brightness & volume
 cask "monitorcontrol"
 # Knowledge base that works on top of a local folder of plain text Markdown files
