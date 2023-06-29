@@ -22,6 +22,9 @@
 	cfu = commit --fixup
 	cm = checkout main
 	co = checkout
+	cp = cherry-pick
+	cpc = cherry-pick --continue
+	cpa = cherry-pick --abort
 	d = diff
 	dca = diff --cached
 	f = fetch
