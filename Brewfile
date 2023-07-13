@@ -46,6 +46,8 @@ brew "parallel"
 brew "pinentry-mac"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
+# JVM-based programming language
+brew "scala"
 # Crypto and x509 Swiss-Army-Knife
 brew "step"
 # Simplified and community-driven man pages
