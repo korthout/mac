@@ -48,6 +48,8 @@ brew "pinentry-mac"
 brew "python@3.11"
 # JVM-based programming language
 brew "scala"
+# JVM-based programming language
+brew "scala@2.13"
 # Crypto and x509 Swiss-Army-Knife
 brew "step"
 # Simplified and community-driven man pages
