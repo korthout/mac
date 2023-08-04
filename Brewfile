@@ -18,6 +18,8 @@ brew "gh"
 brew "git"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Kubernetes package manager
@@ -150,3 +152,6 @@ cask "vlc"
 cask "whatsapp"
 # Video communication and virtual meeting platform
 cask "zoom"
+vscode "GitHub.copilot"
+vscode "GitHub.copilot-chat"
+vscode "github.vscode-github-actions"
