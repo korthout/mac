@@ -46,6 +46,7 @@
 	sh = show
 	st = status
 	sw = switch
-	swc = switch --create
 	sw10 = ! git branch --sort=-committerdate | head -n 10 | fzf --header \"Switch to recent branch\" | xargs git switch
+	swa = ! git branch --all | fzf --header \"Switch to branch\" | xargs git switch
+	swc = switch --create
 	up = pull --rebase
