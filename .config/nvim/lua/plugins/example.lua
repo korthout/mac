@@ -1,4 +1,36 @@
 -- since this is just an example spec, don't actually load anything here and return an empty spec
+
+if true then
+  return {
+    -- add gruvbox
+    { "rebelot/kanagawa.nvim" },
+
+    -- Configure LazyVim to load gruvbox
+    {
+      "LazyVim/LazyVim",
+      opts = {
+        colorscheme = "kanagawa",
+      },
+    },
+
+    -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
+    -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+
+    {
+      "nvim-treesitter/nvim-treesitter",
+      opts = function(_, opts)
+        -- add tsx and treesitter
+        vim.list_extend(opts.ensure_installed, {
+          "typescript",
+        })
+      end,
+    },
+  }
+end
+
+
+
 -- stylua: ignore
 if true then return {} end
 
