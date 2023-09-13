@@ -17,8 +17,8 @@
 	aN = add --intent-to-add
 	anc = ! git merge-base $1 --is-ancestor $2 && echo yes || echo no
 	anch = ! echo 'usage: ganc <ancestor> <descendant>'
-	c = commit
-	ca = commit --amend
+	c = commit --verbose
+	ca = commit --amend --verbose
 	cfu = commit --fixup
 	cm = checkout main
 	co = checkout
