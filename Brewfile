@@ -8,6 +8,10 @@ brew "ack"
 brew "act"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
+# New file format for still image compression
+brew "jpeg-xl"
+# Codec library for encoding and decoding AV1 video streams
+brew "aom"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Command-line fuzzy finder written in Go
@@ -16,6 +20,8 @@ brew "fzf"
 brew "gh"
 # Distributed revision control system
 brew "git"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
@@ -40,12 +46,12 @@ brew "luv"
 brew "neovim"
 # Platform built on V8 to build network applications
 brew "node"
-# Development kit for the Java programming language
-brew "openjdk"
 # Shell command parallelization utility
 brew "parallel"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Theme for zsh
+brew "powerlevel10k"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
 # JVM-based programming language
@@ -72,8 +78,6 @@ brew "zbctl"
 brew "zsh"
 # Maven Daemon
 brew "mvndaemon/mvnd/mvnd"
-# A Zsh Theme
-brew "romkatv/powerlevel10k/powerlevel10k"
 # Apple TV Aerial screensaver
 cask "aerial"
 # Application launcher and productivity software
@@ -142,16 +146,19 @@ cask "timer"
 cask "todoist"
 # Pomodoro desktop timer
 cask "tomighty"
+# SSH server for teams managing distributed infrastructure
+cask "tsh"
 # Mutes your keyboard while you type
 cask "unclack"
 # Open-source code editor
 cask "visual-studio-code"
 # Multimedia player
 cask "vlc"
-# Desktop client for WhatsApp
+# Native desktop client for WhatsApp
 cask "whatsapp"
 # Video communication and virtual meeting platform
 cask "zoom"
 vscode "GitHub.copilot"
 vscode "GitHub.copilot-chat"
 vscode "github.vscode-github-actions"
+vscode "golang.go"
