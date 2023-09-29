@@ -12,6 +12,10 @@ brew "actionlint"
 brew "jpeg-xl"
 # Codec library for encoding and decoding AV1 video streams
 brew "aom"
+# New way of working with Protocol Buffers
+brew "buf"
+# Statistics utility to count lines of code
+brew "cloc"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Command-line fuzzy finder written in Go
@@ -20,8 +24,6 @@ brew "fzf"
 brew "gh"
 # Distributed revision control system
 brew "git"
-# Validating, recursive, caching DNS resolver
-brew "unbound"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
@@ -30,6 +32,8 @@ brew "go"
 brew "harfbuzz"
 # Kubernetes package manager
 brew "helm"
+# ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
+brew "libheif"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Manage your Java environment
@@ -54,6 +58,8 @@ brew "pinentry-mac"
 brew "powerlevel10k"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.9"
 # JVM-based programming language
 brew "scala"
 # JVM-based programming language
@@ -158,7 +164,10 @@ cask "vlc"
 cask "whatsapp"
 # Video communication and virtual meeting platform
 cask "zoom"
+vscode "cmstead.js-codeformer"
+vscode "cmstead.jsrefactor"
 vscode "GitHub.copilot"
 vscode "GitHub.copilot-chat"
 vscode "github.vscode-github-actions"
 vscode "golang.go"
+vscode "vscodevim.vim"
