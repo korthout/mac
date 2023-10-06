@@ -26,6 +26,10 @@ if true then
         })
       end,
     },
+
+    {
+      "tpope/vim-surround",
+    },
   }
 end
 
