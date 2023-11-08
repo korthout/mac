@@ -18,6 +18,8 @@ brew "buf"
 brew "cloc"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Functional metaprogramming aware language built on Erlang VM
+brew "elixir"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
