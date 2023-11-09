@@ -26,6 +26,8 @@ brew "fzf"
 brew "gh"
 # Distributed revision control system
 brew "git"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
@@ -56,6 +58,8 @@ brew "node"
 brew "parallel"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Fast, disk space efficient package manager
+brew "pnpm"
 # Theme for zsh
 brew "powerlevel10k"
 # Interpreted, interactive, object-oriented programming language
@@ -124,6 +128,8 @@ cask "knockknock"
 cask "ledger-live"
 # Privacy-first, open-source platform for knowledge sharing and management
 cask "logseq"
+# Screen and video recording software
+cask "loom"
 # Tool to control external monitor brightness & volume
 cask "monitorcontrol"
 # Knowledge base that works on top of a local folder of plain text Markdown files
