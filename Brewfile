@@ -26,6 +26,8 @@ brew "fzf"
 brew "gh"
 # Distributed revision control system
 brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
 # Validating, recursive, caching DNS resolver
 brew "unbound"
 # GNU Pretty Good Privacy (PGP) package
