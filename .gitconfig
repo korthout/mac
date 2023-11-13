@@ -50,3 +50,6 @@
 	swa = ! git branch --all | fzf --header \"Switch to branch\" | sed -e 's/remotes\\/[a-z]*\\///' | xargs git switch
 	swc = switch --create
 	up = pull --rebase
+[rebase]
+	autoStash = true
+	autoSquash = true
