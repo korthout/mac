@@ -6,6 +6,7 @@
 
 [core]
 	editor = nvim
+	pager = delta
 [gpg]
 	program = /opt/homebrew/bin/gpg
 [commit]
