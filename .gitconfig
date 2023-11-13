@@ -24,8 +24,8 @@
 	cm = checkout main
 	co = checkout
 	cp = cherry-pick
-	cpc = cherry-pick --continue
 	cpa = cherry-pick --abort
+	cpc = cherry-pick --continue
 	d = diff
 	dca = diff --cached
 	f = fetch
