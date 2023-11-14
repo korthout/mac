@@ -52,7 +52,7 @@ if type brew &>/dev/null; then
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # The next line updates PATH for the Google Cloud SDK.
