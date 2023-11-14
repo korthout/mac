@@ -46,7 +46,7 @@
 	rhh = reset --hard
 	sh = show
 	sp = stash push
-	spki = stash push --keep-index
+	spki = stash push --keep-index --include-untracked
   spop = stash pop
 	st = status
 	sw = switch
