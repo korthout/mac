@@ -92,8 +92,6 @@ brew "zbctl"
 brew "zsh"
 # Maven Daemon
 brew "mvndaemon/mvnd/mvnd"
-# Apple TV Aerial screensaver
-cask "aerial"
 # Application launcher and productivity software
 cask "alfred"
 # Android SDK component
