@@ -59,5 +59,9 @@
 	autoSquash = true
 [rerere]
 	enabled = true
+[interactive]
+	diffFilter = delta --color-only --features=interactive
 [delta]
 	line-numbers = true
+[delta "interactive"]
+	keep-plus-minus-markers = false
