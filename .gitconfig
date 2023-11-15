@@ -85,7 +85,8 @@
   right-arrow = >
 	hunk-header-decoration-style = "#3e3e43" box ul
   #plus-style = brightgreen black
-  plus-style = syntax darkgreen
+  dark-green = "#263f26"
+  plus-style = syntax mellow-barbet-adjusted.dark-green
 	plus-emph-style = black green
 	minus-style = brightred black
 	minus-emph-style = black red
