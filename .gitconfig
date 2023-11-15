@@ -47,7 +47,7 @@
 	sh = show
 	sp = stash push
 	spki = stash push --keep-index --include-untracked
-  spop = stash pop
+	spop = stash pop
 	st = status
 	sw = switch
 	sw10 = ! git branch --sort=-committerdate | head -n 10 | fzf --header \"Switch to recent branch\" | xargs git switch
