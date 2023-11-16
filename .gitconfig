@@ -21,6 +21,7 @@
 	c = commit --verbose
 	ca = commit --amend --verbose
 	cfu = commit --fixup
+	retrycommit = ! gc --edit --file $(git rev-parse --git-dir)/COMMIT_EDITMSG
 	cm = checkout main
 	co = checkout
 	cp = cherry-pick
