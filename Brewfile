@@ -96,6 +96,8 @@ brew "zsh"
 brew "mvndaemon/mvnd/mvnd"
 # Application launcher and productivity software
 cask "alfred"
+# Transfer files from and to an Android smartphone
+cask "android-file-transfer"
 # Android SDK component
 cask "android-platform-tools"
 # Web browser focusing on privacy
