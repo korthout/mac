@@ -36,7 +36,7 @@
 	la = log --graph --date=relative --pretty=format:'%C(yellow)%h %C(auto)%d %C(auto)%s %C(green)%aN %C(red)%cd %C(reset)' --color=always --all
 	mn = merge --no-ff --no-commit
 	p = push
-	pf = push --force
+	pf = push --force-with-lease
 	prune = ! git branch --merged main | grep -v '^[ *]*main$' | xargs git branch -d
 	rb = rebase
 	rba = rebase --abort
