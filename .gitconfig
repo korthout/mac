@@ -11,6 +11,7 @@
 	program = /opt/homebrew/bin/gpg
 [commit]
 	gpgsign = true
+	verbose = true
 [push]
 	autoSetupRemote = true
 [alias]
