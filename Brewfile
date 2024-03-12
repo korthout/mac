@@ -108,7 +108,7 @@ cask "camunda-modeler"
 cask "coconutbattery"
 # Voice and text chat software
 cask "discord"
-# App to build and share containerized applications and microservices
+# App to build and share containerised applications and microservices
 cask "docker"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
@@ -148,6 +148,8 @@ cask "rectangle"
 cask "runelite"
 # Team communication and collaboration software
 cask "slack"
+# Sound and audio controller
+cask "soundsource"
 # Music streaming service
 cask "spotify"
 # System monitor for the menu bar
@@ -178,8 +180,8 @@ cask "whatsapp"
 cask "zoom"
 vscode "cmstead.js-codeformer"
 vscode "cmstead.jsrefactor"
-vscode "GitHub.copilot"
-vscode "GitHub.copilot-chat"
+vscode "github.copilot"
+vscode "github.copilot-chat"
 vscode "github.vscode-github-actions"
 vscode "golang.go"
-vscode "JakeBecker.elixir-ls"
+vscode "jakebecker.elixir-ls"
