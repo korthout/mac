@@ -178,6 +178,8 @@ cask "tsh"
 cask "unclack"
 # Open-source code editor
 cask "visual-studio-code"
+# All-in-One Java Troubleshooting Tool
+cask "visualvm"
 # Multimedia player
 cask "vlc"
 # Native desktop client for WhatsApp
