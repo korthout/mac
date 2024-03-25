@@ -24,6 +24,8 @@ brew "elixir"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# Interpreter for PostScript and PDF
+brew "ghostscript"
 # Distributed revision control system
 brew "git"
 # Automatic git commit --fixup
@@ -32,6 +34,8 @@ brew "git-absorb"
 brew "git-delta"
 # Validating, recursive, caching DNS resolver
 brew "unbound"
+# GNU Transport Layer Security (TLS) Library
+brew "gnutls"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
@@ -122,6 +126,8 @@ cask "gimp"
 cask "intellij-idea-ce"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Tools to manage, monitor, profile and troubleshoot Java applications
+cask "jdk-mission-control"
 # Tool to prevent the system from going into sleep mode
 cask "keepingyouawake"
 # End-to-end encryption software
@@ -185,3 +191,4 @@ vscode "github.copilot-chat"
 vscode "github.vscode-github-actions"
 vscode "golang.go"
 vscode "jakebecker.elixir-ls"
+vscode "vscodevim.vim"
