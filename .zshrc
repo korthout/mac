@@ -47,6 +47,9 @@ if type brew &>/dev/null; then
   unsetopt FLOW_CONTROL    # Disable start/stop characters in shell editor.
   unsetopt completealiases # https://unix.stackexchange.com/a/250489
 
+  zstyle ':completion:*' special-dirs true
+  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
   autoload -Uz compinit
   compinit
 fi
