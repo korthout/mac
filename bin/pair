@@ -1,0 +1,74 @@
+#!/bin/sh
+
+# pair - A script to add a co-authored-by line to your commit messages
+#
+# This script allows you to easily add a co-authored-by line to your commit messages.
+# It's useful when you're pair programming or working on a commit with someone else.
+# It uses fzf to allow you to select an author from the list of authors in the git history.
+#
+# Usage:
+# 1. Save this script to your PATH, e.g. as `pair`.
+# 2. Make it executable with `chmod u+x pair`.
+# 3. Stage your changes with `git add`.
+# 4. Run `pair` to commit your changes with a co-authored-by line.
+#
+# You can also add this script to your git configuration as an alias:
+#   git config --global alias.pair '!pair'
+# Then you can run `git pair` instead of `pair`.
+#
+# Note: This script requires git, sort, uniq, and fzf to be installed.
+#
+# Copyright (c) 2024, Nico Korthout <korthout@users.noreply.github.com>
+# Apache License 2.0, see https://www.apache.org/licenses/LICENSE-2.0
+
+# If `-h` is passed as an argument, show usage information
+if [ "$1" = "-h" ]; then
+  echo "Usage: pair [-h]"
+  echo
+  echo "Add a co-authored-by line to your commit messages."
+  echo
+  echo "This script allows you to easily add a co-authored-by line to your commit messages."
+  echo "It's useful when you're pair programming or working on a commit with someone else."
+  echo "It uses fzf to allow you to select an author from the list of authors in the git history."
+  echo
+  echo "Usage:"
+  echo "1. Stage your changes with 'git add'."
+  echo "2. Run 'pair' to commit your changes with a co-authored-by line."
+  echo
+  echo "You can also add this script to your git configuration as an alias:"
+  echo "  git config --global alias.pair '!pair'"
+  echo "Then you can run 'git pair' instead of 'pair'."
+  exit 0
+
+# This script does not accept any arguments other than -h
+elif [ "$#" -ne 0 ]; then
+  echo "Error: invalid arguments"
+  echo "Try 'pair -h' for more information."
+  exit 1
+fi
+
+# Use a main function to avoid running a partial script when download is interrupted
+function run {
+    set -e
+
+    # Require that git, sort, uniq, and fzf are installed
+    command -v git >/dev/null 2>&1 || { echo >&2 "git is required but not installed."; exit 1; }
+    command -v sort >/dev/null 2>&1 || { echo >&2 "sort is required but not installed."; exit 1; }
+    command -v uniq >/dev/null 2>&1 || { echo >&2 "uniq is required but not installed."; exit 1; }
+    command -v fzf >/dev/null 2>&1 || { echo >&2 "fzf is required but not installed."; exit 1; }
+
+    # Find all git authors and emails, storing them in a variable
+    authors=$(git log --format='%an <%ae>' | sort | uniq)
+
+    # TODO: store potential authors in a file for faster lookup
+
+    # Pass authors through fzf, allowing the user to select one
+    author=$(echo "$authors" | fzf --prompt="Select author: ")
+
+    # Commit the staged changes, co-authored-by the selected author
+    git commit --trailer "Co-authored-by: $author"
+
+    exit 0
+}
+
+run
