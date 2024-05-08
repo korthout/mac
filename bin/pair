@@ -23,9 +23,16 @@
 
 # If `-h` is passed as an argument, show usage information
 if [ "$1" = "-h" ]; then
-  echo "Usage: pair [-h]"
+  echo "Usage: pair [-h] [<args>] [--] [<pathspec>...]"
   echo
-  echo "Add a co-authored-by line to your commit messages."
+  echo "Options:"
+  echo "  -h  Show this help message."
+  echo
+  echo "Arguments:"
+  echo "  <args>     Arguments to pass to git commit."
+  echo "  <pathspec> Files to git commit."
+  echo
+  echo "Description: Add a co-authored-by line to your commit messages."
   echo
   echo "This script allows you to easily add a co-authored-by line to your commit messages."
   echo "It's useful when you're pair programming or working on a commit with someone else."
@@ -39,16 +46,10 @@ if [ "$1" = "-h" ]; then
   echo "  git config --global alias.pair '!pair'"
   echo "Then you can run 'git pair' instead of 'pair'."
   exit 0
-
-# This script does not accept any arguments other than -h
-elif [ "$#" -ne 0 ]; then
-  echo "Error: invalid arguments"
-  echo "Try 'pair -h' for more information."
-  exit 1
 fi
 
 # Use a main function to avoid running a partial script when download is interrupted
-function run {
+run() {
     set -e
 
     # Require that git, sort, uniq, and fzf are installed
@@ -65,10 +66,11 @@ function run {
     # Pass authors through fzf, allowing the user to select one
     author=$(echo "$authors" | fzf --prompt="Select author: ")
 
-    # Commit the staged changes, co-authored-by the selected author
-    git commit --trailer "Co-authored-by: $author"
+    # Commit the staged changes, co-authored-by the selected author, passing in all provided args
+    # Note that the pathspec is separately documented, but we don't have to separetely pass it
+    git commit --trailer "Co-authored-by: $author" "$@"
 
     exit 0
 }
 
-run
+run "$@"
