@@ -98,6 +98,8 @@ brew "yq"
 brew "zbctl"
 # Programming language designed for robustness, optimality, and clarity
 brew "zig"
+# Language Server for Zig
+brew "zls"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Maven Daemon
@@ -198,3 +200,4 @@ vscode "github.vscode-github-actions"
 vscode "golang.go"
 vscode "jakebecker.elixir-ls"
 vscode "vscodevim.vim"
+vscode "ziglang.vscode-zig"
