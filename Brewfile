@@ -18,14 +18,14 @@ brew "buf"
 brew "cloc"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Programming language for highly scalable real-time systems
+brew "erlang"
 # Functional metaprogramming aware language built on Erlang VM
 brew "elixir"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
-# Interpreter for PostScript and PDF
-brew "ghostscript"
 # Distributed revision control system
 brew "git"
 # Automatic git commit --fixup
@@ -62,6 +62,8 @@ brew "luv"
 brew "neovim"
 # Platform built on V8 to build network applications
 brew "node"
+# Development kit for the Java programming language
+brew "openjdk"
 # Shell command parallelization utility
 brew "parallel"
 # Pinentry for GPG on Mac
@@ -94,6 +96,8 @@ brew "yarn"
 brew "yq"
 # Zeebe CLI client
 brew "zbctl"
+# Programming language designed for robustness, optimality, and clarity
+brew "zig"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Maven Daemon
