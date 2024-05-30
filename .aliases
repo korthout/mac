@@ -13,8 +13,8 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
-alias cdc='cd $HOME/gh/camunda'
-alias cdz='cd $HOME/gh/camunda/zeebe'
+alias cdc='cd $HOME/gh/camunda/camunda'
+alias cdz='cd $HOME/gh/camunda/camunda/zeebe'
 alias cdk='cd $HOME/gh/korthout'
 alias cdba='cd $HOME/gh/korthout/backport-action'
 
