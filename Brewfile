@@ -26,6 +26,8 @@ brew "elixir"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# Interpreter for PostScript and PDF
+brew "ghostscript"
 # Distributed revision control system
 brew "git"
 # Automatic git commit --fixup
@@ -128,6 +130,8 @@ cask "epic-games"
 cask "font-hack-nerd-font"
 # Free and open-source image editor
 cask "gimp"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "google-cloud-sdk"
 # IDE for Java development - community edition
 cask "intellij-idea-ce"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -199,5 +203,6 @@ vscode "github.copilot-chat"
 vscode "github.vscode-github-actions"
 vscode "golang.go"
 vscode "jakebecker.elixir-ls"
+vscode "timonwong.shellcheck"
 vscode "vscodevim.vim"
 vscode "ziglang.vscode-zig"
