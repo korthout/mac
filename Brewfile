@@ -26,8 +26,6 @@ brew "elixir"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
-# Interpreter for PostScript and PDF
-brew "ghostscript"
 # Distributed revision control system
 brew "git"
 # Automatic git commit --fixup
@@ -158,6 +156,8 @@ cask "obsidian"
 cask "openshot-video-editor"
 # Monitors computer mic and webcam
 cask "oversight"
+# Control your tools with a few keystrokes
+cask "raycast"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 # Client for Old School RuneScape
