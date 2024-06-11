@@ -59,7 +59,7 @@ run() {
     command -v fzf >/dev/null 2>&1 || { echo >&2 "fzf is required but not installed."; exit 1; }
 
     # Find all git authors and emails, storing them in a variable
-    authors=$(git log --format='%an <%ae>' | sort | uniq)
+    authors=$(git log --all --format='%an <%ae>' | sort | uniq)
 
     # TODO: store potential authors in a file for faster lookup
 
