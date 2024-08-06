@@ -20,6 +20,9 @@ export PATH=/usr/local/bin:$PATH
 # personal binaries
 export PATH=$HOME/bin:$PATH
 
+# Created by `pipx` on 2024-08-06 11:25:58
+export PATH="$PATH:/Users/korthout/.local/bin"
+
 # Source my personal aliases
 source $HOME/.aliases
 
