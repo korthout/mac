@@ -26,12 +26,16 @@ brew "elixir"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# Interpreter for PostScript and PDF
+brew "ghostscript"
 # Distributed revision control system
 brew "git"
 # Automatic git commit --fixup
 brew "git-absorb"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Rebase alternative for easy & efficient in-memory rebases and fixups
+brew "git-revise"
 # Validating, recursive, caching DNS resolver
 brew "unbound"
 # GNU Transport Layer Security (TLS) Library
@@ -68,6 +72,8 @@ brew "openjdk"
 brew "parallel"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
 # Fast, disk space efficient package manager
 brew "pnpm"
 # Theme for zsh
@@ -90,6 +96,8 @@ brew "tree"
 brew "trivy"
 # Simple GTD-style task management for the command-line
 brew "ultralist"
+# Executes a program periodically, showing output fullscreen
+brew "watch"
 # JavaScript package manager
 brew "yarn"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
@@ -124,7 +132,6 @@ cask "docker"
 cask "dropbox"
 # Launcher for *Epic Games* games
 cask "epic-games"
-# Developer targeted fonts with a high number of glyphs
 cask "font-hack-nerd-font"
 # Free and open-source image editor
 cask "gimp"
