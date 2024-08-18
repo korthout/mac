@@ -40,6 +40,8 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   #what about /opt/homebrew/share/zsh/site-functions
 
+  export HOMEBREW_NO_INSTALL_CLEANUP=true
+
   setopt COMPLETE_IN_WORD  # Complete from both ends of a word.
   setopt ALWAYS_TO_END     # Move cursor to the end of a completed word.
   setopt AUTO_MENU         # Show completion menu on a successive tab press.

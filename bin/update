@@ -12,6 +12,7 @@ trap 'echo Terminated $0; exit' INT;
 config pull
 
 brew bundle --verbose --file=$HOME/Brewfile
+brew cleanup
 
 config add $HOME/Brewfile
 config commit -m "Update"
