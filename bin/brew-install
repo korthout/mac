@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if [ "$#" -eq "0" ]; then
-  echo "Installs a new package using brew bundle"
-  echo ""
-  echo "Usage: brew-install <package>"
-  echo ""
-  echo "Note that this tool may install other packages when syncing Brewfile"
-  exit 0
+	echo "Installs a new package using brew bundle"
+	echo ""
+	echo "Usage: brew-install <package>"
+	echo ""
+	echo "Note that this tool may install other packages when syncing Brewfile"
+	exit 0
 fi
 
 set -ex
@@ -14,18 +14,17 @@ set -ex
 package=$1
 
 function config() {
-    git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+	git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
 }
 
 # Make sure foreground process group can be terminated
-trap 'echo Terminated $0; exit' INT;
+trap 'echo Terminated $0; exit' INT
 
 # Make sure all recent Brewfile changes are installed
 config pull
+brew install "$package"
 brew bundle --verbose --file=$HOME/Brewfile
 
-# Now we can install
-brew install "$package"
 brew bundle dump -f --describe --file=$HOME/Brewfile
 
 config add $HOME/Brewfile
