@@ -12,8 +12,14 @@ brew "actionlint"
 brew "jpeg-xl"
 # Codec library for encoding and decoding AV1 video streams
 brew "aom"
+# Download with resuming and segmented downloading
+brew "aria2"
 # New way of working with Protocol Buffers
 brew "buf"
+# Core application library for C
+brew "glib"
+# Vector graphics library with cross-device output support
+brew "cairo"
 # Statistics utility to count lines of code
 brew "cloc"
 # Get a file from an HTTP, HTTPS or FTP server
@@ -26,6 +32,8 @@ brew "elixir"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# OpenType text shaping engine
+brew "harfbuzz"
 # Interpreter for PostScript and PDF
 brew "ghostscript"
 # Distributed revision control system
@@ -34,6 +42,8 @@ brew "git"
 brew "git-absorb"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12"
 # Rebase alternative for easy & efficient in-memory rebases and fixups
 brew "git-revise"
 # Validating, recursive, caching DNS resolver
@@ -44,12 +54,12 @@ brew "gnutls"
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# OpenType text shaping engine
-brew "harfbuzz"
 # Kubernetes package manager
 brew "helm"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
+# Library for reading RAW files from digital photo cameras
+brew "libraw"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Manage your Java environment
