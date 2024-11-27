@@ -16,10 +16,6 @@ brew "aom"
 brew "aria2"
 # New way of working with Protocol Buffers
 brew "buf"
-# Core application library for C
-brew "glib"
-# Vector graphics library with cross-device output support
-brew "cairo"
 # Statistics utility to count lines of code
 brew "cloc"
 # Get a file from an HTTP, HTTPS or FTP server
@@ -42,8 +38,6 @@ brew "git"
 brew "git-absorb"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.12"
 # Rebase alternative for easy & efficient in-memory rebases and fixups
 brew "git-revise"
 # Validating, recursive, caching DNS resolver
@@ -58,8 +52,6 @@ brew "go"
 brew "helm"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
-# Library for reading RAW files from digital photo cameras
-brew "libraw"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Manage your Java environment
@@ -78,6 +70,8 @@ brew "neovim"
 brew "node"
 # Development kit for the Java programming language
 brew "openjdk"
+# Development kit for the Java programming language
+brew "openjdk@21"
 # Shell command parallelization utility
 brew "parallel"
 # Pinentry for GPG on Mac
@@ -173,6 +167,8 @@ cask "obsidian"
 cask "openshot-video-editor"
 # Monitors computer mic and webcam
 cask "oversight"
+# Collaboration platform for API development
+cask "postman"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Move and resize windows using keyboard shortcuts or snap areas
@@ -211,10 +207,13 @@ cask "visualvm"
 cask "vlc"
 # Native desktop client for WhatsApp
 cask "whatsapp"
+# Network protocol analyzer
+cask "wireshark"
 # Video communication and virtual meeting platform
 cask "zoom"
 vscode "cmstead.js-codeformer"
 vscode "cmstead.jsrefactor"
+vscode "dotjoshjohnson.xml"
 vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "github.vscode-github-actions"
