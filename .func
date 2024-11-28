@@ -1,0 +1,24 @@
+# Contains my personal zsh functions
+
+# Lazy load jenv
+lazy_load_jenv() {
+  unset -f java jenv mvnd
+  eval export PATH="${HOME}/.jenv/shims:${PATH}"
+  eval "$(jenv init -)"
+}
+
+jenv() {
+  lazy_load_jenv
+  jenv $@
+}
+
+java() {
+  lazy_load_jenv
+  java $@
+}
+
+mvnd() {
+  lazy_load_jenv
+  mvnd $@
+}
+

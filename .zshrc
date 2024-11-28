@@ -26,6 +26,9 @@ export PATH="$PATH:/Users/korthout/.local/bin"
 # Source my personal aliases
 source $HOME/.aliases
 
+# Source my personal functions
+source $HOME/.func
+
 # Pass bad matches onto commands
 # e.g. git show head^ now actually works without escaping
 unsetopt nomatch
