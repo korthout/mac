@@ -14,6 +14,8 @@ brew "jpeg-xl"
 brew "aom"
 # Download with resuming and segmented downloading
 brew "aria2"
+# Extendable version manager with support for Ruby, Node.js, Erlang & more
+brew "asdf"
 # New way of working with Protocol Buffers
 brew "buf"
 # Statistics utility to count lines of code
@@ -114,7 +116,7 @@ brew "zig"
 brew "zls"
 # UNIX shell (command interpreter)
 brew "zsh"
-# Maven Daemon
+# Apache Maven Daemon
 brew "mvndaemon/mvnd/mvnd"
 # Application launcher and productivity software
 cask "alfred"
