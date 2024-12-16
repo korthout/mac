@@ -22,3 +22,20 @@ mvnd() {
   mvnd $@
 }
 
+# Calls mvnw if found in the current project, otherwise use mvnd
+# Uses jenv to execute mvnw to ensure correct JDK
+mvnw-or-mvnd() {
+  local dir="$PWD"
+  while [[ ! -x "$dir/mvnw" && "$dir" != / ]]; do
+    dir="${dir:h}"
+  done
+
+  if [[ -x "$dir/mvnw" ]]; then
+    jenv exec "$dir/mvnw" "$@"
+    return $?
+  fi
+
+  command mvnd "$@"
+}
+
+alias mvn="mvnw-or-mvnd"
