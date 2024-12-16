@@ -5,7 +5,11 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Load Git aliases under g<alias> https://gist.github.com/mwhite/6887990
 for al in `git --list-cmds=alias`; do
-    alias g$al="git $al"
+  alias g$al="git $al"
+done
+
+for al in `git --list-cmds=alias`; do
+  alias conf$al="config $al"
 done
 
 alias -g ...='../..'
