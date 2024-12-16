@@ -15,6 +15,7 @@ alias -g ......='../../../../..'
 
 alias cdc='cd $HOME/gh/camunda/camunda'
 alias cdz='cd $HOME/gh/camunda/camunda/zeebe'
+alias cdr='cd $HOME/gh/camunda/camunda-reviews'
 alias cdk='cd $HOME/gh/korthout'
 alias cdba='cd $HOME/gh/korthout/backport-action'
 
