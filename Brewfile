@@ -60,18 +60,20 @@ brew "imagemagick"
 brew "jenv"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "k9s"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # Tool that can switch between kubectl contexts easily and create aliases
 brew "kubectx"
 # Bare libuv bindings for lua
 brew "luv"
+# Java-based project management
+brew "maven"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Platform built on V8 to build network applications
 brew "node"
-# Development kit for the Java programming language
-brew "openjdk"
 # Development kit for the Java programming language
 brew "openjdk@21"
 # Shell command parallelization utility
@@ -84,6 +86,8 @@ brew "pipx"
 brew "pnpm"
 # Theme for zsh
 brew "powerlevel10k"
+# Protocol buffers (Google's data interchange format)
+brew "protobuf"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
 # Interpreted, interactive, object-oriented programming language
