@@ -39,3 +39,7 @@ mvnw-or-mvnd() {
 }
 
 alias mvn="mvnw-or-mvnd"
+
+partition() {
+  echo $(( $1 >> 51 ))
+}
