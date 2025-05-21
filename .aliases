@@ -17,9 +17,16 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
-alias cdc='cd $HOME/gh/camunda/camunda'
+alias cdc='cd $HOME/gh/camunda'
+alias cdcc='cd $HOME/gh/camunda/camunda'
 alias cdz='cd $HOME/gh/camunda/camunda/zeebe'
-alias cdr='cd $HOME/gh/camunda/camunda-reviews'
+alias cdc8='cd $HOME/gh/camunda/camunda-8.8'
+alias cdc7='cd $HOME/gh/camunda/camunda-8.7'
+alias cdc6='cd $HOME/gh/camunda/camunda-8.6'
+alias cdc5='cd $HOME/gh/camunda/camunda-8.5'
+alias cdc4='cd $HOME/gh/camunda/camunda-8.4'
+alias cdc3='cd $HOME/gh/camunda/camunda-8.3'
+
 alias cdk='cd $HOME/gh/korthout'
 alias cdba='cd $HOME/gh/korthout/backport-action'
 
