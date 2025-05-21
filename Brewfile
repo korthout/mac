@@ -122,8 +122,6 @@ brew "zls"
 brew "zsh"
 # Apache Maven Daemon
 brew "mvndaemon/mvnd/mvnd"
-# Application launcher and productivity software
-cask "alfred"
 # Transfer files from and to an Android smartphone
 cask "android-file-transfer"
 # Android SDK component
