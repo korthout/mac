@@ -1,3 +1,4 @@
+tap "golangci/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "mvndaemon/mvnd"
@@ -8,14 +9,22 @@ brew "ack"
 brew "act"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
+# OpenType text shaping engine
+brew "harfbuzz"
+# Ammonite is a cleanroom re-implementation of the Scala REPL
+brew "ammonite-repl"
 # New file format for still image compression
 brew "jpeg-xl"
 # Codec library for encoding and decoding AV1 video streams
 brew "aom"
 # Download with resuming and segmented downloading
 brew "aria2"
+# Distributed revision control system
+brew "git"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
+# Improved shell history for zsh, bash, fish and nushell
+brew "atuin"
 # New way of working with Protocol Buffers
 brew "buf"
 # Statistics utility to count lines of code
@@ -30,12 +39,8 @@ brew "elixir"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
-# OpenType text shaping engine
-brew "harfbuzz"
 # Interpreter for PostScript and PDF
 brew "ghostscript"
-# Distributed revision control system
-brew "git"
 # Automatic git commit --fixup
 brew "git-absorb"
 # Syntax-highlighting pager for git and diff output
@@ -74,6 +79,8 @@ brew "maven"
 brew "neovim"
 # Platform built on V8 to build network applications
 brew "node"
+# Development kit for the Java programming language
+brew "openjdk@17"
 # Development kit for the Java programming language
 brew "openjdk@21"
 # Shell command parallelization utility
@@ -219,5 +226,3 @@ vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "golang.go"
 vscode "timonwong.shellcheck"
-brew "atuin"
-brew "python@3.13"
