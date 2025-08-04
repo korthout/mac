@@ -31,6 +31,8 @@ brew "buf"
 brew "cloc"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Pack, ship and run any application as a lightweight container
+brew "docker", link: false
 # Programming language for highly scalable real-time systems
 brew "erlang"
 # Functional metaprogramming aware language built on Erlang VM
@@ -133,6 +135,8 @@ brew "mvndaemon/mvnd/mvnd"
 cask "android-file-transfer"
 # Android SDK component
 cask "android-platform-tools"
+# App for managing battery charging. (Also installs a CLI on first use.)
+cask "battery"
 # Web browser focusing on privacy
 cask "brave-browser"
 # Workflow and Decision Automation Platform
@@ -142,16 +146,16 @@ cask "coconutbattery"
 # Voice and text chat software
 cask "discord"
 # App to build and share containerised applications and microservices
-cask "docker"
+cask "docker-desktop"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
 # Launcher for *Epic Games* games
 cask "epic-games"
 cask "font-hack-nerd-font"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "gcloud-cli"
 # Free and open-source image editor
 cask "gimp"
-# Set of tools to manage resources and applications hosted on Google Cloud
-cask "google-cloud-sdk"
 # IDE for Java development - community edition
 cask "intellij-idea-ce"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -203,7 +207,7 @@ cask "teamviewer"
 # Stopwatch, alarm clock, and clock utility
 cask "timer"
 # To-do list
-cask "todoist"
+cask "todoist-app"
 # Pomodoro desktop timer
 cask "tomighty"
 # SSH server for teams managing distributed infrastructure
@@ -219,7 +223,7 @@ cask "vlc"
 # Native desktop client for WhatsApp
 cask "whatsapp"
 # Network protocol analyzer
-cask "wireshark"
+cask "wireshark-app"
 # Video communication and virtual meeting platform
 cask "zoom"
 vscode "github.copilot"
