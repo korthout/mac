@@ -135,8 +135,6 @@ brew "mvndaemon/mvnd/mvnd"
 cask "android-file-transfer"
 # Android SDK component
 cask "android-platform-tools"
-# App for managing battery charging. (Also installs a CLI on first use.)
-cask "battery"
 # Web browser focusing on privacy
 cask "brave-browser"
 # Workflow and Decision Automation Platform
