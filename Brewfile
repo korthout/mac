@@ -208,8 +208,6 @@ cask "timer"
 cask "todoist-app"
 # Pomodoro desktop timer
 cask "tomighty"
-# SSH server for teams managing distributed infrastructure
-cask "tsh"
 # Mutes your keyboard while you type
 cask "unclack"
 # Open-source code editor
