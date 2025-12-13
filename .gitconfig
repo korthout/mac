@@ -36,6 +36,13 @@
 	ff = fetch --all --prune --prune-tags --force
 	l = log --graph --date=relative --pretty=format:'%C(yellow)%h %C(auto)%d %C(auto)%s %C(green)%aN %C(red)%cd %C(reset)' --color=always
 	la = log --graph --date=relative --pretty=format:'%C(yellow)%h %C(auto)%d %C(auto)%s %C(green)%aN %C(red)%cd %C(reset)' --color=always --all
+	leaves = "!f() { \
+        for branch in $(git for-each-ref --format='%(refname:short)' refs/heads/); do \
+            if [ $(git branch --list --format='%(refname:short)' --contains \"$branch\" | grep -v \"^$branch$\" | wc -l) -eq 0 ]; then \
+                echo \"$branch\"; \
+            fi; \
+        done; \
+    }; f"
 	mn = merge --no-ff --no-commit
 	p = push
 	pf = push --force-with-lease
