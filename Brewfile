@@ -1,6 +1,7 @@
 tap "golangci/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
+tap "mhaeuser/mhaeuser"
 tap "mvndaemon/mvnd"
 tap "romkatv/powerlevel10k"
 # Search tool like grep, but optimized for programmers
@@ -9,8 +10,14 @@ brew "ack"
 brew "act"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
+# Core application library for C
+brew "glib"
+# Vector graphics library with cross-device output support
+brew "cairo"
 # OpenType text shaping engine
 brew "harfbuzz"
+# Development kit for the Java programming language
+brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
 # New file format for still image compression
@@ -24,7 +31,7 @@ brew "git"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
 # Improved shell history for zsh, bash, fish and nushell
-brew "atuin"
+brew "atuin", restart_service: :changed
 # New way of working with Protocol Buffers
 brew "buf"
 # Statistics utility to count lines of code
@@ -37,23 +44,29 @@ brew "docker", link: false
 brew "erlang"
 # Functional metaprogramming aware language built on Erlang VM
 brew "elixir"
+# Perl lib for reading and writing EXIF metadata
+brew "exiftool"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Interpreter for PostScript and PDF
 brew "ghostscript"
 # Automatic git commit --fixup
 brew "git-absorb"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12", link: false
 # Rebase alternative for easy & efficient in-memory rebases and fixups
 brew "git-revise"
 # Validating, recursive, caching DNS resolver
 brew "unbound"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
-# GNU Pretty Good Privacy (PGP) package
+# GNU Privacy Guard (OpenPGP)
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
@@ -61,6 +74,8 @@ brew "go"
 brew "helm"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
+# Library for reading RAW files from digital photo cameras
+brew "libraw"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Manage your Java environment
@@ -79,7 +94,9 @@ brew "luv"
 brew "maven"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Platform built on V8 to build network applications
+# Port scanning utility for large networks
+brew "nmap"
+# Open-source, cross-platform JavaScript runtime environment
 brew "node"
 # Development kit for the Java programming language
 brew "openjdk@17"
@@ -131,6 +148,8 @@ brew "zls"
 brew "zsh"
 # Apache Maven Daemon
 brew "mvndaemon/mvnd/mvnd"
+# Application launcher and productivity software
+cask "alfred"
 # Transfer files from and to an Android smartphone
 cask "android-file-transfer"
 # Android SDK component
@@ -149,7 +168,11 @@ cask "docker-desktop"
 cask "dropbox"
 # Launcher for *Epic Games* games
 cask "epic-games"
+# Official wallet for IOTA
+cask "firefly-iota-desktop"
 cask "font-hack-nerd-font"
+# Complete development tool for making 2D games
+cask "gamemaker"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"
 # Free and open-source image editor
@@ -167,7 +190,7 @@ cask "keybase"
 # Tool to show what is persistently installed on the computer
 cask "knockknock"
 # Wallet desktop application to maintain multiple cryptocurrencies
-cask "ledger-live"
+cask "ledger-wallet"
 # Privacy-first, open-source platform for knowledge sharing and management
 cask "logseq"
 # Screen and video recording software
@@ -188,6 +211,8 @@ cask "raycast"
 cask "rectangle"
 # Client for Old School RuneScape
 cask "runelite"
+# Instant messaging application focusing on security
+cask "signal"
 # Team communication and collaboration software
 cask "slack"
 # Sound and audio controller
@@ -208,6 +233,10 @@ cask "timer"
 cask "todoist-app"
 # Pomodoro desktop timer
 cask "tomighty"
+# Companion app for the Trezor hardware wallet
+cask "trezor-suite"
+# SSH server for teams managing distributed infrastructure
+cask "tsh"
 # Mutes your keyboard while you type
 cask "unclack"
 # Open-source code editor
