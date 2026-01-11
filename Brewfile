@@ -168,8 +168,6 @@ cask "docker-desktop"
 cask "dropbox"
 # Launcher for *Epic Games* games
 cask "epic-games"
-# Official wallet for IOTA
-cask "firefly-iota-desktop"
 cask "font-hack-nerd-font"
 # Complete development tool for making 2D games
 cask "gamemaker"
