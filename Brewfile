@@ -48,6 +48,8 @@ brew "elixir"
 brew "exiftool"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU awk utility
+brew "gawk"
 # GitHub command-line tool
 brew "gh"
 # OCR (Optical Character Recognition) engine
@@ -92,6 +94,8 @@ brew "kubectx"
 brew "luv"
 # Java-based project management
 brew "maven"
+# Run a Kubernetes cluster locally
+brew "minikube"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Port scanning utility for large networks
@@ -154,12 +158,16 @@ cask "alfred"
 cask "android-file-transfer"
 # Android SDK component
 cask "android-platform-tools"
+# App for managing battery charging. (Also installs a CLI on first use.)
+cask "battery"
 # Web browser focusing on privacy
 cask "brave-browser"
 # Workflow and Decision Automation Platform
 cask "camunda-modeler"
 # Tool to show live information about the batteries in various devices
 cask "coconutbattery"
+# Brings the power of Copilot coding agent directly to your terminal
+cask "copilot-cli"
 # Voice and text chat software
 cask "discord"
 # App to build and share containerised applications and microservices
@@ -175,6 +183,10 @@ cask "gamemaker"
 cask "gcloud-cli"
 # Free and open-source image editor
 cask "gimp"
+# Vector graphics editor
+cask "inkscape"
+# Java IDE by JetBrains
+cask "intellij-idea"
 # IDE for Java development - community edition
 cask "intellij-idea-ce"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -253,3 +265,8 @@ vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "golang.go"
 vscode "timonwong.shellcheck"
+go "github.com/go-delve/delve/cmd/dlv"
+go "github.com/zer0yu/ghtracker"
+go "github.com/golangci/golangci-lint/cmd/golangci-lint"
+go "golang.org/x/tools/gopls"
+go "honnef.co/go/tools/cmd/staticcheck"
