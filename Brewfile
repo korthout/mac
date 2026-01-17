@@ -253,8 +253,6 @@ cask "visualvm"
 cask "vlc"
 # Native desktop client for WhatsApp
 cask "whatsapp"
-# Network protocol analyzer
-cask "wireshark-app"
 # Video communication and virtual meeting platform
 cask "zoom"
 vscode "github.copilot"
