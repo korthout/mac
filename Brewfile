@@ -178,7 +178,6 @@ cask "dropbox"
 cask "epic-games"
 cask "font-hack-nerd-font"
 # Complete development tool for making 2D games
-cask "gamemaker"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"
 # Free and open-source image editor
