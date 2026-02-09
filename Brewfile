@@ -177,11 +177,8 @@ cask "dropbox"
 # Launcher for *Epic Games* games
 cask "epic-games"
 cask "font-hack-nerd-font"
-# Complete development tool for making 2D games
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"
-# Free and open-source image editor
-cask "gimp"
 # Vector graphics editor
 cask "inkscape"
 # Java IDE by JetBrains
