@@ -234,7 +234,6 @@ cask "tomighty"
 # Companion app for the Trezor hardware wallet
 cask "trezor-suite"
 # SSH server for teams managing distributed infrastructure
-cask "tsh"
 # Mutes your keyboard while you type
 cask "unclack"
 # Open-source code editor
