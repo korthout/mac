@@ -1,11 +1,11 @@
 #!/bin/bash
 
 if [ "$#" -eq "0" ]; then
-	echo "Installs a new package using brew bundle"
+	echo "Uninstalls a package using brew bundle"
 	echo ""
-	echo "Usage: brew-install <package>"
+	echo "Usage: brew-uninstall <package>"
 	echo ""
-	echo "Note that this tool may install other packages when syncing Brewfile"
+	echo "Note that this tool may uninstall other packages when syncing Brewfile"
 	exit 0
 fi
 
@@ -23,9 +23,9 @@ trap 'echo Terminated $0; exit' INT
 # Make sure all recent Brewfile changes are installed
 config pull
 
-brew bundle add --global "$package"
-brew install "$package"
+brew bundle remove --global "$package"
+brew uninstall "$package"
 
 config add $XDG_CONFIG_HOME/homebrew/Brewfile
-config commit -m "Install-$package"
+config commit -m "Uninstall-$package"
 config push
