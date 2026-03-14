@@ -226,7 +226,6 @@ cask "superduper"
 # Remote access and connectivity software focused on security
 cask "teamviewer"
 # Stopwatch, alarm clock, and clock utility
-cask "timer"
 # To-do list
 cask "todoist-app"
 # Pomodoro desktop timer
