@@ -174,7 +174,6 @@ cask "gcloud-cli"
 # Vector graphics editor
 cask "inkscape"
 # Java IDE by JetBrains
-cask "intellij-idea"
 # IDE for Java development - community edition
 cask "intellij-idea-ce"
 # Terminal emulator as alternative to Apple's Terminal app
