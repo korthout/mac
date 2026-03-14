@@ -116,7 +116,6 @@ brew "powerlevel10k"
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
 # Interpreted, interactive, object-oriented programming language
-brew "python@3.11"
 # Interpreted, interactive, object-oriented programming language
 # JVM-based programming language
 brew "scala"
