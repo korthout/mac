@@ -1,5 +1,4 @@
 tap "golangci/tap"
-tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "mhaeuser/mhaeuser"
 tap "mvndaemon/mvnd"
