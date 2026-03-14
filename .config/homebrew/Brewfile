@@ -118,7 +118,6 @@ brew "protobuf"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
 # Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
 # JVM-based programming language
 brew "scala"
 # JVM-based programming language
