@@ -23,10 +23,10 @@ trap 'echo Terminated $0; exit' INT
 # Make sure all recent Brewfile changes are installed
 config pull
 brew install "$package"
-brew bundle --verbose --file=$HOME/Brewfile
+brew bundle --verbose --global
 
-brew bundle dump -f --describe --file=$HOME/Brewfile
+brew bundle dump -f --describe --global
 
-config add $HOME/Brewfile
+config add $XDG_CONFIG_HOME/homebrew/Brewfile
 config commit -m "Install-$package"
 config push

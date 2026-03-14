@@ -16,13 +16,13 @@ trap 'echo Terminated $0; exit' INT
 
 config pull
 
-brew bundle check --verbose --file=$HOME/Brewfile || true
+brew bundle check --verbose --global || true
 
 prompt "Continue? y/n"
 
-brew bundle install --verbose --file=$HOME/Brewfile
+brew bundle install --verbose --global
 brew cleanup
 
-config add $HOME/Brewfile
+config add $XDG_CONFIG_HOME/homebrew/Brewfile
 config commit -m "Update"
 config push
