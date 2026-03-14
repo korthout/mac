@@ -1,5 +1,4 @@
 tap "golangci/tap"
-tap "homebrew/cask-fonts"
 tap "mhaeuser/mhaeuser"
 tap "mvndaemon/mvnd"
 tap "romkatv/powerlevel10k"
