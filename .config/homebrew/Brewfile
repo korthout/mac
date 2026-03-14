@@ -53,7 +53,6 @@ brew "gh"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
 # Interpreter for PostScript and PDF
-brew "ghostscript"
 # Automatic git commit --fixup
 brew "git-absorb"
 # Syntax-highlighting pager for git and diff output
