@@ -2,6 +2,7 @@
 
 alias aliases='vim $HOME/.aliases'
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cfg='config'
 
 # Load Git aliases under g<alias> https://gist.github.com/mwhite/6887990
 for al in `git --list-cmds=alias`; do
@@ -9,7 +10,7 @@ for al in `git --list-cmds=alias`; do
 done
 
 for al in `git --list-cmds=alias`; do
-  alias conf$al="config $al"
+  alias cfg$al="config $al"
 done
 
 alias -g ...='../..'
