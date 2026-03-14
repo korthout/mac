@@ -59,7 +59,6 @@ brew "git-absorb"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
 # Interpreted, interactive, object-oriented programming language
-brew "python@3.12", link: false
 # Rebase alternative for easy & efficient in-memory rebases and fixups
 brew "git-revise"
 # Validating, recursive, caching DNS resolver
