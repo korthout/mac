@@ -47,6 +47,7 @@ if type brew &>/dev/null; then
   #what about /opt/homebrew/share/zsh/site-functions
 
   export HOMEBREW_NO_INSTALL_CLEANUP=true
+  export HOMEBREW_FORCE_BREWED_CURL=1
 
   setopt COMPLETE_IN_WORD  # Complete from both ends of a word.
   setopt ALWAYS_TO_END     # Move cursor to the end of a completed word.
