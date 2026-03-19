@@ -23,8 +23,8 @@ trap 'echo Terminated $0; exit' INT
 # Make sure all recent Brewfile changes are installed
 config pull
 
-brew uninstall "$package" "$@"
-brew bundle remove --global "$package" "$@"
+brew uninstall "$@"
+brew bundle remove --global "$@"
 
 config add $XDG_CONFIG_HOME/homebrew/Brewfile
 config commit -m "Uninstall-$package"
