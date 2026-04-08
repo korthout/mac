@@ -28,6 +28,7 @@ alias cdc6='cd $HOME/gh/camunda/camunda-8.6'
 alias cdc5='cd $HOME/gh/camunda/camunda-8.5'
 alias cdc4='cd $HOME/gh/camunda/camunda-8.4'
 alias cdc3='cd $HOME/gh/camunda/camunda-8.3'
+alias cdcd='cd $HOME/gh/camunda/camunda-docs'
 
 alias cdk='cd $HOME/gh/korthout'
 alias cdba='cd $HOME/gh/korthout/backport-action'
