@@ -70,6 +70,13 @@ fi
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Reload the python virtual environment
+if [[ ! -d ~/.venv ]]; then
+  mkdir ~/.venv
+  python3 -m venv ~/.venv
+fi
+source ~/.venv/bin/activate
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/korthout/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/korthout/google-cloud-sdk/path.zsh.inc'; fi
 
