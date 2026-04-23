@@ -33,7 +33,8 @@ Once all branches are resolved, present a final summary of the issue and ask for
 ## Formatting rules
 
 - **Match the actual rendered format**: before writing the issue body, check a recent issue created from the same template (e.g. `gh issue list --label kind/bug --limit 1` then `gh issue view <number> --json body`) to see exactly how GitHub renders the template fields. Reproduce that format exactly.
-- **Dropdown fields as HTML comments**: YAML form dropdown fields (Component, Affected version, Severity, Likelihood) are rendered as HTML comments at the top of the body, e.g. `<!-- Component: Zeebe -->`. Do not render these as markdown headings with plain text.
+- **Dropdown fields as HTML comments**: YAML form dropdown fields (Component, Affected version, Severity, Likelihood) are rendered as HTML comments at the top of the body. Use the exact format from the template YAML (e.g. `<!-- Zeebe- -->`, `<!-- -8.8 -->`, `<!-- Medium- -->`, `<!-- Low_ -->`). The heading for each dropdown is also a comment (e.g. `### <!-- Component -->`). These comments are invisible when rendered on GitHub — that is intentional. GitHub parses these to automatically apply labels and populate template fields, so they must be exact.
+- **Preserving HTML comments in shell**: `<!--` contains `!` which zsh history expansion will escape to `\!` inside heredocs and command substitutions. To avoid this, write the issue body to a file using the Write tool (not a shell heredoc), then use `python3 -c "import json; ..."` to JSON-encode it for the API. Never use `jq --arg` or shell heredocs for bodies containing HTML comments.
 - **Section headings**: use `##` for content sections (Description, Steps to reproduce, etc.), matching the rendered output.
 - Use the exact section headings from the issue template — do not skip, rename, or rephrase them.
 - Fill in every field from the template. If a field is not applicable, explicitly mark it as N/A rather than omitting it.
