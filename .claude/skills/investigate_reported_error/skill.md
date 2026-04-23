@@ -7,6 +7,28 @@ description: Investigate a reported error message to determine if it's a known i
 
 Investigate a reported error message to determine whether it's a known issue and decide on next steps.
 
+## Phase 0: Redact sensitive data
+
+Before the user shares a log snippet or error message, remind them to scrub sensitive data first. Production logs often contain customer-identifying information that must not appear in conversation history, issue comments, or summaries.
+
+Ask the user to replace the following before pasting:
+
+| Data type | Replace with |
+|-----------|-------------|
+| Tenant / org / customer IDs | `[REDACTED-TENANT]` |
+| User emails, names, usernames | `[REDACTED-USER]` |
+| API tokens, secrets, passwords, keys | `[REDACTED-SECRET]` |
+| IP addresses | `[REDACTED-IP]` |
+| Process / element instance IDs | `[REDACTED-INSTANCE-ID]` |
+| Cluster / node / deployment IDs | `[REDACTED-CLUSTER]` |
+| Customer-identifying URLs or hostnames | `[REDACTED-HOST]` |
+| Database connection strings | `[REDACTED-CONN]` |
+| Any UUID that could identify a customer resource | `[REDACTED-ID]` |
+
+Safe to keep: Java class names, method names, line numbers, thread names, Zeebe component names, log severity, timestamps (date only).
+
+If the user has already shared unscrubbed data, **stop immediately**. Flag exactly which fields contain sensitive data so the user is aware. Do not proceed with investigation until the user acknowledges and provides a scrubbed version.
+
 ## Phase 1: Search for known issues
 
 Search for existing GitHub issues using the information provided (error message, stack trace, component names). Search with:
@@ -37,6 +59,7 @@ For candidate issues, read the issue body to confirm it describes the same probl
 Present a concise summary:
 - **Root cause**: what triggers the error and why
 - **Known issues**: links to any existing GitHub issues
+- **SaaS vs SM**: is this SaaS-only (caused by SaaS-specific infrastructure like GKE config, GCP services, SaaS-specific env vars) or does it affect both deployments (bug in application code that SM users could hit too)? When unsure, default to both and note it for the user to confirm.
 - **Assessment**: is this expected/transient, a known bug, or a new issue?
 
 Determine whether the error is **expected/transient** or **unexpected**:

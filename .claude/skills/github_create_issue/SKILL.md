@@ -38,3 +38,15 @@ Once all branches are resolved, present a final summary of the issue and ask for
 - **Section headings**: use `##` for content sections (Description, Steps to reproduce, etc.), matching the rendered output.
 - Use the exact section headings from the issue template — do not skip, rename, or rephrase them.
 - Fill in every field from the template. If a field is not applicable, explicitly mark it as N/A rather than omitting it.
+
+## Common mistakes
+
+| Mistake | Fix |
+|---------|-----|
+| Including raw UUIDs or customer IDs from logs | Every UUID must be evaluated — redact if customer-facing |
+| Copying log messages verbatim without scanning for PII | Scan for embedded IDs, emails, hostnames first |
+| Skipping the draft review step | Always present the full draft and wait for explicit approval before creating |
+| Leaving placeholder values (e.g. version "8.8.21") when the actual value is available | Populate from logs or context if available |
+| Using `fix:` or conventional-commit prefix in title | Issue titles are descriptive sentences, not commit messages |
+| Wrapping component in title, e.g. `[Gateway] ...` | No brackets or component prefix — just a plain descriptive sentence |
+| Adding `type: bug` as a label | "Bug" is a GitHub Issue Type, not a label — set it via GraphQL after creation |
