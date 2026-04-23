@@ -2,6 +2,7 @@
 
 - Answer questions — don't assume they imply an action. Only act when explicitly asked.
 - Check available skills before starting a task. Update skill definitions when receiving feedback during execution.
+- When a skill's instructions say to use another skill, invoke that skill — don't skip ahead and do the work inline.
 - Verify claims against actual code and changes. Don't speculate — update your analysis when given counter-evidence.
 - Commit titles max 72 chars. Explain all considerations in the body.
 - When removing permissions or settings, provide a wildcard replacement.
