@@ -22,6 +22,8 @@ Use the `github-issue-searcher` agent to search for existing GitHub issues cover
 - Key terms from the error and surrounding code
 - Related component/area terms
 
+For candidate issues, read the issue body to confirm it describes the same problem. Then read the issue comments to understand the issue better (e.g. prior analysis, workarounds, fix attempts).
+
 Also check `git log` for recent fixes in the same code area.
 
 ## Phase 3: Present findings
@@ -43,6 +45,10 @@ For expected/transient errors, also determine **who initiates the action**:
 - **System-initiated**: the system must handle the retry itself, since there is no user to retry — application-level retry handling is more important.
 
 Propose options based on this assessment (e.g. lower log level, add retry handling, report in existing issue, open new issue, fix it) and let the user decide. Do not take action until the user chooses.
+
+When a known issue exists, offer to post a comment. Always include links to the reported error and the relevant log entry for traceability. If the issue is missing information our investigation uncovered (root cause analysis, affected code paths, solution ideas), include that too. If not, a comment noting that the issue was observed again is still valuable.
+
+Draft the comment for user review before posting.
 
 When creating issues, use the `/github_create_issue` skill.
 
