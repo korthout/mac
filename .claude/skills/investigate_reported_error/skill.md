@@ -1,39 +1,43 @@
 ---
 name: investigate_reported_error
-description: Investigate a reported error message to determine if it's a known issue and decide how to proceed. Use when user shares an error message, stack trace, or log snippet and wants to understand whether it's known.
+description: Investigate a reported error message to determine if it's a known issue and decide how to proceed. Use when user shares an error message, stack trace, or log snippet and wants to understand whether it's known. Also use when user wants to research, investigate, or rootcause an incident.
 ---
 
 # Investigate Reported Error
 
 Investigate a reported error message to determine whether it's a known issue and decide on next steps.
 
-## Phase 1: Understand the error
+## Phase 1: Search for known issues
 
-1. Search the codebase for the exact error message to locate where it's produced.
-2. Read the surrounding code to understand:
-   - What condition triggers the error
-   - Whether it's expected/transient or indicates a real fault
-   - The broader flow it's part of
-
-## Phase 2: Search for known issues
-
-Use the `github-issue-searcher` agent to search for existing GitHub issues covering the same error. Search with:
+Search for existing GitHub issues using the information provided (error message, stack trace, component names). Search with:
 - The exact error message
-- Key terms from the error and surrounding code
+- Key terms from the stack trace
 - Related component/area terms
 
 For candidate issues, read the issue body to confirm it describes the same problem. Then read the issue comments to understand the issue better (e.g. prior analysis, workarounds, fix attempts).
 
-Also check `git log` for recent fixes in the same code area.
+If a known issue fully explains the root cause and matches the reported error, skip to Phase 4.
 
-## Phase 3: Present findings
+## Phase 2: Investigate root cause
+
+Investigate relentlessly until reaching the root cause. Walk down each causal branch, resolving dependencies between questions one-by-one. If a question can be answered by exploring the codebase, explore the codebase instead of asking the user.
+
+1. Search the codebase for the exact error message to locate where it's produced.
+2. Trace the full causal chain — don't stop at the immediate crash site. Follow the data and control flow to understand why the failing state arose in the first place.
+3. Identify the root cause: the deepest point where a fix or validation would prevent the error.
+
+## Phase 3: Search for known issues again
+
+The investigation likely uncovered new terms, component names, or root cause details. Search for known issues again using this deeper understanding. Also check `git log` for recent fixes in the same code area.
+
+For candidate issues, read the issue body to confirm it describes the same problem. Then read the issue comments to understand the issue better (e.g. prior analysis, workarounds, fix attempts).
+
+## Phase 4: Present findings and decide next steps
 
 Present a concise summary:
 - **Root cause**: what triggers the error and why
 - **Known issues**: links to any existing GitHub issues
 - **Assessment**: is this expected/transient, a known bug, or a new issue?
-
-## Phase 4: Decide next steps
 
 Determine whether the error is **expected/transient** or **unexpected**:
 
@@ -46,7 +50,7 @@ For expected/transient errors, also determine **who initiates the action**:
 
 Propose options based on this assessment (e.g. lower log level, add retry handling, report in existing issue, open new issue, fix it) and let the user decide. Do not take action until the user chooses.
 
-When a known issue exists, offer to post a comment. Always include links to the reported error and the relevant log entry for traceability. If the issue is missing information our investigation uncovered (root cause analysis, affected code paths, solution ideas), include that too. If not, a comment noting that the issue was observed again is still valuable.
+When a known issue exists, offer to post a comment. Always include links to the reported error and the relevant log entry for traceability. If the issue is missing information our investigation uncovered (root cause analysis, affected code paths), include that too. If not, a comment noting that the issue was observed again is still valuable.
 
 Draft the comment for user review before posting.
 
