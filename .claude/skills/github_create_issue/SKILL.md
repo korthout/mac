@@ -30,6 +30,10 @@ Key branches to resolve (as applicable to the issue type):
 
 Once all branches are resolved, present a final summary of the issue and ask for confirmation. Then create the issue using `gh issue create`.
 
-Rules:
+## Formatting rules
+
+- **Match the actual rendered format**: before writing the issue body, check a recent issue created from the same template (e.g. `gh issue list --label kind/bug --limit 1` then `gh issue view <number> --json body`) to see exactly how GitHub renders the template fields. Reproduce that format exactly.
+- **Dropdown fields as HTML comments**: YAML form dropdown fields (Component, Affected version, Severity, Likelihood) are rendered as HTML comments at the top of the body, e.g. `<!-- Component: Zeebe -->`. Do not render these as markdown headings with plain text.
+- **Section headings**: use `##` for content sections (Description, Steps to reproduce, etc.), matching the rendered output.
 - Use the exact section headings from the issue template — do not skip, rename, or rephrase them.
 - Fill in every field from the template. If a field is not applicable, explicitly mark it as N/A rather than omitting it.
