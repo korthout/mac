@@ -3,6 +3,12 @@
 # Expects Claude Code PreToolUse JSON on stdin.
 CMD=$(jq -r '.tool_input.command')
 
+# Only check git commit commands
+case "$CMD" in
+  "git commit"*) ;;
+  *) exit 0 ;;
+esac
+
 # Extract title: look for the first content line after <<'EOF' or <<EOF
 TITLE=$(echo "$CMD" | sed -n "/<<['\"]\\{0,1\\}EOF/,/^EOF/ { /<<.*EOF/d; /^EOF/d; /^[[:space:]]*$/d; p; q; }")
 
