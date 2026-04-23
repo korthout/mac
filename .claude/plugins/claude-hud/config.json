@@ -1,0 +1,18 @@
+{
+  "lineLayout": "compact",
+  "showSeparators": false,
+  "language": "en",
+  "display": {
+    "showTools": false,
+    "showAgents": true,
+    "showTodos": false,
+    "showDuration": true,
+    "showConfigCounts": true,
+    "showSessionName": true,
+    "showUsage": true,
+    "sevenDayThreshold": 80
+  },
+  "gitStatus": {
+    "enabled": false
+  }
+}
