@@ -3,6 +3,8 @@
     "allow": [
       "Bash(cat:*)",
       "Bash(find:*)",
+      "Bash(curl -s \"https://api.github.com/repos/camunda/camunda/issues/*)",
+      "Bash(curl -s \"https://api.github.com/search/issues?q*)",
       "Bash(gh issue:*)",
       "Bash(gh search:*)",
       "Bash(git add:*)",
