@@ -47,10 +47,10 @@ Then wait for the user's research query.
 
    ```markdown
    ---
-   date: [Current date and time in ISO format]
-   researcher: Claude
-   topic: "[User's Question/Topic]"
-   tags: [research, codebase, relevant-component-names]
+   title: "[Concise research title]"
+   type: research
+   date: [Current date in YYYY-MM-DD format]
+   tags: [relevant-component-names]
    status: complete
    ---
 
@@ -92,7 +92,7 @@ Then wait for the user's research query.
 
 6. **Save and present findings:**
    - Check existing research files to determine next sequence number
-   - Save to `thoughts/shared/research/NNN_topic.md` where NNN is a 3-digit sequential number (001, 002, etc.)
+   - Save to `thoughts/research/NNN_topic.md` where NNN is a 3-digit sequential number (001, 002, etc.) unless told otherwise
    - Present a concise summary of findings to the user
    - Include key file references for easy navigation
 

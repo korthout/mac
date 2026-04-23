@@ -1,15 +1,16 @@
 ---
 name: 4_implement_plan
-description: Implements an approved technical plan from `thoughts/shared/plans/`. These plans contain phases with specific changes and success criteria.
+description: Implements an approved technical plan from `thoughts/plans/`. These plans contain phases with specific changes and success criteria.
 ---
 
 # Implement Plan
 
-You are tasked with implementing an approved technical plan from `thoughts/shared/plans/`. These plans contain phases with specific changes and success criteria.
+You are tasked with implementing an approved technical plan from `thoughts/plans/`. These plans contain phases with specific changes and success criteria.
 
 ## Getting Started
 
 When given a plan path:
+
 - Read the plan completely and check for any existing checkmarks (- [x])
 - Read all files mentioned in the plan
 - **Read files fully** - never use limit/offset parameters
@@ -21,12 +22,14 @@ If no plan path provided, ask for one.
 ## Implementation Philosophy
 
 Plans are carefully designed, but reality can be messy. Your job is to:
+
 - Follow the plan's intent while adapting to what you find
 - Implement each phase fully before moving to the next
 - Verify your work makes sense in the broader codebase context
 - Update checkboxes in the plan as you complete sections
 
 When things don't match the plan exactly:
+
 ```
 Issue in Phase [N]:
 Expected: [what the plan says]
@@ -39,12 +42,13 @@ How should I proceed?
 ## IMPORTANT Commit after every step
 
 You MUST commit changes after completing any step of a phase.
-Do not wait for the user to ask — this command authorizes you to commit. 
+Do not wait for the user to ask — this command authorizes you to commit.
 After each step: stage, commit (following the commit guidelines below), then move to the next step.
 
 ## Commit guidelines
 
 When committing changes to git, adhere to the following:
+
 - Stage behavioral changes from structural changes (refactorings like moves, renames, etc) to commit them separately
 - Keep commit title short (50 chars max)
 - Explain reasoning for these particular changes in commit body
@@ -53,6 +57,7 @@ When committing changes to git, adhere to the following:
 ## Verification Approach
 
 After implementing a phase:
+
 - Run the success criteria checks
 - Fix any issues before proceeding
 - Update your progress in both the plan and your todos
@@ -78,6 +83,7 @@ After implementing a phase:
 ## Resuming Work
 
 If the plan has existing checkmarks:
+
 - Trust that completed work is done
 - Pick up from the first unchecked item
 - Verify previous work only if something seems off

@@ -10,6 +10,7 @@ You are tasked with creating detailed implementation plans through an interactiv
 ## Initial Response
 
 When this command is invoked, respond with:
+
 ```
 I'll help you create a detailed implementation plan. Let me start by understanding what we're building.
 
@@ -46,6 +47,7 @@ Then wait for the user's input.
 ### Step 3: Plan Structure Development
 
 Once aligned on approach:
+
 ```
 Here's my proposed plan structure:
 
@@ -62,49 +64,59 @@ Does this phasing make sense?
 
 ### Step 4: Detailed Plan Writing
 
-Check existing plan files to determine next sequence number, then write the plan to `thoughts/shared/plans/NNN_{descriptive_name}.md` where NNN is a 3-digit sequential number (001, 002, etc.):
+Check existing plan files to determine next sequence number, then write the plan to `thoughts/plans/NNN_{descriptive_name}.md` where NNN is a 3-digit sequential number (001, 002, etc.):
 
-```markdown
+````markdown
 # [Feature/Task Name] Implementation Plan
 
 ## Overview
+
 [Brief description of what we're implementing and why]
 
 ## Current State Analysis
+
 [What exists now, what's missing, key constraints discovered]
 
 ## Desired End State
+
 [Specification of the desired end state and how to verify it]
 
 ## What We're NOT Doing
+
 [Explicitly list out-of-scope items]
 
 ## Implementation Approach
+
 [High-level strategy and reasoning]
 
 ## Phase 1: [Descriptive Name]
 
 ### Overview
+
 [What this phase accomplishes]
 
 ### Changes Required:
 
 #### 1. [Component/File Group]
+
 **File**: `path/to/file.ext`
 **Changes**: [Summary of changes]
 
 ```[language]
 // Specific code to add/modify
 ```
+````
 
 ### Success Criteria:
 
 #### Automated Verification:
+
 - [ ] Tests pass: `npm test`
 - [ ] Type checking passes: `npm run typecheck`
 - [ ] Linting passes: `npm run lint`
 
 #### Manual Verification:
+
 - [ ] Feature works as expected in UI
 - [ ] Performance is acceptable
 - [ ] No regressions in related features
@@ -112,26 +124,33 @@ Check existing plan files to determine next sequence number, then write the plan
 ---
 
 ## Phase 2: [Descriptive Name]
+
 [Similar structure...]
 
 ## Testing Strategy
 
 ### Unit Tests:
+
 - [What to test]
 - [Key edge cases]
 
 ### Integration Tests:
+
 - [End-to-end scenarios]
 
 ### Manual Testing Steps:
+
 1. [Specific verification step]
 2. [Another verification step]
 
 ## Performance Considerations
+
 [Any performance implications or optimizations needed]
 
 ## Migration Notes
+
 [If applicable, how to handle existing data/systems]
+
 ```
 
 ### Step 5: Review and Iterate
@@ -148,3 +167,4 @@ Check existing plan files to determine next sequence number, then write the plan
 4. **Be Practical**: Focus on incremental, testable changes
 5. **Track Progress**: Use TodoWrite throughout planning
 6. **No Open Questions**: Resolve all questions before finalizing plan
+```
