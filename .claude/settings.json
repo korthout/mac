@@ -27,13 +27,6 @@
     ],
     "defaultMode": "default"
   },
-  "sandbox": {
-    "filesystem": {
-      "allowWrite": [
-        "/Users/korthout/.claude/projects/"
-      ]
-    }
-  },
   "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
