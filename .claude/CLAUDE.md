@@ -7,6 +7,7 @@
 - Commit titles max 72 chars. Explain all considerations in the body.
 - Amend the previous commit when review feedback edits the same files, instead of creating a separate fix commit.
 - When removing permissions or settings, provide a wildcard replacement.
+- Never read, print, generate, or pipe private keys, tokens, `.env`/credentials files, or any secret value — anything in tool output is exposed. Hand the user a command to run themselves. Public halves and secret *names* are fine.
 
 ## GitHub CLI workaround
 
