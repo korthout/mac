@@ -63,7 +63,7 @@
       "source": {
         "source": "github",
         "repo": "jarrodwatts/claude-hud",
-        "sha": "c4fd79e6d31fe40d8e57b1e3db768025254df553"
+        "ref": "c4fd79e6d31fe40d8e57b1e3db768025254df553"
       }
     }
   },
