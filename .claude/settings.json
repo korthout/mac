@@ -75,5 +75,17 @@
       }
     }
   },
+  "sandbox": {
+    "network": {
+      "allowUnixSockets": [
+        "/Users/korthout/.gnupg/S.gpg-agent"
+      ]
+    },
+    "filesystem": {
+      "allowWrite": [
+        "/Users/korthout/.gnupg"
+      ]
+    }
+  },
   "effortLevel": "medium"
 }
