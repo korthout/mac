@@ -5,6 +5,7 @@
 - When a skill's instructions say to use another skill, invoke that skill — don't skip ahead and do the work inline.
 - Verify claims against actual code and changes. Don't speculate — update your analysis when given counter-evidence.
 - Commit titles max 72 chars. Explain all considerations in the body.
+- Amend the previous commit when review feedback edits the same files, instead of creating a separate fix commit.
 - When removing permissions or settings, provide a wildcard replacement.
 
 ## GitHub CLI workaround
