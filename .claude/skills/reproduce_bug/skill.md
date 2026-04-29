@@ -19,6 +19,8 @@ Extract: expected behavior, actual behavior, reproduction steps, environment (ve
 
 Detect project conventions first — read `CLAUDE.md` / `AGENTS.md` / `README` and locate similar existing tests in the relevant module. Reuse the project's test framework and harnesses; don't introduce new ones.
 
+If the report names a version or commit, anchor to it (check it out, or pin the dependency) before building the reproducer. Reproducing against `main` risks a passing run because the bug was already fixed there.
+
 Prefer in order:
 
 1. Existing test harness (integration or unit test modeled on a similar one).
@@ -30,6 +32,14 @@ You may deviate from the reporter's exact steps (API instead of UI, client inste
 ## Phase 3: Build, run, verify
 
 Run the reproducer and confirm it fails *for the reason described*, not just that it errors. A wrong-reason failure (bad setup, missing dep, unrelated assertion) is not a reproducer — fix the setup until the failure mode matches.
+
+Assert the *expected* behavior, not the observed buggy behavior — so applying the future fix flips the test from red to green. A reproducer that asserts the bug will pass forever, including after the fix.
+
+Run it 3+ times. Inconsistent failures aren't disqualifying — note the failure rate and flag the reproducer as flaky in the report.
+
+Once it fails reliably for the right reason, minimize: strip setup, fixtures, and steps until removing more changes the failure mode. Smallest surface area is the best handoff for RCA.
+
+The reproducer is meant to fail. Place it in the project's test tree alongside similar tests (not a scratch file outside it), and don't add skip/disable annotations (`@Disabled`, `@Ignore`, `xfail`, `.skip`, `it.skip`) to keep CI green — a failing reproducer blocking merge is the artifact, not a problem to route around.
 
 ## Phase 4: Stop and report
 
