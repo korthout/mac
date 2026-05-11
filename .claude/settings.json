@@ -56,7 +56,8 @@
   },
   "enabledPlugins": {
     "commit-commands@claude-plugins-official": true,
-    "claude-hud@claude-hud": true
+    "claude-hud@claude-hud": true,
+    "superpowers@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
