@@ -48,6 +48,16 @@
           }
         ]
       }
+    ],
+    "WorktreeCreate": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/korthout/.claude/hooks/worktree-create.sh"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
