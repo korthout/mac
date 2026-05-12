@@ -57,7 +57,8 @@
   "enabledPlugins": {
     "commit-commands@claude-plugins-official": true,
     "claude-hud@claude-hud": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true,
+    "crit@crit": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
@@ -65,6 +66,12 @@
         "source": "github",
         "repo": "jarrodwatts/claude-hud",
         "ref": "c4fd79e6d31fe40d8e57b1e3db768025254df553"
+      }
+    },
+    "crit": {
+      "source": {
+        "source": "github",
+        "repo": "tomasz-tomczyk/crit"
       }
     }
   },
