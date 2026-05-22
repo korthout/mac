@@ -141,7 +141,8 @@
     "commit-commands@claude-plugins-official": true,
     "claude-hud@claude-hud": true,
     "superpowers@claude-plugins-official": true,
-    "crit@crit": true
+    "crit@crit": true,
+    "team-core-features-charlie@team-core-features-charlie": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
@@ -155,6 +156,12 @@
       "source": {
         "source": "github",
         "repo": "tomasz-tomczyk/crit"
+      }
+    },
+    "team-core-features-charlie": {
+      "source": {
+        "source": "github",
+        "repo": "camunda/team-core-features-charlie"
       }
     }
   },
