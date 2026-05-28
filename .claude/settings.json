@@ -35,7 +35,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/korthout/.claude/hooks/rtk-rewrite.sh"
+            "command": "/Users/korthout/.claude/hooks/commit-title-check.sh"
           }
         ]
       },
@@ -44,7 +44,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/korthout/.claude/hooks/commit-title-check.sh"
+            "command": "rtk hook claude"
           }
         ]
       }
