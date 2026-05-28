@@ -1,6 +1,6 @@
 ---
 name: investigate_reported_error
-description: Investigate a reported error message to determine if it's a known issue and decide how to proceed. Use when user shares an error message, stack trace, or log snippet and wants to understand whether it's known. Also use when user wants to research, investigate, or rootcause an incident.
+description: Use when user shares an error message, stack trace, or log snippet to investigate — or when investigating an incident that has a concrete error artifact (log line, exception, failed assertion). Skip when the incident has no error artifact, e.g. performance regressions, throughput/latency drops, capacity issues, or behavioral discrepancies without logs.
 ---
 
 # Investigate Reported Error
