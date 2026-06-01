@@ -35,7 +35,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/korthout/.claude/hooks/commit-title-check.sh"
+            "command": "$HOME/.claude/hooks/commit-title-check.sh"
           }
         ]
       },
@@ -54,7 +54,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/korthout/.claude/hooks/worktree-create.sh"
+            "command": "$HOME/.claude/hooks/worktree-create.sh"
           }
         ]
       }
@@ -168,12 +168,12 @@
   "sandbox": {
     "network": {
       "allowUnixSockets": [
-        "/Users/korthout/.gnupg/S.gpg-agent"
+        "$HOME/.gnupg/S.gpg-agent"
       ]
     },
     "filesystem": {
       "allowWrite": [
-        "/Users/korthout/.gnupg"
+        "$HOME/.gnupg"
       ]
     }
   },
