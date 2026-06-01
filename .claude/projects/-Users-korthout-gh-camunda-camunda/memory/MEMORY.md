@@ -1,0 +1,24 @@
+- [Error reporting threshold](feedback_error_reporting_threshold.md) — Expected/transient errors with retries should lower log level, not be filed as bugs
+- [Commit title length](feedback_commit_title_length.md) — Keep commit titles under 50 chars; push details to body
+- [PR titles have no prefix](feedback_pr_title_no_prefix.md) — PR titles do NOT use conventional-commit prefixes; commits do
+- [Use repo PR template](feedback_pr_template.md) — Always fill `.github/pull_request_template.md` sections when opening PRs in camunda/camunda
+- [Backport PRs — no amend](feedback_backport_no_amend.md) — Review fixes on backport branches go in NEW commits to preserve cherry-pick provenance
+- [Document conflict resolution in commits](feedback_document_conflict_resolution.md) — Any commit with resolved conflicts (merge/rebase/cherry-pick/backport) must explain the resolution in its body
+- [Delegate crit changes to subagents](feedback_crit_delegate_changes.md) — Judge /crit:crit feedback yourself, but delegate the edits to subagents to save context
+- [Crit is for human review](feedback_crit_for_human_review.md) — Don't have subagents use crit for agent-loop reviews; it pollutes the human's review file
+- [Review: raise topics first](feedback_review_raise_topics_first.md) — During commit-by-commit reviews, share your findings before asking what the user noticed
+- [PR review emoji code](reference_review_emoji_code.md) — camunda/camunda uses 👍/❓/❌/🔧/💭 prefixes; always apply, and include 2–3 👍 in the general comment
+- [Review nit budget](feedback_review_nit_budget.md) — Cap inline 🔧 suggestions at 0–5; if there'd be more, diagnose (PR too big / pre-existing debt / author sloppy)
+- [Review general-comment template](reference_review_general_comment_template.md) — `Thanks @author` opener, compact emoji paragraphs, `LGTM 👍` on its own at the end
+- [Review inline-comment style](reference_review_inline_comment_style.md) — ❓ are raw questions (no answer attached); 🔧 carry the proposal; short by default; hedge non-blocking; 👍 praise is specific
+- [💭 vs 🔧](feedback_review_thought_vs_suggestion.md) — 💭 is for pure observation; any comment that proposes a change (even softly) is 🔧
+- [Edit recent PR comments rather than appending corrections](feedback_edit_recent_pr_comments.md) — When the user corrects you just after a PR comment, PATCH the original instead of posting a follow-up
+- [Paginate GitHub API list calls](feedback_github_api_pagination.md) — `per_page=100` is the max, not "all"; check `total_count` / `Link: rel="next"` or you'll silently miss results
+- [Approve when no blockers](feedback_review_approve_when_no_blockers.md) — Submit PR reviews as APPROVE (not COMMENT) when there are no ❌ blockers / hard change requests
+- [Delegate investigations too](feedback_delegate_investigations_too.md) — Subagents can do CI/log/codebase digging, not just fixes; keep judgment in the main thread
+- [No issue refs in commits](feedback_no_issue_refs_in_commits.md) — Reference GitHub issues in PR descriptions, not commit messages — rebases multiply the cross-refs
+- [No Claude co-author trailer](feedback_no_claude_coauthor.md) — Never add `Co-Authored-By: Claude` to commit messages
+- [CI polling cadence](feedback_ci_polling_cadence.md) — Monitor PRs every 3 min for first 30 min, then back off: 15 min → 30 min → 1 hr; stop at 24 hr
+- [Rerun failed GHA jobs](reference_github_rerun_failed_jobs.md) — `POST /actions/runs/<id>/rerun-failed-jobs` retries infra/runner cancels without user intervention
+- [Use mvn not ./mvnw](project_use_mvn_not_mvnw.md) — In camunda/camunda use `mvn` (a shell function that picks the right distribution), not the `./mvnw` wrapper that AGENTS.md suggests
+- [Run QA IT in Failsafe](reference_run_qa_integration_tests.md) - Run tests in `zeebe/qa/integration-tests` via Failsafe not Surefire
