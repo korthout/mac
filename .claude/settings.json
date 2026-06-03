@@ -27,7 +27,7 @@
     ],
     "defaultMode": "default"
   },
-  "model": "opus[1m]",
+  "model": "sonnet",
   "hooks": {
     "PreToolUse": [
       {
@@ -178,5 +178,6 @@
     }
   },
   "effortLevel": "high",
+  "advisorModel": "opus",
   "skipAutoPermissionPrompt": true
 }
