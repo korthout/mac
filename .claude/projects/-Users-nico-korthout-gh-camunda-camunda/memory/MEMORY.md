@@ -19,6 +19,7 @@
 - [No issue refs in commits](feedback_no_issue_refs_in_commits.md) — Reference GitHub issues in PR descriptions, not commit messages — rebases multiply the cross-refs
 - [No Claude co-author trailer](feedback_no_claude_coauthor.md) — Never add `Co-Authored-By: Claude` to commit messages
 - [CI polling cadence](feedback_ci_polling_cadence.md) — Monitor PRs every 3 min for first 30 min, then back off: 15 min → 30 min → 1 hr; stop at 24 hr
+- [GitHub commit refs — no backticks](feedback_github_commit_refs.md) — Write commit SHAs bare (not in backticks) so GitHub auto-links them
 - [Rerun failed GHA jobs](reference_github_rerun_failed_jobs.md) — `POST /actions/runs/<id>/rerun-failed-jobs` retries infra/runner cancels without user intervention
 - [Use mvn not ./mvnw](project_use_mvn_not_mvnw.md) — In camunda/camunda use `mvn` (a shell function that picks the right distribution), not the `./mvnw` wrapper that AGENTS.md suggests
 - [Run QA IT in Failsafe](reference_run_qa_integration_tests.md) - Run tests in `zeebe/qa/integration-tests` via Failsafe not Surefire
