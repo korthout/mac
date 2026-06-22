@@ -163,6 +163,12 @@
         "source": "github",
         "repo": "camunda/team-core-features-charlie"
       }
+    },
+    "camunda-internal": {
+      "source": {
+        "source": "github",
+        "repo": "camunda/claude-marketplace-internal"
+      }
     }
   },
   "sandbox": {
