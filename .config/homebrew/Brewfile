@@ -182,8 +182,6 @@ cask "iterm2"
 cask "jdk-mission-control"
 # Tool to prevent the system from going into sleep mode
 cask "keepingyouawake"
-# End-to-end encryption software
-cask "keybase"
 # Tool to show what is persistently installed on the computer
 cask "knockknock"
 # Privacy-first, open-source platform for knowledge sharing and management
