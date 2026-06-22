@@ -1,6 +1,6 @@
 tap "golangci/tap"
 tap "mhaeuser/mhaeuser"
-tap "mvndaemon/mvnd"
+tap "mvndaemon/homebrew-mvnd"
 tap "romkatv/powerlevel10k"
 # Search tool like grep, but optimized for programmers
 brew "ack"
@@ -143,7 +143,7 @@ brew "zls"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Apache Maven Daemon
-brew "mvndaemon/mvnd/mvnd"
+brew "mvndaemon/homebrew-mvnd/mvnd"
 # Application launcher and productivity software
 cask "alfred"
 # Transfer files from and to an Android smartphone
@@ -186,8 +186,6 @@ cask "keepingyouawake"
 cask "keybase"
 # Tool to show what is persistently installed on the computer
 cask "knockknock"
-# Wallet desktop application to maintain multiple cryptocurrencies
-cask "ledger-wallet"
 # Privacy-first, open-source platform for knowledge sharing and management
 cask "logseq"
 # Screen and video recording software
