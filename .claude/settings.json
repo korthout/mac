@@ -142,7 +142,8 @@
     "claude-hud@claude-hud": true,
     "superpowers@claude-plugins-official": true,
     "crit@crit": true,
-    "team-core-features-charlie@team-core-features-charlie": true
+    "team-core-features-charlie@team-core-features-charlie": true,
+    "eng-kit@camunda-internal": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
