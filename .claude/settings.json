@@ -27,7 +27,7 @@
     ],
     "defaultMode": "default"
   },
-  "model": "sonnet",
+  "model": "opusplan",
   "hooks": {
     "PreToolUse": [
       {
