@@ -23,3 +23,4 @@
 - [Rerun failed GHA jobs](reference_github_rerun_failed_jobs.md) — `POST /actions/runs/<id>/rerun-failed-jobs` retries infra/runner cancels without user intervention
 - [Use mvn not ./mvnw](project_use_mvn_not_mvnw.md) — In camunda/camunda use `mvn` (a shell function that picks the right distribution), not the `./mvnw` wrapper that AGENTS.md suggests
 - [Run QA IT in Failsafe](reference_run_qa_integration_tests.md) - Run tests in `zeebe/qa/integration-tests` via Failsafe not Surefire
+- [Test duplication is fine](feedback_test_duplication.md) — Tests should favor readability over DRY; inline setup, accept redundancy, use literal values
