@@ -196,8 +196,6 @@ cask "obsidian"
 cask "openshot-video-editor"
 # Monitors computer mic and webcam
 cask "oversight"
-# Collaboration platform for API development
-cask "postman"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Move and resize windows using keyboard shortcuts or snap areas
