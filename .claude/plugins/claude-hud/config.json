@@ -10,7 +10,9 @@
     "showConfigCounts": true,
     "showSessionName": true,
     "showUsage": true,
-    "sevenDayThreshold": 80
+    "sevenDayThreshold": 80,
+    "showSkills": false,
+    "contextValue": "tokens"
   },
   "gitStatus": {
     "enabled": false
