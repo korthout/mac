@@ -77,6 +77,8 @@ if [[ ! -d ~/.venv ]]; then
 fi
 source ~/.venv/bin/activate
 
+export CLOUDSDK_PYTHON=$(which python3.14)
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/korthout/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/korthout/google-cloud-sdk/path.zsh.inc'; fi
 
