@@ -246,5 +246,3 @@ brew "crit"
 cask "superset"
 cask "shottr"
 brew "codeburn"
-# Whisper dictation/transcription app
-cask "opensuperwhisper"
