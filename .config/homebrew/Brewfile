@@ -246,5 +246,3 @@ brew "crit"
 cask "superset"
 cask "shottr"
 brew "codeburn"
-# macOS dictation with local Whisper/Parakeet transcription
-cask "my-monkeys/tap/opensuperwhisper"
