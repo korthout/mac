@@ -10,13 +10,6 @@
 - Never read, print, generate, or pipe private keys, tokens, `.env`/credentials files, or any secret value — anything in tool output is exposed. Hand the user a command to run themselves. Public halves and secret *names* are fine.
 - For any GitHub, Slack, or list API call, use full pagination by default (`gh api --paginate`, or loop until no next cursor / next page). Before reporting results, state the total count and confirm all pages were retrieved. Never report "all checks green" / "no failures" / "all comments addressed" without verifying `total_count` matches the retrieved count.
 
-## GitHub CLI workaround
-
-`gh` (and other Go-based CLIs) fail with TLS errors (`x509: OSStatus -26276`) through Claude Code's HTTPS proxy on macOS. Use `curl` with the GitHub REST API instead:
-```bash
-curl -s "https://api.github.com/..." -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github+json"
-```
-
 ## Model selection
 
 - Haiku: subagent retrieval/lookup with a narrow, well-specified target and no judgment (locate a file, grep a symbol, check whether X exists). If the task needs comprehension or synthesis, don't — a wrong cheap answer costs more to recover than it saved. Set `model: "haiku"` in the agent's frontmatter, or pass it explicitly for ad-hoc calls.
