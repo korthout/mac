@@ -17,4 +17,12 @@
 curl -s "https://api.github.com/..." -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github+json"
 ```
 
+## Model selection
+
+- Haiku: subagent retrieval/lookup with a narrow, well-specified target and no judgment (locate a file, grep a symbol, check whether X exists). If the task needs comprehension or synthesis, don't — a wrong cheap answer costs more to recover than it saved. Set `model: "haiku"` in the agent's frontmatter, or pass it explicitly for ad-hoc calls.
+- Delegating only pays off when the subagent does its own costly retrieval, or the same task repeats enough that spin-up overhead amortizes across a fan-out. Don't delegate a handful of small, already-specified edits in files already read into context — do those inline.
+- Sonnet is the default driving model for engineering work (implementation, TDD, git ops, CI debugging, PR triage, docs/issue drafting) — Opus is the exception, not Sonnet.
+- Opus: adversarial review/verification, high-stakes or hard-to-reverse decisions (architecture, security/CVE impact, ambiguous scope), synthesis across many sources. Pass `model: "opus"` explicitly for these rather than defaulting the session to it.
+- If an Opus session is doing routine implementation/CI/git work, or a Sonnet session keeps hitting architecture/security/adversarial-review calls, say so once and suggest switching tier — session-level, not per-message.
+
 @RTK.md
