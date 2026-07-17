@@ -1,6 +1,6 @@
 ---
 name: daily-standup
-description: Use when Nico asks to write his daily stand-up, stand-up message, Geekbot reply, or to summarize yesterday's work for stand-up. Produces both "Yesterday" and "Today" sections in Nico's house style, organized by his current P1/P2/P3 epics with everything else under "Also". Posted in Slack #team-core-features-charlie.
+description: Produces Nico's daily stand-up reply — "Yesterday", "Today", and "Blockers or risks" sections in his house style, organized by his current P1/P2/P3 epics with everything else under "Also" — then posts each as a separate Geekbot reply in his Slack DM once he agrees on the wording. Use when Nico asks to write his daily stand-up, stand-up message, Geekbot reply, or to summarize yesterday's work for stand-up.
 ---
 
 # Daily Standup
@@ -22,31 +22,29 @@ Produce Nico's two Slack stand-up replies (yesterday + today) in his exact style
 
 3. **Ask Nico for today's plan.** One open-ended question. He may say "nothing for P2", give an issue number, or describe a task informally.
 
-4. **Synthesize** both sections. Map each activity item to P1 / P2 / P3 if it relates to that epic; otherwise to **Also**. When unsure, prefer **Also**. Drop trivial follow-up commits (test imports, lint fixups, minor renames) that belong to a larger merged PR — list the PR, not its commits.
+4. **Ask Nico about blockers or risks.** One open-ended question, e.g. "Any blockers or risks?" He may say there are none, or describe them freely. This is raw free text — it does not get organized into P1/P2/P3.
 
-5. **Output** two clearly-separable blobs preceded by bold labels that Nico discards when pasting:
+5. **Synthesize** the Yesterday and Today sections. Map each activity item to P1 / P2 / P3 if it relates to that epic; otherwise to **Also**. When unsure, prefer **Also**. Drop trivial follow-up commits (test imports, lint fixups, minor renames) that belong to a larger merged PR — list the PR, not its commits. The blockers/risks item needs no P1/P2/P3 mapping — light cleanup of Nico's wording only.
 
-   ```
-   **For "What did you work on yesterday?":**
+6. **Agree, then post — one item at a time, in order.** For each of the three items below: show the drafted blob, wait for Nico to agree (iterate on wording if he asks for changes), then immediately post it as its own Geekbot reply to the DM conversation at https://camunda.slack.com/archives/D07RWKK2UTG (channel ID `D07RWKK2UTG`) via `mcp__claude_ai_Slack__slack_send_message`. Do not draft all three before posting any — each is agreed and posted before moving to the next.
 
-   P1 - …
+   a. **Yesterday** — the P1/P2/P3/Also blob for "What did you work on yesterday?".
+   b. **Today** — the P1/P2/P3/Also blob for "What will you work on today?".
+   c. **Blockers or risks** — if Nico gave actual blockers/risks text, post it as-is via Slack (free text, not organized by P1/P2/P3, no bold Geekbot label). If Nico said there are none, do NOT post anything via Slack for this item — the Slack integration appends a "Sent using @Claude" signature to every message it sends, and on a lone `.` that signature dominates the reply and renders as a garbled/unresolved mention in Geekbot's compiled thread report. Instead, tell Nico he needs to reply `.` to the "Any blockers or risks?" question himself in the DM.
 
-   ---
+   Drop the bold `**For "..."**` labels used in earlier versions of this skill when *posting* — those were only needed when Nico copy-pasted manually. Use them only when *drafting* a blob for his review, so he knows which Geekbot question it answers.
 
-   **For "What will you work on today?":**
-
-   P1 - …
-   ```
-
-   Nico copies each blob to the matching Geekbot question — they go in as separate messages.
+7. **Archive.** Write the three agreed items to `~/.claude/skills/daily-standup/history/<YYYY-MM-DD>.md`, where the date is today's date (the day the stand-up is posted), under plain `## Yesterday` / `## Today` / `## Blockers or risks` headers (a plain header is clearer to skim later than the Geekbot framing). Overwrite silently if the file already exists (a re-run same-day supersedes the earlier draft). This builds a dated archive of what Nico reported each day — useful later for performance-review prep.
 
 ## Style guide
 
-**Section headers** — one per P-section, blank line after:
+**Section headers** — one per P-section, NO blank line between the header and its first bullet (bullets follow immediately on the next line):
 
 - `P1 - <Epic name> (<Phase>)` — include phase in parentheses if the P-task description names one (e.g. "Drive Implement phase" → `(Implement)`); omit if the P-task doesn't name a phase.
-- `P3 - #<num> <short title>` when the P-task is a single issue — number first, then a short human-readable title (rewrite — do NOT paste the raw issue title verbatim).
+- `P3 - [#<num>](url) <short title>` when the P-task is a single issue — linked number first, then a short human-readable title (rewrite — do NOT paste the raw issue title verbatim). The issue number is always a markdown link, even in a header — never a bare `#<num>`.
 - `Also` — no number, no phase.
+
+A blank line still separates each P-section block from the next (header + its bullets is one block).
 
 **Bullets** — ASCII hyphen + space: `- item`. **NEVER `•`**. **NEVER em-dash `—` bullets**. Nico's clipboard mojibakes Unicode bullets.
 
@@ -57,11 +55,12 @@ Produce Nico's two Slack stand-up replies (yesterday + today) in his exact style
 
 Always include all three P-sections even if empty.
 
-**Links** — GitHub-flavored markdown `[text](url)`. Two acceptable forms:
+**Links** — GitHub-flavored markdown `[text](url)`. Every issue/PR reference gets a link — no exceptions, including section headers. Three acceptable forms:
 
 - **Preferred:** `[<Full PR or issue title> #<num>](url)` when the title carries information the reader needs. Example: `[Track multiple element instances per agent instance #51513](https://github.com/camunda/camunda/issues/51513)`.
 - **Shorthand:** `[PR #<num>](url)` when mid-bullet and the surrounding text already conveys the topic. Example: "took over [PR #53028](url)".
-- **NEVER** Slack-mrkdwn `<url|text>`. **NEVER** bare URLs. **NEVER** `(#num)` without a link.
+- **Header form:** `[#<num>](url)` — bare linked number, used only in `P2`/`P3` section headers (see Section headers above).
+- **NEVER** Slack-mrkdwn `<url|text>`. **NEVER** bare URLs. **NEVER** `#num` or `(#num)` without a link — this includes section headers, not just prose.
 
 **Inline code (backticks)** — apply consistently to:
 
@@ -78,7 +77,7 @@ Always include all three P-sections even if empty.
 
 **Clustering** — one bullet per coherent topic. Group related PRs into one bullet ("Took over PR #X, PR #Y, PR #Z (same case)"). Don't list every commit. List the merged PR or user-visible outcome.
 
-**Issue-title rewriting** — when a P-task description is verbose (e.g. `[Bug] Explore solutions for and start breaking down Partitions gets unhealthy if many timers are scheduled #8991`), rewrite to a short header (`P3 - #8991 Partitions unhealthy with many timers`).
+**Issue-title rewriting** — when a P-task description is verbose (e.g. `[Bug] Explore solutions for and start breaking down Partitions gets unhealthy if many timers are scheduled #8991`), rewrite to a short header (`P3 - [#8991](https://github.com/camunda/camunda/issues/8991) Partitions unhealthy with many timers`).
 
 ## P-tasks file format
 
@@ -112,9 +111,13 @@ See `example.md` for a complete worked stand-up (Nico's 2026-05-21 output) — u
 | Adding "Yesterday:" / "Today:" inside the content         | Don't — Geekbot prompts provide framing                                              |
 | Forgetting backticks on versions / branches / skill names | Apply consistently                                                                   |
 | Em-dashes in section headers (`P1 — …`)                   | Space-hyphen-space: `P1 - …`                                                         |
-| Pasting raw verbose issue title for P3                    | Rewrite: `P3 - #<num> <short title>`                                                 |
-| Linking with `(#51513)` instead of `[#51513](url)`        | Always provide the URL                                                               |
+| Pasting raw verbose issue title for P3                    | Rewrite: `P3 - [#<num>](url) <short title>`                                          |
+| Linking with `(#51513)` instead of `[#51513](url)`        | Always provide the URL — including in P2/P3 section headers, not just prose         |
 | Including a trivial fix-up commit as its own bullet       | Drop it — list only the parent PR                                                    |
 | Producing a single combined message                       | Output TWO separable blobs; Nico posts them as separate Geekbot replies              |
 | Skipping Slack — relying only on git                      | Support cases and planning posts have zero commits; always run the Glean Slack query |
 | Stopping at the first 50 Slack results                    | Paginate until `hasMoreResults` is absent or cursor returns empty                    |
+| Blank line between a section header and its first bullet  | No blank line — bullets follow the header on the very next line                     |
+| Drafting all three items before posting any                | Agree then post one at a time: Yesterday, then Today, then Blockers or risks         |
+| Posting `.` via Claude when there are no blockers/risks     | Don't — the auto-appended "Sent using @Claude" signature garbles a lone `.` in Geekbot's report. Tell Nico to post `.` himself instead |
+| Organizing blockers/risks into P1/P2/P3                    | It's raw free text, no epic mapping                                                  |
