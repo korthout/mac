@@ -65,6 +65,7 @@
 	swc = switch --create
 	up = pull --rebase
 	pair = !pair
+	today = "!f() { TODAY=$(date +%Y-%m-%d); FIRST=$(git log --format=\"%H %ad\" --date=format:\"%Y-%m-%d\" --reverse origin/main..@ | awk -v d=\"$TODAY\" '$2 >= d {print $1; exit}'); git log --reverse \"${FIRST}^..@\" \"$@\"; }; f"
 [rebase]
 	autoStash = true
 	autoSquash = true
