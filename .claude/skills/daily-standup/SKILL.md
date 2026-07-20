@@ -18,7 +18,8 @@ Produce Nico's two Slack stand-up replies (yesterday + today) in his exact style
      - **Keep:** support/incident channels (`#inc-*`, `support-*`), CVE channels (`#cve-*`), team DRI/planning posts (iteration planning, rotation swaps, retros), substantive cross-team threads where Nico contributed analysis, escalations.
      - **Drop:** threads on his own open PRs (already covered by git), personal/reunion/birthday DMs, one-word replies ("Makes sense", "Thanks"), Geekbot self-messages, social chitchat in DMs.
      - Cluster multi-message threads into one bullet — link the parent thread, not each reply.
-   - **GitHub activity (optional).** If a PR is referenced but its title/state matters, fetch via `curl -s "https://api.github.com/repos/<owner>/<repo>/pulls/<num>" -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github+json"` (Go-based `gh` fails through Claude Code's proxy on macOS — always curl).
+   - **GitHub review activity (required).** Pure code review — approvals, "requested changes", review comments — leaves no git commit and is often never mentioned in Slack, so git log and Slack both miss it. Query directly:
+     `curl -s "https://api.github.com/search/issues?q=repo:camunda/camunda+commenter:korthout+updated:<YYYY-MM-DD>" -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github+json"` to list PRs/issues touched that day, then for each PR check `curl -s "https://api.github.com/repos/camunda/camunda/pulls/<num>/reviews" -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github+json" | jq -r '.[] | select(.user.login=="korthout")'` to confirm a review (approval/changes-requested) actually landed that day and get its verdict. (Go-based `gh` fails through Claude Code's proxy on macOS — always curl, never `gh`.) Also use this same curl pattern to enrich any PR referenced elsewhere (Slack, git) whose title/state matters.
 
 3. **Ask Nico for today's plan.** One open-ended question. He may say "nothing for P2", give an issue number, or describe a task informally.
 
@@ -121,3 +122,4 @@ See `example.md` for a complete worked stand-up (Nico's 2026-05-21 output) — u
 | Drafting all three items before posting any                | Agree then post one at a time: Yesterday, then Today, then Blockers or risks         |
 | Posting `.` via Claude when there are no blockers/risks     | Don't — the auto-appended "Sent using @Claude" signature garbles a lone `.` in Geekbot's report. Tell Nico to post `.` himself instead |
 | Organizing blockers/risks into P1/P2/P3                    | It's raw free text, no epic mapping                                                  |
+| Relying only on git + Slack for GitHub work                | Pure review activity (approve/request-changes, no commit, no Slack mention) is invisible to both — always run the GitHub review-activity search |
