@@ -130,21 +130,23 @@ Output **exactly** this structure, in this exact order, and nothing else — no 
 ## Triage Result
 
 - **PR:** <owner/repo>#<number> — <short title>
-- **Intake:** :white_check_mark: Pass | :flags: Flagged | :x: Rejected — <one-line reason if Flagged/Rejected, else "meets all four bars">
-- **Tier:** :large_green_circle: Low | :large_orange_circle: Medium | :red_circle: High
-- **:reasonably-sized-haystacks: Stack:** <tools and reviewers to involve>
-- **:red-flag: Red flags:**
+- **Achieves:** <one-line goal/outcome — why this PR exists, e.g. "fixes a race in timer cancellation">
+- **Changes:** <one-line mechanism — how it gets there, e.g. "adds a lock around the timer registry">
+- **Intake:** Pass | Flagged | Rejected — <one-line reason if Flagged/Rejected, else "meets all four bars">
+- **Tier:** Low | Medium | High
+- **Stack:** <tools and reviewers to involve>
+- **Red flags:**
   - <flag>
   - <flag>
-- **:standing_person: Gate:** Human-on-loop (spot-check) | Human-in-loop (review every merge)
-- **:hourglass_flowing_sand: Estimated human effort:** <range, e.g. "5–10 min"> — <one-line driver>
+- **Gate:** Human-on-loop (spot-check) | Human-in-loop (review every merge)
+- **Estimated human effort:** <range, e.g. "5–10 min"> — <one-line driver>
 
 ### Suggested PR Splits
 1. **<split name>** — <what this split contains> — <why it should be split out>
 2. **<split name>** — <what this split contains> — <why it should be split out>
 ```
 
-Fill in every placeholder (`<...>`); for fields with `|`-separated options, choose exactly one matching the actual verdict/tier and write only that one emoji+word, not the alternatives — the emojis are part of the fixed options, not a free choice. For **Red flags**, list one triggered flag per bullet line (`- <flag>`); if none triggered, write a single line `- none` instead of a comma-separated list.
+Fill in every placeholder (`<...>`); for fields with `|`-separated options, choose exactly one matching the actual verdict/tier and write only that one word, not the alternatives. For **Red flags**, list one triggered flag per bullet line (`- <flag>`); if none triggered, write a single line `- none` instead of a comma-separated list.
 
 The `### Suggested PR Splits` header and its numbered list are the **only** conditional part of this template:
 - Include it, in that exact position (last, after Estimated human effort), **only when** the diff exceeds 1000 changed lines *and* Step 2 above found a real decomposition. Use 2–4 numbered items, each in the form `N. **<split name>** — <contents> — <rationale>`.
