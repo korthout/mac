@@ -12,11 +12,14 @@ P1 - AI Visibility & Explainability (Implement)
 - Reviewed [PR #52912](https://github.com/camunda/camunda/pull/52912) (agent metric processors); aligned with author on splitting CREATE/UPDATE into stacked PRs
 - Drafted the implementation plan for the elementInstanceKeys piece of [#51513](https://github.com/camunda/camunda/issues/51513)
 
+
 P2 - Business ID Visibility & Filtering
 - Nothing yesterday
 
+
 P3 - [#8991](https://github.com/camunda/camunda/issues/8991) Partitions unhealthy with many timers
 - Nothing yesterday
+
 
 Also
 - Worked on [PR #53028](https://github.com/camunda/camunda/pull/53028) and took over PR #52988 and PR #53078 from Stephan and Deepthi (same case)
@@ -32,11 +35,14 @@ Also
 P1 - AI Visibility & Explainability (Implement)
 - Implement [Track multiple element instances per agent instance #51513](https://github.com/camunda/camunda/issues/51513)
 
+
 P2 - Business ID Visibility & Filtering
 - Nothing planned today
 
+
 P3 - [#8991](https://github.com/camunda/camunda/issues/8991) Partitions unhealthy with many timers
 - Breakdown to something tangeable (currently continues to result in too large PRs >5k lines)
+
 
 Also
 - #inc-support-32932-version-of-8-8-that-does-not-have-memory-allocation-issue
@@ -50,6 +56,7 @@ Also
 - `P2` header has no phase because the P-task says "Assist Business ID Visibility & Filtering epic" — no phase keyword.
 - `P3` header rewrites the verbose issue title to `[#8991](url) Partitions unhealthy with many timers` — the issue number is a link even in the header.
 - No blank line between a section header and its first bullet — the bullets start on the very next line.
+- Two blank lines between each P-section block (P1/P2/P3/Also) — Geekbot doesn't render a single blank line as a break.
 - Empty P-sections are still present, with `- Nothing yesterday` or `- Nothing planned today`.
 - Links use `[full title #num](url)` for the headline issue/PR, shorter `[PR #num](url)` mid-bullet, `[#num](url)` in P2/P3 headers.
 - Backticks on `3.5.2`, `stable/8.8`, `reviewing-agent-ready-prs`.

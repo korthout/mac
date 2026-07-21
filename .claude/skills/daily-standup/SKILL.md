@@ -27,7 +27,7 @@ Produce Nico's two Slack stand-up replies (yesterday + today) in his exact style
 
 5. **Synthesize** the Yesterday and Today sections. Map each activity item to P1 / P2 / P3 if it relates to that epic; otherwise to **Also**. When unsure, prefer **Also**. Drop trivial follow-up commits (test imports, lint fixups, minor renames) that belong to a larger merged PR — list the PR, not its commits. The blockers/risks item needs no P1/P2/P3 mapping — light cleanup of Nico's wording only.
 
-6. **Agree, then post — one item at a time, in order.** For each of the three items below: show the drafted blob, wait for Nico to agree (iterate on wording if he asks for changes), then immediately post it as its own Geekbot reply to the DM conversation at https://camunda.slack.com/archives/D07RWKK2UTG (channel ID `D07RWKK2UTG`) via `mcp__claude_ai_Slack__slack_send_message`. Do not draft all three before posting any — each is agreed and posted before moving to the next.
+6. **Agree, then post — one item at a time, in order.** For each of the three items below: show the drafted blob **as plain text output in the chat message itself** — never via `AskUserQuestion` or any other tool that hides the actual content behind an option label (Nico cannot see the draft until it's rendered directly). Wait for Nico to agree in his own reply (iterate on wording if he asks for changes), then immediately post it as its own Geekbot reply to the DM conversation at https://camunda.slack.com/archives/D07RWKK2UTG (channel ID `D07RWKK2UTG`) via `mcp__claude_ai_Slack__slack_send_message`. Do not draft all three before posting any — each is agreed and posted before moving to the next.
 
    a. **Yesterday** — the P1/P2/P3/Also blob for "What did you work on yesterday?".
    b. **Today** — the P1/P2/P3/Also blob for "What will you work on today?".
@@ -42,10 +42,10 @@ Produce Nico's two Slack stand-up replies (yesterday + today) in his exact style
 **Section headers** — one per P-section, NO blank line between the header and its first bullet (bullets follow immediately on the next line):
 
 - `P1 - <Epic name> (<Phase>)` — include phase in parentheses if the P-task description names one (e.g. "Drive Implement phase" → `(Implement)`); omit if the P-task doesn't name a phase.
-- `P3 - [#<num>](url) <short title>` when the P-task is a single issue — linked number first, then a short human-readable title (rewrite — do NOT paste the raw issue title verbatim). The issue number is always a markdown link, even in a header — never a bare `#<num>`.
+- `P2 - [#<num>](url) <short title>` / `P3 - [#<num>](url) <short title>` when the P-task names a single issue (its description ends in `#<num>`) — linked number first, then a short human-readable title (rewrite — do NOT paste the raw issue title verbatim). The issue number is always a markdown link, even in a header — never a bare `#<num>`.
 - `Also` — no number, no phase.
 
-A blank line still separates each P-section block from the next (header + its bullets is one block).
+**Two** blank lines still separate each P-section block from the next (header + its bullets is one block) — Geekbot doesn't render a single blank line as a paragraph break, so it takes two to show up as one.
 
 **Bullets** — ASCII hyphen + space: `- item`. **NEVER `•`**. **NEVER em-dash `—` bullets**. Nico's clipboard mojibakes Unicode bullets.
 
@@ -119,7 +119,9 @@ See `example.md` for a complete worked stand-up (Nico's 2026-05-21 output) — u
 | Skipping Slack — relying only on git                      | Support cases and planning posts have zero commits; always run the Glean Slack query |
 | Stopping at the first 50 Slack results                    | Paginate until `hasMoreResults` is absent or cursor returns empty                    |
 | Blank line between a section header and its first bullet  | No blank line — bullets follow the header on the very next line                     |
+| Only one blank line between P-section blocks               | Use two — Geekbot doesn't render a single blank line as a break                     |
 | Drafting all three items before posting any                | Agree then post one at a time: Yesterday, then Today, then Blockers or risks         |
 | Posting `.` via Claude when there are no blockers/risks     | Don't — the auto-appended "Sent using @Claude" signature garbles a lone `.` in Geekbot's report. Tell Nico to post `.` himself instead |
 | Organizing blockers/risks into P1/P2/P3                    | It's raw free text, no epic mapping                                                  |
 | Relying only on git + Slack for GitHub work                | Pure review activity (approve/request-changes, no commit, no Slack mention) is invisible to both — always run the GitHub review-activity search |
+| Asking "does this look right?" via `AskUserQuestion` instead of showing the draft | The draft text must appear directly in the chat message, not hidden behind an option label Nico has to guess at — he can't approve what he can't see |
