@@ -26,5 +26,5 @@ fi
 
 LEN=${#TITLE}
 if [ "$LEN" -gt 72 ]; then
-  echo "{\"decision\":\"block\",\"reason\":\"Commit title too long: $LEN chars (max 72, prefer under 50)\"}"
+  echo "{\"decision\":\"block\",\"reason\":\"Commit title too long: $LEN chars (max 72, prefer under 50 not including the prefix (type(scope):)\"}"
 fi
