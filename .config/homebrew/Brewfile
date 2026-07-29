@@ -1,4 +1,3 @@
-tap "mhaeuser/mhaeuser"
 tap "mvndaemon/homebrew-mvnd"
 tap "romkatv/powerlevel10k"
 # Search tool like grep, but optimized for programmers
