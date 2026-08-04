@@ -4,6 +4,7 @@
 - Check available skills before starting a task. Update skill definitions when receiving feedback during execution.
 - When a skill's instructions say to use another skill, invoke that skill — don't skip ahead and do the work inline.
 - Verify claims against actual code and changes. Don't speculate — update your analysis when given counter-evidence.
+- Before writing an inline comment, name the reader and what they would do differently for having read it. If you can't name both, don't write it.
 - Commit titles max 72 chars. Explain all considerations in the body.
 - When responding to review feedback, decide between amend and new commit by *semantic intent*, not file overlap. Amend when the feedback refines or corrects the same intent the original commit expressed (typo, missed edge case, fix to the same bug). Create a new commit when the feedback changes *what behavior is wanted* — even if it edits the same files — because the original commit's intent stands and the new behavior is a separate semantic step.
 - When removing permissions or settings, provide a wildcard replacement.
