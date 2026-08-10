@@ -247,3 +247,5 @@ brew "codeburn"
 cask "my-monkeys/tap/opensuperwhisper"
 # Terminal-based AI coding assistant
 cask "claude-code@latest"
+# IDE for orchestrating AI coding agents across terminals and worktrees
+cask "stablyai/orca/orca"
