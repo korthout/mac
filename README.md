@@ -91,6 +91,9 @@ Installs everything listed in this machine's Brewfile — `Brewfile.work`
 or `Brewfile.personal`, whichever the context says. Unchanged day-to-day:
 no flags, no prompts about context.
 
+Quiet by default. Add `--verbose` to see the full `brew bundle`
+output and a trace of the script's own commands.
+
 There is no third "shared" file. A package is shared by being listed in
 both Brewfiles, and `update` only ever reads one of them; it never
 reconciles the two.
@@ -100,7 +103,11 @@ reconciles the two.
 ```sh
 brew-install <package>
 brew-install --cask <package>
+brew-install --verbose <package>
 ```
+
+Quiet by default; `--verbose` shows `brew install`'s own output and a
+trace of the script's own commands.
 
 Installs the package and records it against this machine's context. If it
 looks like something you'd want everywhere, you'll be asked:
@@ -138,7 +145,11 @@ third-party tap.
 
 ```sh
 brew-uninstall <package>
+brew-uninstall --verbose <package>
 ```
+
+Quiet by default; `--verbose` shows `brew uninstall`'s own output and a
+trace of the script's own commands.
 
 Uninstalls the package and removes its record. If the package was shared
 (listed in both Brewfiles), you'll be asked what should happen to the

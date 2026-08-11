@@ -1,3 +1,25 @@
+# Splits `--verbose` out of "$@", so update/brew-install/brew-uninstall can
+# recognize it before require_single_package() runs — that function rejects
+# any flag it doesn't know about, and --verbose isn't something it (or a
+# Brewfile line) needs to care about.
+#
+# Sets two globals rather than returning the filtered list on stdout: a
+# round trip through command substitution would re-split/re-quote package
+# names, which is exactly what require_single_package() and resolve_package()
+# depend on staying intact.
+# Usage: extract_verbose "$@"; set -- "${VERBOSE_ARGS[@]}"
+function extract_verbose() {
+	VERBOSE=no
+	VERBOSE_ARGS=()
+	local arg
+	for arg in "$@"; do
+		case "$arg" in
+			--verbose) VERBOSE=yes ;;
+			*) VERBOSE_ARGS+=("$arg") ;;
+		esac
+	done
+}
+
 CONTEXT_FILE="$XDG_CONFIG_HOME/homebrew/context"
 if [ ! -f "$CONTEXT_FILE" ]; then
 	echo "No context set for this machine. Run: echo work|personal > $CONTEXT_FILE" >&2

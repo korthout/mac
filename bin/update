@@ -1,8 +1,15 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 source "$HOME/bin/lib/brew-context.sh"
+
+extract_verbose "$@"
+set -- "${VERBOSE_ARGS[@]}"
+[ "$VERBOSE" = yes ] && set -x
+
+verbose_flag=()
+[ "$VERBOSE" = yes ] && verbose_flag=(--verbose)
 
 function config() {
 	git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
@@ -12,11 +19,11 @@ trap 'echo Terminated $0; exit' INT
 
 config pull
 
-brew bundle check --verbose || true
+brew bundle check "${verbose_flag[@]}" || true
 
 prompt "Continue? y/n"
 
-brew bundle install --verbose
+brew bundle install "${verbose_flag[@]}"
 brew cleanup
 
 commit_and_push "Update" "$BREWFILE"

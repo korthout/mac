@@ -3,15 +3,19 @@
 if [ "$#" -eq "0" ]; then
 	echo "Installs a new package using brew bundle"
 	echo ""
-	echo "Usage: brew-install [--cask] <package>"
+	echo "Usage: brew-install [--cask] [--verbose] <package>"
 	echo ""
 	echo "Note that this tool may install other packages when syncing Brewfile"
 	exit 0
 fi
 
-set -ex
+set -e
 
 source "$HOME/bin/lib/brew-context.sh"
+
+extract_verbose "$@"
+set -- "${VERBOSE_ARGS[@]}"
+[ "$VERBOSE" = yes ] && set -x
 
 require_single_package "$@"
 
@@ -23,7 +27,10 @@ trap 'echo Terminated $0; exit' INT
 
 config pull
 
-brew install "$@"
+verbose_flag=()
+[ "$VERBOSE" = yes ] && verbose_flag=(-v)
+
+brew install "${verbose_flag[@]}" "$@"
 
 read -r pkg_type pkg_name pkg_tap < <(resolve_package "$@")
 
