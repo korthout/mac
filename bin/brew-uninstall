@@ -39,8 +39,12 @@ fi
 
 brew bundle remove --"$pkg_type" "$pkg_name"
 
+# Only the files actually written get staged, so an unrelated edit sitting
+# in the other context's Brewfile doesn't get swept into an Uninstall commit.
+written=("$BREWFILE")
 if [ "$remove_from_other" = yes ]; then
 	HOMEBREW_BUNDLE_FILE="$OTHER_BREWFILE" brew bundle remove --"$pkg_type" "$pkg_name"
+	written+=("$OTHER_BREWFILE")
 fi
 
-commit_and_push "Uninstall-$pkg_name" "$BREWFILE" "$OTHER_BREWFILE"
+commit_and_push "Uninstall-$pkg_name" "${written[@]}"

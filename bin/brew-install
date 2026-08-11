@@ -41,9 +41,13 @@ fi
 ensure_tap "$pkg_tap" "$BREWFILE"
 brew bundle add --"$pkg_type" "$pkg_name"
 
+# Only the files actually written get staged, so an unrelated edit sitting
+# in the other context's Brewfile doesn't get swept into an Install commit.
+written=("$BREWFILE")
 if [ "$share" = yes ]; then
 	ensure_tap "$pkg_tap" "$OTHER_BREWFILE"
 	HOMEBREW_BUNDLE_FILE="$OTHER_BREWFILE" brew bundle add --"$pkg_type" "$pkg_name"
+	written+=("$OTHER_BREWFILE")
 fi
 
-commit_and_push "Install-$pkg_name" "$BREWFILE" "$OTHER_BREWFILE"
+commit_and_push "Install-$pkg_name" "${written[@]}"
