@@ -2,7 +2,7 @@
 
 This repo contains the dotfiles and installed packages of my Mac.
 Homebrew is the main way to manage packages from this repo.
-An overview of all installed packages can be found in `Brewfile` (the exact versions are specified in `Brewfile.lock.json`).
+An overview of all installed packages can be found in `Brewfile.work` and `Brewfile.personal` (the exact versions are specified in `Brewfile.work.lock.json` and `Brewfile.personal.lock.json`, respectively).
 Originally, I looked into using Nix and nix-darwin to manage packages, but this was too cumbersome compared to Brew.
 
 This repo should be used as a bare git repository to work on the `~` home folder without messing with git repos existing in sub folders.
@@ -39,6 +39,26 @@ config checkout
 config config status.showUntrackedFiles no
 ```
 
+### Set this machine's context
+
+Each machine is permanently either `work` or `personal`. `update`,
+`brew-install`, and `brew-uninstall` all read this from a local,
+untracked marker file and refuse to run without it, so set it now,
+before the first `update`.
+
+The checkout above wrote `~/.zshrc`, which is what sets
+`$XDG_CONFIG_HOME` — open a new shell (or `source ~/.zshrc`) first so
+it's actually set in your current one:
+
+```sh
+mkdir -p "$XDG_CONFIG_HOME/homebrew"
+echo work > "$XDG_CONFIG_HOME/homebrew/context"      # or: echo personal > ...
+```
+
+This file lives outside version control — untracked files in this
+repo are already hidden from `config status` — and is never synced;
+every machine sets it independently.
+
 ### Install Homebrew
 
 You can install Homebrew pretty in an unsafe way.
@@ -59,21 +79,51 @@ softwareupdate --install-rosetta --agree-to-license
 
 ## Usage
 
-Install and update packages
+### Install and update packages
 
 ```sh
-brew bundle --verbose
-config commit -a -m 'Update packages'
-config push
+update
 ```
 
-Dump newly installed packages into Brewfile
+Installs and updates the packages shared across every machine, plus this
+machine's own context. Unchanged day-to-day: no flags, no prompts about
+context.
+
+### Install a package
 
 ```sh
-brew bundle dump --force --describe
-config commit -a -m 'Add new package'
-config push
+brew-install <package>
 ```
+
+Installs the package and records it against this machine's context. If it
+looks like something you'd want everywhere, you'll be asked:
+
+> Do you want to share this?
+
+- **No** (default) — stays recorded against this machine's context only.
+- **Yes** — recorded as shared: added to *both* Brewfiles, so every
+  machine's next `update` picks it up. Also how you promote an existing
+  work-only or personal-only package to shared — just re-run
+  `brew-install` on it.
+
+Installed something by hand with plain `brew install`? Run `brew-install
+<package>` on it too, even though it's already installed — it's a safe
+no-op reinstall that records it in the Brewfile and asks the share
+question.
+
+### Uninstall a package
+
+```sh
+brew-uninstall <package>
+```
+
+Uninstalls the package and removes its record. If the package was shared
+(listed in both Brewfiles), you'll be asked what should happen to the
+*other* machines that still expect it:
+
+- **Remove entirely** — dropped from both Brewfiles.
+- **Keep it for the other side** (default) — removed from this machine's
+  file only; the other context keeps it untouched.
 
 ## Additional installations
 
