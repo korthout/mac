@@ -3,7 +3,7 @@
 if [ "$#" -eq "0" ]; then
 	echo "Installs a new package using brew bundle"
 	echo ""
-	echo "Usage: brew-install <package>"
+	echo "Usage: brew-install [--cask] <package>"
 	echo ""
 	echo "Note that this tool may install other packages when syncing Brewfile"
 	exit 0
@@ -11,21 +11,36 @@ fi
 
 set -ex
 
-package=$1
+source "$HOME/bin/lib/brew-context.sh"
+
+require_single_package "$@"
 
 function config() {
 	git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
 }
 
-# Make sure foreground process group can be terminated
 trap 'echo Terminated $0; exit' INT
 
-# Make sure all recent Brewfile changes are installed
 config pull
 
 brew install "$@"
-brew bundle add --global "$@"
 
-config add $XDG_CONFIG_HOME/homebrew/Brewfile
-config commit -m "Install-$package"
-config push
+read -r pkg_type pkg_name < <(resolve_package "$@")
+
+share=no
+if in_bundle "$pkg_type" "$pkg_name" "$BREWFILE" && in_bundle "$pkg_type" "$pkg_name" "$OTHER_BREWFILE"; then
+	share=yes
+	echo "'$pkg_name' is already shared."
+elif prompt "Do you want to share '$pkg_name'? [y/N]"; then
+	share=yes
+	echo "Sharing '$pkg_name' — adding it to both contexts."
+else
+	echo "Keeping '$pkg_name' for $CONTEXT only."
+fi
+
+brew bundle add --"$pkg_type" "$pkg_name"
+if [ "$share" = yes ]; then
+	HOMEBREW_BUNDLE_FILE="$OTHER_BREWFILE" brew bundle add --"$pkg_type" "$pkg_name"
+fi
+
+commit_and_push "Install-$pkg_name" "$BREWFILE" "$OTHER_BREWFILE"
