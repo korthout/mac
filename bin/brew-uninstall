@@ -23,7 +23,7 @@ trap 'echo Terminated $0; exit' INT
 
 config pull
 
-read -r pkg_type pkg_name < <(resolve_package "$@")
+read -r pkg_type pkg_name _ < <(resolve_package "$@")
 
 brew uninstall "$@"
 
@@ -38,6 +38,7 @@ if in_bundle "$pkg_type" "$pkg_name" "$OTHER_BREWFILE"; then
 fi
 
 brew bundle remove --"$pkg_type" "$pkg_name"
+
 if [ "$remove_from_other" = yes ]; then
 	HOMEBREW_BUNDLE_FILE="$OTHER_BREWFILE" brew bundle remove --"$pkg_type" "$pkg_name"
 fi

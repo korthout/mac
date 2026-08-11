@@ -25,7 +25,7 @@ config pull
 
 brew install "$@"
 
-read -r pkg_type pkg_name < <(resolve_package "$@")
+read -r pkg_type pkg_name pkg_tap < <(resolve_package "$@")
 
 share=no
 if in_bundle "$pkg_type" "$pkg_name" "$BREWFILE" && in_bundle "$pkg_type" "$pkg_name" "$OTHER_BREWFILE"; then
@@ -38,8 +38,11 @@ else
 	echo "Keeping '$pkg_name' for $CONTEXT only."
 fi
 
+ensure_tap "$pkg_tap" "$BREWFILE"
 brew bundle add --"$pkg_type" "$pkg_name"
+
 if [ "$share" = yes ]; then
+	ensure_tap "$pkg_tap" "$OTHER_BREWFILE"
 	HOMEBREW_BUNDLE_FILE="$OTHER_BREWFILE" brew bundle add --"$pkg_type" "$pkg_name"
 fi
 

@@ -57,7 +57,9 @@ function prompt() {
 # package is already installed. require_single_package() already rejects
 # any flag it can't record faithfully, so by the time resolve_package runs,
 # the only flag left to consider is --cask/--casks.
-# Prints: "formula <full-name>" or "cask <token>"
+# Prints: "<type> <name> <tap>", e.g. "formula jq homebrew/core" or
+# "cask stablyai/orca/orca stablyai/orca". The tap is what ensure_tap()
+# needs to decide whether the Brewfile also needs a `tap` line.
 function extract_package_name() {
 	local name arg
 	for arg in "$@"; do
@@ -88,9 +90,28 @@ function resolve_package() {
 		info=$(brew info --json=v2 "$name") || return 1
 	fi
 	if [ "$(jq '.formulae | length' <<<"$info")" -gt 0 ]; then
-		echo "formula $(jq -r '.formulae[0].full_name' <<<"$info")"
+		echo "formula $(jq -r '.formulae[0] | "\(.full_name) \(.tap)"' <<<"$info")"
 	else
-		echo "cask $(jq -r '.casks[0].full_token' <<<"$info")"
+		echo "cask $(jq -r '.casks[0] | "\(.full_token) \(.tap)"' <<<"$info")"
+	fi
+}
+
+# Adds the `tap "<tap>"` line a tapped package needs, so a Brewfile that
+# gains a third-party package is installable on a machine that has never
+# heard of that tap. Without this, sharing e.g. stablyai/orca/orca hands
+# the other machine a Brewfile whose `brew bundle install` can't resolve
+# it.
+#
+# Homebrew's own taps are skipped — every machine already has them, and
+# `brew bundle` emits no tap line for them either.
+# Usage: ensure_tap <tap> <brewfile-path>
+function ensure_tap() {
+	local tap=$1 file=$2
+	case "$tap" in
+		''|null|homebrew/core|homebrew/cask) return 0 ;;
+	esac
+	if ! in_bundle tap "$tap" "$file"; then
+		HOMEBREW_BUNDLE_FILE="$file" brew bundle add --tap "$tap"
 	fi
 }
 
@@ -104,12 +125,13 @@ function resolve_package() {
 #
 # A missing or unreadable file makes grep exit non-zero, i.e. reads as "not
 # present" — the same fail-closed behaviour the `bundle list` version had.
-# Usage: in_bundle formula|cask <name> <brewfile-path>
+# Usage: in_bundle formula|cask|tap <name> <brewfile-path>
 function in_bundle() {
 	local type=$1 name=$2 file=$3 prefix
 	case "$type" in
 		formula) prefix=brew ;;
 		cask) prefix=cask ;;
+		tap) prefix=tap ;;
 		*) return 1 ;;
 	esac
 	grep -qF -- "$prefix \"$name\"" "$file" 2>/dev/null

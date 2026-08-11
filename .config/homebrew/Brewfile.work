@@ -1,4 +1,4 @@
-tap "mvndaemon/homebrew-mvnd"
+tap "mvndaemon/mvnd"
 tap "romkatv/powerlevel10k"
 # Search tool like grep, but optimized for programmers
 brew "ack"
