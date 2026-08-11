@@ -141,7 +141,7 @@ brew "zls"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Apache Maven Daemon
-brew "mvndaemon/homebrew-mvnd/mvnd"
+brew "mvndaemon/mvnd/mvnd"
 # Application launcher and productivity software
 cask "alfred"
 # Transfer files from and to an Android smartphone
