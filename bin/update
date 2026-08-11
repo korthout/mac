@@ -2,27 +2,21 @@
 
 set -ex
 
+source "$HOME/bin/lib/brew-context.sh"
+
 function config() {
 	git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
 }
 
-function prompt() {
-	read -p "$1" a
-	[ $a = "y" ]
-}
-
-# Make sure foreground process group can be terminated
 trap 'echo Terminated $0; exit' INT
 
 config pull
 
-brew bundle check --verbose --global || true
+brew bundle check --verbose || true
 
 prompt "Continue? y/n"
 
-brew bundle install --verbose --global
+brew bundle install --verbose
 brew cleanup
 
-config add $XDG_CONFIG_HOME/homebrew/Brewfile
-config commit -m "Update"
-config push
+commit_and_push "Update" "$BREWFILE"
