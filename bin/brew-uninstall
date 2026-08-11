@@ -11,21 +11,35 @@ fi
 
 set -ex
 
-package=$1
+source "$HOME/bin/lib/brew-context.sh"
+
+require_single_package "$@"
 
 function config() {
 	git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
 }
 
-# Make sure foreground process group can be terminated
 trap 'echo Terminated $0; exit' INT
 
-# Make sure all recent Brewfile changes are installed
 config pull
 
-brew uninstall "$@"
-brew bundle remove --global "$@"
+read -r pkg_type pkg_name < <(resolve_package "$@")
 
-config add $XDG_CONFIG_HOME/homebrew/Brewfile
-config commit -m "Uninstall-$package"
-config push
+brew uninstall "$@"
+
+remove_from_other=no
+if in_bundle "$pkg_type" "$pkg_name" "$OTHER_BREWFILE"; then
+	if prompt "'$pkg_name' is shared. Remove entirely (affects the other side too)? [y/N]"; then
+		remove_from_other=yes
+		echo "Removing '$pkg_name' entirely — both contexts will lose it."
+	else
+		echo "Keeping '$pkg_name' for the other side — only removing it from $CONTEXT."
+	fi
+fi
+
+brew bundle remove --"$pkg_type" "$pkg_name"
+if [ "$remove_from_other" = yes ]; then
+	HOMEBREW_BUNDLE_FILE="$OTHER_BREWFILE" brew bundle remove --"$pkg_type" "$pkg_name"
+fi
+
+commit_and_push "Uninstall-$pkg_name" "$BREWFILE" "$OTHER_BREWFILE"
