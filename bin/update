@@ -23,7 +23,7 @@ brew bundle check --verbose || true
 
 prompt "Continue? y/n"
 
-brew bundle install "${verbose_flag[@]}"
+brew bundle install --verbose
 brew cleanup
 
 commit_and_push "Update" "$BREWFILE"
