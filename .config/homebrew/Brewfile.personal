@@ -58,8 +58,6 @@ brew "git-delta"
 # Interpreted, interactive, object-oriented programming language
 # Rebase alternative for easy & efficient in-memory rebases and fixups
 brew "git-revise"
-# Validating, recursive, caching DNS resolver
-brew "unbound"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
 # GNU Privacy Guard (OpenPGP)
