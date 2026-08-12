@@ -158,8 +158,6 @@ cask "camunda-modeler"
 cask "coconutbattery"
 # Brings the power of Copilot coding agent directly to your terminal
 cask "copilot-cli"
-# Voice and text chat software
-cask "discord"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Client for the Dropbox cloud storage service
