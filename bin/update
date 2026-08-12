@@ -12,14 +12,14 @@ verbose_flag=()
 [ "$VERBOSE" = yes ] && verbose_flag=(--verbose)
 
 function config() {
-	git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+  git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
 }
 
 trap 'echo Terminated $0; exit' INT
 
 config pull
 
-brew bundle check "${verbose_flag[@]}" || true
+brew bundle check --verbose || true
 
 prompt "Continue? y/n"
 
