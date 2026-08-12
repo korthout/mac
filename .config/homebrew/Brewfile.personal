@@ -88,8 +88,6 @@ brew "kubectx"
 brew "luv"
 # Java-based project management
 brew "maven"
-# Run a Kubernetes cluster locally
-brew "minikube"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Port scanning utility for large networks
