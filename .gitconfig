@@ -9,6 +9,9 @@
 	pager = delta
 [gpg]
 	program = /opt/homebrew/bin/gpg
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /Users/nico.korthout/.gitallowedsigners
 [commit]
 	gpgsign = true
 	verbose = true
