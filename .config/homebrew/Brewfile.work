@@ -198,8 +198,6 @@ cask "raycast"
 cask "rectangle"
 # Client for Old School RuneScape
 cask "runelite"
-# Instant messaging application focusing on security
-cask "signal"
 # Team communication and collaboration software
 cask "slack"
 # Sound and audio controller
