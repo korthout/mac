@@ -1,7 +1,8 @@
 [user]
 	name = Nico Korthout
 	email = nicokorthout@gmail.com
-	signingkey = /Users/nico.korthout/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/PublicKeys/4b450215e051da1fd4130d00f287c90b.pub
+[include]
+	path = .gitconfig.local
 [includeIf "gitdir:~/gh/camunda/"]
 	path = ~/gh/camunda/.gitconfig
 

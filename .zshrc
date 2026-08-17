@@ -66,7 +66,7 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-export SSH_AUTH_SOCK=/Users/nico.korthout/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+export SSH_AUTH_SOCK=~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
