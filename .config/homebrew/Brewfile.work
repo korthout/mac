@@ -245,3 +245,9 @@ cask "claude-code@latest"
 cask "stablyai/orca/orca"
 # Store SSH keys in the Secure Enclave
 cask "secretive"
+# Store SSH keys in the Secure Enclave
+cask "secretive"
+# Store SSH keys in the Secure Enclave
+cask "secretive"
+# Store SSH keys in the Secure Enclave
+cask "secretive"
