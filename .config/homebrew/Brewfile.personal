@@ -176,8 +176,6 @@ cask "keepingyouawake"
 cask "knockknock"
 # Privacy-first, open-source platform for knowledge sharing and management
 cask "logseq"
-# Screen and video recording software
-cask "loom"
 # Tool to control external monitor brightness & volume
 cask "monitorcontrol"
 # Knowledge base that works on top of a local folder of plain text Markdown files
