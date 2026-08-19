@@ -225,7 +225,6 @@ brew "tlrc"
 brew "curl"
 brew "rtk"
 cask "claude"
-brew "crit"
 cask "superset"
 cask "shottr"
 # macOS dictation with local Whisper/Parakeet transcription
