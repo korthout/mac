@@ -116,8 +116,6 @@ brew "ultralist"
 brew "watch"
 # JavaScript package manager
 brew "yarn"
-# Process YAML, JSON, XML, CSV and properties documents from the CLI
-brew "yq"
 # Zeebe CLI client
 brew "zbctl"
 # Programming language designed for robustness, optimality, and clarity
