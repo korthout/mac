@@ -98,8 +98,6 @@ brew "pipx"
 brew "pnpm"
 # Theme for zsh
 brew "powerlevel10k"
-# Protocol buffers (Google's data interchange format)
-brew "protobuf"
 # Interpreted, interactive, object-oriented programming language
 # Interpreted, interactive, object-oriented programming language
 # JVM-based programming language
