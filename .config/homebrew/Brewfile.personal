@@ -62,8 +62,6 @@ brew "git-revise"
 brew "gnutls"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
-# Open source programming language to build simple/reliable/efficient software
-brew "go"
 # Kubernetes package manager
 brew "helm"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
