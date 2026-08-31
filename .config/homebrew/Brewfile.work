@@ -186,8 +186,6 @@ cask "logseq"
 cask "monitorcontrol"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# Cross-platform video editor
-cask "openshot-video-editor"
 # Monitors computer mic and webcam
 cask "oversight"
 # Control your tools with a few keystrokes
