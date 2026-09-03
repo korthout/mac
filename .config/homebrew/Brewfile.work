@@ -36,8 +36,6 @@ brew "cloc"
 brew "curl"
 # Pack, ship and run any application as a lightweight container
 brew "docker", link: false
-# Programming language for highly scalable real-time systems
-brew "erlang"
 # Perl lib for reading and writing EXIF metadata
 brew "exiftool"
 # Command-line fuzzy finder written in Go
