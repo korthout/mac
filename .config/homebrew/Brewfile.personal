@@ -101,8 +101,6 @@ brew "powerlevel10k"
 # Interpreted, interactive, object-oriented programming language
 # Interpreted, interactive, object-oriented programming language
 # JVM-based programming language
-brew "scala"
-# JVM-based programming language
 brew "scala@2.13"
 # Crypto and x509 Swiss-Army-Knife
 brew "step"
