@@ -154,8 +154,6 @@ cask "coconutbattery"
 cask "copilot-cli"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
-# Client for the Dropbox cloud storage service
-cask "dropbox"
 # Launcher for *Epic Games* games
 cask "epic-games"
 cask "font-hack-nerd-font"
