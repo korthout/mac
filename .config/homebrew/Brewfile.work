@@ -204,8 +204,6 @@ cask "teamviewer"
 # To-do list
 cask "todoist-app"
 # Pomodoro desktop timer
-# Companion app for the Trezor hardware wallet
-cask "trezor-suite"
 # SSH server for teams managing distributed infrastructure
 # Mutes your keyboard while you type
 cask "unclack"
