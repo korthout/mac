@@ -184,8 +184,6 @@ cask "oversight"
 cask "raycast"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
-# Client for Old School RuneScape
-cask "runelite"
 # Team communication and collaboration software
 cask "slack"
 # Sound and audio controller
