@@ -6,30 +6,12 @@ brew "ack"
 brew "act"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
-# Core application library for C
-brew "glib"
-# Vector graphics library with cross-device output support
-brew "cairo"
-# OpenType text shaping engine
-brew "harfbuzz"
 # Development kit for the Java programming language
 brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
-# New file format for still image compression
-brew "jpeg-xl"
-# Codec library for encoding and decoding AV1 video streams
-brew "aom"
-# Download with resuming and segmented downloading
-brew "aria2"
 # Distributed revision control system
 brew "git"
-# Extendable version manager with support for Ruby, Node.js, Erlang & more
-brew "asdf"
-# Improved shell history for zsh, bash, fish and nushell
-brew "atuin", restart_service: :changed
-# New way of working with Protocol Buffers
-brew "buf"
 # Statistics utility to count lines of code
 brew "cloc"
 # Get a file from an HTTP, HTTPS or FTP server
@@ -51,7 +33,6 @@ brew "tesseract"
 brew "git-absorb"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# Interpreted, interactive, object-oriented programming language
 # Rebase alternative for easy & efficient in-memory rebases and fixups
 brew "git-revise"
 # Validating, recursive, caching DNS resolver
@@ -64,10 +45,6 @@ brew "gnupg"
 brew "go"
 # Kubernetes package manager
 brew "helm"
-# ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
-brew "libheif"
-# Library for reading RAW files from digital photo cameras
-brew "libraw"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Manage your Java environment
@@ -80,8 +57,6 @@ brew "k9s"
 brew "kubernetes-cli"
 # Tool that can switch between kubectl contexts easily and create aliases
 brew "kubectx"
-# Bare libuv bindings for lua
-brew "luv"
 # Java-based project management
 brew "maven"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -106,8 +81,6 @@ brew "pnpm"
 brew "powerlevel10k"
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
-# Interpreted, interactive, object-oriented programming language
-# Interpreted, interactive, object-oriented programming language
 # JVM-based programming language
 brew "scala"
 # JVM-based programming language
@@ -222,3 +195,5 @@ cask "claude-code@latest"
 cask "stablyai/orca/orca"
 # Store SSH keys in the Secure Enclave
 cask "secretive"
+# Improved shell history for zsh, bash, fish and nushell
+brew "atuin"
