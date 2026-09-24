@@ -195,7 +195,5 @@ cask "stablyai/orca/orca"
 cask "secretive"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
-# Open-source edition of IntelliJ IDEA
-cask "intellij-idea-oss"
 # Java IDE by JetBrains
 cask "intellij-idea"
