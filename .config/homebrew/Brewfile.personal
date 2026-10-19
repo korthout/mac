@@ -54,8 +54,6 @@ brew "git-revise"
 brew "gnutls"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
-# ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
-brew "libheif"
 # Library for reading RAW files from digital photo cameras
 brew "libraw"
 # Tools and libraries to manipulate images in many formats
