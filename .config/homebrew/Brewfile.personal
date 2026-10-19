@@ -213,7 +213,6 @@ brew "tlrc"
 brew "curl"
 brew "rtk"
 cask "claude"
-cask "superset"
 cask "shottr"
 # macOS dictation with local Whisper/Parakeet transcription
 cask "my-monkeys/tap/opensuperwhisper"
