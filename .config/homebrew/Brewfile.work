@@ -195,3 +195,5 @@ cask "secretive"
 brew "atuin"
 # Java IDE by JetBrains
 cask "intellij-idea"
+# Java heap analyzer
+cask "memoryanalyzer"
