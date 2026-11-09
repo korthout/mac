@@ -99,8 +99,6 @@ brew "yarn"
 brew "yq"
 # Zeebe CLI client
 brew "zbctl"
-# Programming language designed for robustness, optimality, and clarity
-brew "zig"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Apache Maven Daemon
