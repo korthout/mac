@@ -101,8 +101,6 @@ brew "yq"
 brew "zbctl"
 # Programming language designed for robustness, optimality, and clarity
 brew "zig"
-# Language Server for Zig
-brew "zls"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Apache Maven Daemon
