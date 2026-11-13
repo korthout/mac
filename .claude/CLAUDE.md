@@ -4,10 +4,13 @@
 - Check available skills before starting a task. Update skill definitions when receiving feedback during execution.
 - When a skill's instructions say to use another skill, invoke that skill — don't skip ahead and do the work inline.
 - Verify claims against actual code and changes. Don't speculate — update your analysis when given counter-evidence.
-- Before writing an inline comment, name the reader and what they would do differently for having read it. If you can't name both, don't write it.
+- When something is worthwhile to remember in future sessions, don't store in auto-memory for the project. Instead, consider whether it applies only to this repo, then store it in the repo (e.g. docs, skills, CLAUDE.md), otherwise consider storing it in a personal skill or ~/.claude/CLAUDE.md.
+- Write commit messages, code comments, issue descriptions, pull request bodies, and comments on GitHub and Slack in the following way. Use simple, plain English. Use short sentences. Use everyday words, ubiquitous language used at Camunda, and name concepts from this codebase directly.
+- Before writing an inline comment, name the reader and what they would do differently for having read it. If you can't name both, don't write it. Same if a test would catch the same regression. If restructuring the code removes the need, do that instead of writing the comment. If it belongs in the commit message, put it there instead — don't just skip it.
 - Commit titles max 72 chars. Explain all considerations in the body.
 - When responding to review feedback, decide between amend and new commit by *semantic intent*, not file overlap. Amend when the feedback refines or corrects the same intent the original commit expressed (typo, missed edge case, fix to the same bug). Create a new commit when the feedback changes *what behavior is wanted* — even if it edits the same files — because the original commit's intent stands and the new behavior is a separate semantic step.
-- When removing permissions or settings, provide a wildcard replacement.
+- On posts made for the user (GitHub issues, PRs, comments; not Slack), end with `*Posted by an AI agent (Claude Code) on behalf of @korthout*`. `@korthout` is their GitHub handle; elsewhere use their handle there.
+- At Camunda, reach people about work (incidents, coordination, asks) with a mention in a public channel, never a Slack DM. For an incident, that is its own incident channel. If you can't post there (not a member), ask the user to join it; don't fall back to a DM or another channel.
 - Never read, print, generate, or pipe private keys, tokens, `.env`/credentials files, or any secret value — anything in tool output is exposed. Hand the user a command to run themselves. Public halves and secret *names* are fine.
 - For any GitHub, Slack, or list API call, use full pagination by default (`gh api --paginate`, or loop until no next cursor / next page). Before reporting results, state the total count and confirm all pages were retrieved. Never report "all checks green" / "no failures" / "all comments addressed" without verifying `total_count` matches the retrieved count.
 
