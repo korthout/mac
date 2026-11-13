@@ -1,3 +1,4 @@
 .cfg
 .claude/projects/*/memory/
 .claude/settings.private.json
+.config/cfg/private-patterns

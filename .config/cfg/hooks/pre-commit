@@ -1,0 +1,32 @@
+#!/bin/sh
+# Block commits to this public dotfiles repo that add secrets or private details.
+# Private patterns live in an untracked file, one extended regex per line.
+# Bypass a false positive with: cfg commit --no-verify
+
+git diff --cached --quiet --exit-code >/dev/null 2>&1; [ $? -le 1 ] || { echo "pre-commit: cannot read the staged changes." >&2; exit 1; }
+
+patterns="$HOME/.config/cfg/private-patterns"
+generic='xox[abpr]-[A-Za-z0-9-]+|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|BEGIN [A-Z ]*PRIVATE KEY'
+
+all=$(mktemp) || exit 1
+trap 'rm -f "$all"' EXIT
+echo "$generic" > "$all"
+if [ -f "$patterns" ]; then
+  grep -vE '^[[:space:]]*(#|$)' "$patterns" >> "$all"
+else
+  echo "pre-commit: $patterns is missing; only checking for secrets." >&2
+fi
+
+found=$(git diff --cached --name-only --diff-filter=ACMR | while IFS= read -r file; do
+  hits=$(git diff --cached -U0 --no-color -- "$file" | grep -E '^\+' | grep -vE '^\+\+\+ ' | grep -oiEf "$all" | sort -u)
+  if [ -n "$hits" ]; then
+    echo "pre-commit: $file adds:" >&2
+    echo "$hits" | sed 's/^/  /' >&2
+    echo found
+  fi
+done | grep -c found)
+
+if [ "$found" -gt 0 ]; then
+  echo "pre-commit: move these to a gitignored file, or commit with --no-verify if they're fine to publish." >&2
+  exit 1
+fi
