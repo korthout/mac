@@ -77,8 +77,10 @@
 [rerere]
 	enabled = true
 [interactive]
-  diffFilter = delta --color-only --detect-dark-light=always
+  diffFilter = delta --color-only
 [delta]
+  detect-dark-light = never
+  light = true
 	line-numbers = true
 	keep-plus-minus-markers = false
 [diff]
