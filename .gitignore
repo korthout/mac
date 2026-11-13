@@ -2,3 +2,7 @@
 .claude/projects/*/memory/
 .claude/settings.private.json
 .config/cfg/private-patterns
+.DS_Store
+.claude/skills/.trash/
+.claude/skills/synced/
+.claude/skills/orchestration
