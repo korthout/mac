@@ -29,7 +29,7 @@ Read the full SKILL.md and every sibling file in scope before auditing — you c
 7. **Smart-Claude default** — flag sentences that explain something Claude already knows.
 8. **Redundancy** — duplication within the skill, or content already in `~/.claude/CLAUDE.md` / project `CLAUDE.md`.
 9. **Progressive disclosure** — body should be <500 lines; bulk content moves to one-level-deep reference files (no nested refs `SKILL.md → a.md → b.md`); reference files >100 lines need a table of contents. For multi-domain skills (one skill covering finance + sales + product, or several distinct sub-tasks), partition references by domain (`reference/finance.md`, `reference/sales.md`) so unrelated context stays unloaded when not needed.
-10. **Generality** — repo/language/toolchain-specific content the skill doesn't need; replace with a "detect project conventions" step.
+10. **Generality** — repo/language/toolchain-specific content the skill doesn't need; replace with a "detect project conventions" step. For a repo skill, center it on what a capable agent can't know without this repo, keep it general for its domain rather than one incident, and cover parallel subagents and PII protection where they apply.
 11. **Anti-patterns** — flag any of:
     - Windows-style paths (use forward slashes everywhere, including on Windows)
     - Time-sensitive content (collapse legacy info into a `<details>` "old patterns" block when historical context is load-bearing; otherwise delete)
@@ -42,7 +42,7 @@ Read the full SKILL.md and every sibling file in scope before auditing — you c
 
 ### Discoverability — does Claude trigger it when relevant?
 12. **`name`** — lowercase letters/numbers/hyphens, ≤64 chars, no XML tags, no reserved words (`anthropic`, `claude`); gerund or action-oriented.
-13. **`description`** — third person, non-empty, ≤1024 chars, no XML tags, states both *what the skill does* and *when to use it* with specific trigger terms.
+13. **`description`** — third person, non-empty, ≤1024 chars, no XML tags, states both *what the skill does* and *when to use it* with specific trigger terms. If the skill should also be used for reviewing, say so: authoring verbs alone miss review tasks. When a skill fails to trigger, fix its own description, not by routing to it from another skill.
 
 Synthesize into one edit plan: removals, additions, restructures, file splits. Sequence the plan effectiveness-first. If the plan contains only trivial efficiency tweaks and no effectiveness or discoverability gaps, **STOP** and tell the user the skill is already strong.
 

@@ -6,8 +6,9 @@ disable-model-invocation: true
 
 # Resolve backport conflicts
 
-Resolves cherry-pick conflicts on a draft backport PR opened by `korthout/backport-action`
-(see `feedback_backport_no_amend` and `feedback_document_conflict_resolution` memories).
+Resolves cherry-pick conflicts on a draft backport PR opened by `korthout/backport-action`.
+Explain every conflict resolution in the commit body. Never amend commits once the backport PR
+is open for review; add new commits instead.
 
 1. If no PR was given, ask the user for the PR number or URL.
 
@@ -36,11 +37,9 @@ Resolves cherry-pick conflicts on a draft backport PR opened by `korthout/backpo
    `git cherry-pick --continue --no-edit` (the plain `--continue` opens an editor by default —
    `--no-edit` keeps this non-interactive; HEAD is still the *previous* commit until this
    completes, so there is nothing to amend yet). Once it completes, run `git commit --amend` on
-   the commit it just created to document the resolution (what was dropped/rewritten and why —
-   see `feedback_document_conflict_resolution`). This is amending a commit you're still
-   constructing pre-push, not the post-review "no-amend on backport branches" case in
-   `feedback_backport_no_amend` — that rule is about not rewriting commits after the PR is already
-   open for review.
+   the commit it just created to document the resolution (what was dropped/rewritten and why).
+   This amends a commit you're still constructing before the push. The no-amend rule is only
+   about not rewriting commits after the PR is open for review.
 
 6. Once all commits have applied cleanly, summarize what was resolved and ask the user before
    pushing (`git push --force-with-lease`) — do not push without confirmation.

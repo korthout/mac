@@ -144,7 +144,8 @@ single-PR plan gets one entry. Use this exact row shape per PR:]
      row has a test), scope adherence (behavior-only, respects "Out of scope"), red-state
      correctness (each red commit failed at the time for the intended reason, not a fixture/compile
      bug), test hygiene/convention (repo `AGENTS.md` testing conventions), commit message quality
-     (repo commit guidelines). Run once, over the full red/green/refactor sequence from steps 1-6.
+     (repo commit guidelines; flag a message that has to list more than 2-3 behaviors as a commit
+     doing too much). Run once, over the full red/green/refactor sequence from steps 1-6.
      Triage every finding yourself: delegate clear-cut fixes to a subagent — amend the relevant
      commit or add a new one, per the global amend-vs-new-commit rule (same intent → amend,
      different intent → new commit). Not confident it's clear-cut? Carry it forward unresolved
