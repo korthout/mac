@@ -4,13 +4,13 @@
 - Check available skills before starting a task. Update skill definitions when receiving feedback during execution.
 - When a skill's instructions say to use another skill, invoke that skill — don't skip ahead and do the work inline.
 - Verify claims against actual code and changes. Don't speculate — update your analysis when given counter-evidence.
-- When something is worthwhile to remember in future sessions, don't store in auto-memory for the project. Instead, consider whether it applies only to this repo, then store it in the repo (e.g. docs, skills, CLAUDE.md), otherwise consider storing it in a personal skill or ~/.claude/CLAUDE.md.
-- Write commit messages, code comments, issue descriptions, pull request bodies, and comments on GitHub and Slack in the following way. Use simple, plain English. Use short sentences. Use everyday words, ubiquitous language used at Camunda, and name concepts from this codebase directly. Lead each paragraph with its point. Check every draft against this rule before posting, not only when I ask.
+- When something is worth remembering, save it in the repo (docs, skills, CLAUDE.md) if it's repo-specific, otherwise in a personal skill or ~/.claude/CLAUDE.md, not in auto-memory.
+- Write commit messages, code comments, issues, PRs, and GitHub and Slack comments in plain English: short sentences, everyday words, Camunda's terms and the codebase's names for things. Lead each paragraph with its point. Check every draft against this before posting.
 - Ask me one question at a time, the one whose answer changes the most first. Write it in plain English, with the context and options I need to decide without looking things up.
-- Before writing an inline comment, name the reader and what they would do differently for having read it. If you can't name both, don't write it. Same if a test would catch the same regression. If restructuring the code removes the need, do that instead of writing the comment. If it belongs in the commit message, put it there instead — don't just skip it.
+- Before writing an inline comment, name its reader and what they'd do differently. If you can't, or a test would catch the same regression, don't write it. Restructure the code if that removes the need, and put reasoning that belongs in the commit message there.
 - Before posting to Slack or GitHub, show me the exact text and wait for an explicit "post it". A general "take action" is not approval. Show the text again after any edit.
 - Never read, print, generate, or pipe private keys, tokens, `.env`/credentials files, or any secret value — anything in tool output is exposed. Hand the user a command to run themselves. Public halves and secret *names* are fine.
-- For any GitHub, Slack, or list API call, use full pagination by default (`gh api --paginate`, or loop until no next cursor / next page). Before reporting results, state the total count and confirm all pages were retrieved. Never report "all checks green" / "no failures" / "all comments addressed" without verifying `total_count` matches the retrieved count.
+- Paginate every GitHub, Slack or list API call fully (`gh api --paginate`, or follow the cursor). State the total count, and never report "all green", "no failures" or "all addressed" unless it matches what you retrieved.
 - In tests, prefer obvious over DRY: a failing test should make sense without reading other code. Inline setup and use literal values when the value matters. Extract one helper only for repeated plumbing (like polling until a record is visible), and pass the values that matter as arguments. A helper never acts on the thing under test or hides values that decide the outcome.
 - Run `mvn`, not `./mvnw`, even when a repo says to use the wrapper. My `mvn` shell function picks the right Maven.
 - In chat, link GitHub issues and PRs as `[<full title> #N](url)`. Look up the title; don't guess it.
@@ -34,10 +34,10 @@
 
 ## Model selection
 
-- Haiku: subagent retrieval/lookup with a narrow, well-specified target and no judgment (locate a file, grep a symbol, check whether X exists). If the task needs comprehension or synthesis, don't — a wrong cheap answer costs more to recover than it saved. Set `model: "haiku"` in the agent's frontmatter, or pass it explicitly for ad-hoc calls.
-- Keep the main context lean. Run commands so their output is small: filter, limit or count, and read only the lines you need. Delegate to a subagent when the output would be large or finding the answer takes many lookups, so only the conclusion comes back. Keep judgment in the main thread, and check subagent findings rather than relaying them. Do a handful of small, already-specified edits in files already in context inline.
-- Sonnet is the default driving model for engineering work (implementation, TDD, git ops, CI debugging, PR triage, docs/issue drafting) — Opus is the exception, not Sonnet.
-- Opus: adversarial review/verification, high-stakes or hard-to-reverse decisions (architecture, security/CVE impact, ambiguous scope), synthesis across many sources. Pass `model: "opus"` explicitly for these rather than defaulting the session to it.
-- If an Opus session is doing routine implementation/CI/git work, or a Sonnet session keeps hitting architecture/security/adversarial-review calls, say so once and suggest switching tier — session-level, not per-message.
+- Haiku: narrow lookups with no judgment (locate a file, grep a symbol). Not for comprehension: a wrong cheap answer costs more than it saves.
+- Sonnet: the default for engineering work (implementing, TDD, git, CI, PR triage, drafting).
+- Opus: adversarial review, high-stakes or hard-to-reverse decisions (architecture, security impact, unclear scope), and synthesis across many sources. Pass `model: "opus"` instead of switching the session.
+- Keep the main context lean: run commands with small output (filter, limit, count, read only the lines you need). Delegate when output would be large or needs many lookups, so only the conclusion comes back. Keep judgment in the main thread and check subagent findings. Do small, specified edits in files already in context inline.
+- If the session's model doesn't fit the work, say so once and suggest switching.
 
 @private.md
