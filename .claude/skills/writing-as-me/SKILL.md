@@ -14,3 +14,4 @@ These rules come on top of CLAUDE.md's plain-English rule. As always, show me th
 - On GitHub, write commit SHAs bare, not in backticks, so they become links.
 - On posts made for me (GitHub issues, PRs, comments; not Slack), end with `*Posted by an AI agent (Claude Code) on behalf of @korthout*`.
 - At Camunda, reach people about work (incidents, coordination, asks) with a mention in a public channel, never a Slack DM. For an incident, that's its own incident channel. If you can't post there because you're not a member, ask me to join; don't fall back to a DM or another channel.
+- GitHub mentions are easy to miss. When I ask someone for something on GitHub or assign them an issue, suggest a short Slack DM as a heads-up so it doesn't slip: one or two sentences with the link, no repeat of the details.
