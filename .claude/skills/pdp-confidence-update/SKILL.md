@@ -1,6 +1,7 @@
 ---
 name: pdp-confidence-update
-description: Use ONLY when Nico explicitly invokes it (typically via /pdp-confidence-update) to write, prepare, or reconstruct the weekly PDP confidence update for a project channel. Do NOT trigger automatically from general Slack/status questions. Reconstructs the channel since the last `!pdp progress` post and drafts a ready-to-post update in Nico's house style.
+description: Writes, prepares, or reconstructs Nico's weekly PDP confidence update for a project channel. Reconstructs the channel since the last `!pdp progress` post and drafts a ready-to-post update in his house style.
+disable-model-invocation: true
 ---
 
 # PDP Confidence Update

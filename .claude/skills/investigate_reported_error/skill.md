@@ -1,6 +1,6 @@
 ---
 name: investigate_reported_error
-description: Use when user shares an error message, stack trace, or log snippet to investigate — or when investigating an incident that has a concrete error artifact (log line, exception, failed assertion). Skip when the incident has no error artifact, e.g. performance regressions, throughput/latency drops, capacity issues, or behavioral discrepancies without logs.
+description: Use when investigating an error with a concrete artifact — error message, stack trace, or log snippet. Skip when there's no error artifact, e.g. a performance regression.
 ---
 
 # Investigate Reported Error
