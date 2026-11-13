@@ -5,7 +5,7 @@ here, or there is no licence. A path that matches nothing — including a new or
 is unknown, not safe.
 
 This list starts deliberately near-empty and grows only by ratified promotion. See the Learning
-section of `SKILL.md` for the bar. Each entry must carry its structural argument, because that is
+section of `review-triage.md` for the bar. Each entry must carry its structural argument, because that is
 what makes it re-testable when the codebase moves underneath it.
 
 ## Entries
@@ -28,7 +28,8 @@ code. When a diff touches frontmatter keys or JSX inside markdown, treat those h
 and skim only the prose around them.
 
 Excluded markdown *is* input to something — agent instructions, workflow config, recorded
-decisions. `AGENTS.md` and `.claude/**` belong to `reviewing-agent-ready-prs`.
+decisions. `AGENTS.md` and `.claude/**` have no owning domain skill, so they are unmatched and
+unowned.
 
 ## Promotion candidates — not yet granted
 
