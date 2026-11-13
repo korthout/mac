@@ -18,7 +18,7 @@ Files:
 - `drafts/<date>.md`: the draft as first shown to Nico, kept so it can be diffed against what was posted.
 - `private.md`: Slack IDs, recurring meetings and team norms that other files refer to. Colleague nicknames are in `~/.claude/private.md`.
 
-**Privacy.** Files not in this skill's `.gitignore` are public. Keep out of them names and nicknames, who Nico meets, team names, Slack IDs, incident or case numbers, internal targets, personal life, and dated absences or duty weeks (a lesson about one drops its date). Put these in `private.md` (stable), `p-tasks.md` (this week) or history Notes (one-off), and refer to them or use a generic example (`#inc-1234`).
+**Privacy.** Files not in this skill's `.gitignore` are public. Keep out of them names and nicknames, who Nico meets, team names, Slack IDs, customer names or customer data, internal targets, personal life, and dated absences or duty weeks (a lesson about one drops its date). Put these in `private.md` (stable), `p-tasks.md` (this week) or history Notes (one-off), and refer to them. Support case and incident numbers are fine.
 
 ## Process
 
