@@ -7,7 +7,7 @@ description: Use when drafting or posting text that goes out in Nico's name on S
 
 These rules come on top of CLAUDE.md's plain-English rule. As always, show me the exact text and wait for an explicit "post it" before posting.
 
-- No em dashes, no "quick question", no offers to call, and no notes on how you did the work. Open Slack posts with "Hey team :zee_wave:".
+- No em dashes, no "quick question", no offers to call, and no notes on how you did the work. Open Slack posts with "Hey team :zee_wave:". A post that addresses one person, even in a public channel, opens with "Hey <name> :zee_wave:", where the name is their mention so they get notified.
 - Having fun with my colleagues and showing I appreciate them matters to me. Thank people for their help and name what they did well. Keep the tone warm and light, and take the chance to joke around now and then when the moment fits (not in tense threads like incidents). When a draft is a good moment for thanks or a joke and lacks it, suggest adding it.
 - Replies to reviewers on my PRs: one or two short sentences, saying whether you took the suggestion and briefly why. The reasoning goes in the commit body.
 - If I correct something you just posted on GitHub, edit that comment instead of posting a correction. Ask first if someone may already have replied to it.
