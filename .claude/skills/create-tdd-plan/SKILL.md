@@ -67,8 +67,9 @@ parallel one.
    the template below. Pass it this framing as its argument: "Plan the test coverage and TDD
    workflow for [issue reference]. Fixed constraints: the plan must not name production classes or
    methods to change — only the behavior/spec and the tests that cover it. Resolve, in order:
-   Grounding, Out of scope, Test locations, Test List, whether this needs multiple PRs (and
-   if so how they split), and the AC-to-coverage mapping."
+   Grounding, whether Grounding pre-fixed the design's final shape and if so which of (a)/(b)
+   applies (see "Grounding" below), Out of scope, Test locations, Test List, whether this needs
+   multiple PRs (and if so how they split), and the AC-to-coverage mapping."
 4. Once every section is resolved (completion rule above), write the plan to
    `plan-<issue-number>-<slug>.md` at the **repo root** — not a scratchpad. It needs to survive
    across sessions and show up in `git status` for standalone review. Use the template below.
@@ -123,8 +124,16 @@ single-PR plan gets one entry. Use this exact row shape per PR:]
      splitting them adds no review value; note the grouping and why in the task-list row's Notes.
   2. Write the failing test(s) for the picked item(s) (delegate to a subagent), commit — the **red**
      commit.
-  3. Implement to make it/them pass (delegate to a subagent), commit — the **green** commit. Do not
-     refactor here — make it pass, then make it right.
+  3. Implement to make it/them pass (delegate to a subagent), commit — the **green** commit. Ask
+     "what's the smallest change that makes only this test pass" — never "build the full design
+     already known to be needed," even when the design genuinely is known up front (Grounding option
+     (b)): build only the piece this item needs, and leave pieces later items will need for their own
+     green commits, so each fix commit lands immediately before the earliest test it's required for.
+     That's a reviewability rule, independent of whether TDD is actually discovering anything. A
+     `[confirms: ...]` item that needs no additional piece stays a standalone test-only commit. If a
+     `[driver]` (or untagged) item's smallest change turns out to be the whole end-state design, stop
+     and flag it at `⏸ tests reviewed` instead of proceeding — the Test List likely needs
+     restructuring. Do not refactor here — make it pass, then make it right.
   4. If the implementation now warrants refactoring, do it as its own commit — the **refactor**
      commit. Skip if there's nothing to improve.
   5. Check off the picked item(s) on the Test List. If the cycle surfaced a new scenario, append it
@@ -153,7 +162,19 @@ single-PR plan gets one entry. Use this exact row shape per PR:]
 ## Grounding (confirmed in codebase)
 
 [Interview-driven: facts confirmed by delegated research subagents — existing fields/behavior this
-plan builds on, existing test infra to reuse, precedent to follow. State facts, not assumptions.]
+plan builds on, existing test infra to reuse, precedent to follow. State facts, not assumptions.
+
+Watch for over-specifying: if these facts already fix the implementation's final shape (exact
+storage structure, exact wiring points) before any Test List item has run, that's a signal, not a
+convenience. Resolve it one of two ways before the Test List is
+written: (a) restructure the Test List so each item is likely to force a genuinely new increment of
+the design — sequence it so an earlier item's minimal-to-pass implementation is narrower than the
+final shape, and a later item is the one that forces generalization (e.g. cleanup-on-completion
+drives its own item that forces adding the wiring, rather than getting built into an earlier item
+just because the final design was already known to need it); or (b) if the design genuinely has one
+obvious correct shape with nothing left for TDD to discover (e.g. it mirrors an existing sibling
+structure 1:1), say so here and annotate the Test List accordingly (see "Test List" below) instead
+of leaving it implicit.]
 
 ## Out of scope (flag in PR description)
 
@@ -175,7 +196,13 @@ with how each turns green, and not in a fixed execution order; picking the next 
 trivially-related variations is an execution-time decision (see "Sequence within a PR"). Items
 describe *behavior* to assert, never which production class/method implements it. Execution checks
 items off and appends newly discovered ones in place, so this section is the live source of truth
-for what's done and what's left — not a static spec.]
+for what's done and what's left — not a static spec.
+
+If Grounding above flagged option (b) — a design with nothing left for TDD to discover — tag each
+item `[driver]` or `[confirms: <reason>]`: `[driver]` items are expected to force a new increment of
+the design; `[confirms: ...]` items are known in advance to pass once the drivers are implemented,
+kept as regression coverage. Omit the tags entirely under option (a), where every item is a driver
+by construction.]
 
 - [ ] ...
 
