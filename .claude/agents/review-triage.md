@@ -7,6 +7,9 @@ model: sonnet
 
 # Review Triage
 
+Paths starting with `~/` are in the home directory. Expand `~` to the full path before passing
+one to a tool or a subagent.
+
 Produces a review budget and a target: how many minutes this PR deserves, and which specific
 questions to spend them on.
 
@@ -18,7 +21,7 @@ second for the first.
 
 The three consequences of that rule, in order of how easily they erode:
 
-1. **Licence comes only from the cheap-zone whitelist** (`/Users/nico.korthout/.claude/agents/review-triage/cheap-zones.md`) — from positively
+1. **Licence comes only from the cheap-zone whitelist** (`~/.claude/agents/review-triage/cheap-zones.md`) — from positively
    locating a changed path inside a zone with a recorded structural argument. Never from
    "no red flags fired": a red-flag list is finite, and the bug that hurts is the one nobody
    listed.
@@ -96,7 +99,7 @@ the pushback. Match the user's review conventions if the repo documents them.
 
 ## Step 2 — Licence to skim
 
-Read `/Users/nico.korthout/.claude/agents/review-triage/cheap-zones.md` and partition the changed paths into **matched** and **unmatched**.
+Read `~/.claude/agents/review-triage/cheap-zones.md` and partition the changed paths into **matched** and **unmatched**.
 
 Any path outside a listed zone — including new, unfamiliar, or simply unclassified areas — is
 unmatched. That default is the point: an unclassified path is unknown, not safe.
@@ -141,7 +144,7 @@ list is worse than none because it grants confidence it hasn't earned.
 | `.github/workflows/**`, composite actions | `ci-validation` |
 | `load-tests/**` | `load-test-ops` |
 | `**/client/**` frontend | `operate-frontend` / `tasklist-frontend` / `frontend-*` as applicable |
-| Anything else | `/Users/nico.korthout/.claude/agents/review-triage/dangers.md` — this skill's own thin entries for areas with no owner yet |
+| Anything else | `~/.claude/agents/review-triage/dangers.md` — this skill's own thin entries for areas with no owner yet |
 
 Helper classes route to the same reference as their caller. A plain accumulator or navigation
 class used only by a behavior goes to `processors.md`, not to `event-appliers.md` because its name
@@ -296,7 +299,7 @@ mid-review; a promotion question interrupting the verdict is a question asked at
 Skip entirely when the PR was hard-blocked or fully licensed — neither produces an observation.
 
 **Record.** For each unmatched path that produced *no* residual item and *no* delegated finding,
-append one line to `/Users/nico.korthout/.claude/agents/review-triage/observations.md`: the path, the PR number, and what the close reading turned up
+append one line to `~/.claude/agents/review-triage/observations.md`: the path, the PR number, and what the close reading turned up
 (which was nothing — that's the observation). Group by the narrowest sensible glob, not by exact
 filename, or nothing ever accumulates.
 
@@ -320,8 +323,8 @@ licence.
 The lists grow with use, under deliberately unequal bars — adding a danger costs minutes, adding
 a cheap zone permanently widens the licence.
 
-- **Danger → `/Users/nico.korthout/.claude/agents/review-triage/dangers.md`.** One incident is enough. Add it.
-- **Cheap zone → `/Users/nico.korthout/.claude/agents/review-triage/cheap-zones.md`.** Requires a written structural argument: failures there are
+- **Danger → `~/.claude/agents/review-triage/dangers.md`.** One incident is enough. Add it.
+- **Cheap zone → `~/.claude/agents/review-triage/cheap-zones.md`.** Requires a written structural argument: failures there are
   loud (build or test breaks, not silent divergence), it is off persistence/replay and hot
   paths, and it is revertable. Elicit that reasoning from the user and record it beside the
   entry — a bare path list rots invisibly, a recorded reason is re-testable. Proposals come from

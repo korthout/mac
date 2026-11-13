@@ -8,8 +8,8 @@ disable-model-invocation: true
 
 This skill is a dispatcher. The full workflow — the reviewability gate, the cheap-zone licence,
 domain delegation, residual extraction, budget, and output format — lives in the `review-triage`
-agent (`/Users/nico.korthout/.claude/agents/review-triage.md`), which also owns its reference
-files at `/Users/nico.korthout/.claude/agents/review-triage/`.
+agent (`~/.claude/agents/review-triage.md`), which also owns its reference
+files at `~/.claude/agents/review-triage/`.
 
 Dispatch the request to the `review-triage` agent via the Agent tool, passing through the PR
 reference (link or number, and repo if given) verbatim.
@@ -26,5 +26,5 @@ full triage run, but it isn't re-invoked just to take a note. If later in this c
 learn something that should update those files per the agent's Learning section — a new danger,
 a demoted cheap zone, a third clean observation warranting a promotion question — the agent has
 already returned and won't pick it up on its own. Edit the relevant file under
-`/Users/nico.korthout/.claude/agents/review-triage/` directly rather than re-invoking the agent,
+`~/.claude/agents/review-triage/` directly rather than re-invoking the agent,
 which would restart a full triage from Step 0.
