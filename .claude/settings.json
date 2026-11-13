@@ -317,12 +317,6 @@
         "repo": "jarrodwatts/claude-hud"
       }
     },
-    "crit": {
-      "source": {
-        "source": "github",
-        "repo": "tomasz-tomczyk/crit"
-      }
-    },
     "camunda-internal": {
       "source": {
         "source": "github",
