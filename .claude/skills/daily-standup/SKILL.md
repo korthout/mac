@@ -1,181 +1,127 @@
 ---
 name: daily-standup
-description: Produces Nico's daily stand-up reply — "Yesterday", "Today", and "Blockers or risks" sections in his house style, organized by his current P1/P2/P3 epics with everything else under "Also" — then posts each as a separate Geekbot reply in his Slack DM once he agrees on the wording. Use when Nico asks to write his daily stand-up, stand-up message, Geekbot reply, or to summarize yesterday's work for stand-up.
+description: Produces Nico's daily stand-up / Geekbot reply.
+disable-model-invocation: true
 ---
 
 # Daily Standup
 
-Produce Nico's two Slack stand-up replies (yesterday + today) in his exact style.
+Produce and post Nico's three Geekbot replies (Yesterday, Today, Blockers or risks) in his style, with **one review by Nico at the end**. Do all the gathering and judgment yourself. Turn every open question into an assumption that he reviews alongside the draft, instead of asking mid-run. Two things drive this design. Waiting on Nico mid-run lets the 1h prompt cache expire. And the north star is fewer corrections per review.
+
+Files:
+- `rubric.md`: the rules a draft must pass. Run it as a checklist on every draft.
+- `p0.md`: medic and on-call rules, read only when `rubric.md` points there.
+- `gathering.md`: the briefs for each source. Read it in step 2.
+- `p-tasks.md`: this week's P1/P2/P3.
+- `examples.md`: the posted entries Nico picked as the reference for voice, length and tone. Read them before drafting.
+- `history/<date>.md`: what was posted, plus private Notes and Corrections.
+- `drafts/<date>.md`: the draft as first shown to Nico, kept so it can be diffed against what was posted.
+- `private.md`: Slack IDs, colleague nicknames, recurring meetings and team norms that other files refer to.
+
+**Privacy.** Files not in this skill's `.gitignore` are public. Keep out of them names and nicknames, who Nico meets, team names, Slack IDs, incident or case numbers, internal targets, personal life, and dated absences or duty weeks (a lesson about one drops its date). Put these in `private.md` (stable), `p-tasks.md` (this week) or history Notes (one-off), and refer to them or use a generic example (`#inc-1234`).
 
 ## Process
 
-1. **Load P-tasks.** Read `~/.claude/skills/daily-standup/p-tasks.md`. If the file is missing OR its `iso_week:` frontmatter differs from today's ISO week (`date +%G-W%V`), ASK Nico for the new P1, P2, P3 as free text — then save with today's `updated:` and `iso_week:`. Otherwise reuse silently. Ask in a plain chat message, not `AskUserQuestion` — three free-text values don't fit multiple-choice options, and a generic "new priorities?" option just produces a confirmation with no content, forcing a second round-trip.
+### 0. Resume or start
 
-   **One-off P0.** Nico may also give a P0 that isn't a persistent weekly priority but a rotating duty scoped to specific day(s) (e.g. "Zeebe Medic on Monday"). Give it its own section the same way as P1/P2/P3 (see Section headers below) only on the day(s) it applies — do NOT add it to `p-tasks.md`, since it isn't a standing epic and would incorrectly persist across ISO weeks. Nico doesn't always declare a P0 upfront — while synthesizing Yesterday, if the gathered activity clusters into a full day's worth of on-call-shaped work (support-case investigations, prod alerts, rotation-swap coordination), propose grouping it under a one-off P0 in the draft even without a prior heads-up; he'll confirm or fold it into Also. A P0 is per-stand-up, not sticky — a section reported as P0 in Yesterday doesn't carry over into Today unless Nico says the duty continues.
+If `drafts/<today>.md` exists and `history/<today>.md` doesn't, a previous run was interrupted. Read the Geekbot DM first and skip any reply already posted today. Then show the draft again (step 6) without re-gathering.
 
-   **Mid-session issue links.** If Nico supplies a tracking issue for a P-task while reviewing a draft (e.g. "you can use this link for P1"), immediately append `#<num>` to that P-task's line in `p-tasks.md` — this makes the header-linking rule (see Style guide) apply now and for the rest of the week, without waiting for the next ISO-week refresh. Also update the header in any draft or archive file already written this session to match.
+### 1. Upfront: only what can't be inferred
 
-   **Mid-week completion.** If Nico says a P-task is completed mid-week (e.g. "P1 is completed, mark it as such for the rest of the week"), append `(completed <date>)` to that P-task's line in `p-tasks.md` immediately — same persistence mechanism as mid-session issue links, no waiting for the next ISO-week refresh. For every remaining stand-up this week (including the one being drafted right now), render that P-section's header with `(Completed)` as its phase and give it one bullet in both Yesterday and Today — `- Completed - see the <date> update` — instead of asking about new activity or falling back to `Nothing yesterday` / `Nothing planned today`. Also fix up any draft/archive already written this session to match.
+Questions asked before gathering are cheap, because there's no context yet to lose. Ask in one plain chat message, only when needed, then wait:
+- **ISO week rolled over** (`date +%G-W%V` ≠ `iso_week:` in `p-tasks.md`): ask for the new P1/P2/P3 as free text, and whether a P0 duty (e.g. medic) applies this week. Save them in the file's existing format, updating `updated:` and `iso_week:`. Use `%G`, not `%Y`, which wraps wrongly at year boundaries.
+- **The window or today includes a medic day** and no handover summary is in history yet: ask for Nico's medic handover summary. It already holds alert owners and support-case tiers that Slack gets wrong.
 
-2. **Gather activity for the reporting window.** Determine the window first, deterministically, *before* querying anything: `ls ~/.claude/skills/daily-standup/history | grep -v "^$(date +%F)" | tail -1 | sed 's/\.md$//'` gives the most recent date Nico posted a stand-up *before today* (`H`) — excluding today's own file is required because step 7 overwrites same-day, so a same-day re-run would otherwise see today's file and invert the window. That stand-up's Yesterday section already covered the day before `H`, so the window to gather now is **`[H, yesterday]` inclusive** — everything from `H` through today minus 1 calendar day. This self-corrects for gaps without any guessing: if no stand-up was posted Friday (long weekend), the last history file is still Thursday's, so the window naturally starts at Thursday and picks up everything unreported through Monday's yesterday, even though Saturday/Sunday sit in between. If no qualifying history file exists (first-ever run, or every prior file is today's), the window is just yesterday = today minus 1 calendar day. Don't fall back to "check if git/Slack is empty, then widen" — that requires querying before you know the window, which is backwards; the history archive is authoritative. Only double-check with Nico if the window covers more than 2 *working* days of gap (weekends/holidays don't count against this) — not for the ordinary one-day or routine long-weekend case.
+Read `private.md`. If it's missing (e.g. a fresh clone), ask for the values its references need and recreate it.
 
-   Every delegated subagent below must return **structured facts with provenance, not prose bullets** — the verbatim substance, permalink components (`channel_id`/`message_ts`), public-vs-DM flag, and the actual author login whenever it differs from the git commit author. A subagent that compresses straight to a prose bullet ("discussed the timer issue with Robert") destroys information the Style guide depends on later (see "State the actual content, not just the action", "Verify who actually did the work", and the Links rules) — and once dropped, the main thread cannot recover it. Subagents should **over-include** on *which* items to report rather than filter aggressively — a fact the main thread doesn't end up using is free to cut, one it never saw can't be added back — but keep each item itself to a sentence or two of substance; over-inclusion means don't drop borderline items, not "return everything at length."
+Apply anything Nico passed when invoking the skill, e.g. "out of time" (see the Today rules in `rubric.md`) or "medic today". Everything else becomes an assumption. That includes later days of a medic week: read `## Notes` of the last history file, and assume the duty continues if it says so.
 
-   Run the git-commits sweep first (it's inline, and its output feeds the GitHub agent below), then launch the three delegated subagents in parallel — one message, multiple tool calls — with `run_in_background: false` on each, since drafting cannot start until they all return.
+Compute the window: `H=$(ls history | grep -v "^$(date +%F)" | tail -1 | sed 's/\.md$//')`. The window is `[H, yesterday]` inclusive, because `H`'s stand-up covered the day before `H`. With no prior file, the window is just yesterday. This self-corrects across weekends and absences. If it spans more than 2 working days, note that as an assumption and check the calendar for `Absent` days.
 
-   - **Git commits (inline — do not delegate).** For each `~/gh/**/.git` (depth ≤ 3): `git log --all --author="korthout" --author="Nico Korthout" --since="<window-start> 00:00" --until="<window-end> 23:59:59" --pretty=format:"%h %ad %s" --date=short`. Skip repos with no hits. This is a known-shape, already-tight query — the risk with this source was never raw volume, so delegating it would only add subagent spin-up cost with no context reduction.
-   - **GitHub + authorship forensics (delegate to ONE general-purpose subagent).** Give it the window, the repo path(s) that had hits above (it needs a cwd for `git branch --contains`), and any PR/commit numbers or short SHAs already surfaced by the git-commits step. It should: (a) run both `curl -s "https://api.github.com/search/issues?q=repo:camunda/camunda+commenter:korthout+updated:>=<window-start>"` and the same query with `reviewed-by:korthout` (auth via `-H "Authorization: token $(gh auth token)"`, `-H "Accept: application/vnd.github+json"`; never `gh` itself — it fails through Claude Code's proxy on macOS) — use an **open-ended `updated:>=<window-start>` lower bound, never a closed `updated:<window-start>..<window-end>` range**: `updated_at` reflects the PR's most recent event from *any* source (a new commit, a later comment, or Nico's own follow-up review the next day), so a PR he reviewed inside the window but that got touched again afterward has its `updated_at` pushed past `<window-end>` and drops out of a closed range entirely — silently losing the in-window review with it. This is exactly how an approval on PR #59505 was missed on 2026-08-06: a second review from him on 08-07 bumped `updated_at` to 08-07, so `updated:2026-08-06..2026-08-06` excluded the PR outright even though the 08-06 review was real. An open lower bound can only ever over-include (never under-include), which is the safe direction — union the results, to find every PR/issue possibly touched since the window opened; then for each, check `/pulls/<num>/reviews` and keep only reviews whose `submitted_at` falls inside the window, and check `/issues/<num>/comments` and keep only comments whose `created_at` falls inside the window — these endpoints return every review/comment ever made, so an old approval or comment on a PR that was merely touched again later (by Nico or anyone else) must not be reported as window activity; (b) for any PR/commit whose authorship is unclear — e.g. a squash-merge commit that might just be Nico merging someone else's fix (see Style guide: "Verify who actually did the work") — chase it down with `git branch --contains` and the PR's actual `user.login` and resolve who really did the work. Part (b) is open-ended in call count, which is exactly what's worth hiding behind a subagent; part (a) is mechanical but folded in here since it needs the same PR list. Have it return, per PR: number, title, URL, review verdict (with its `submitted_at` date), and the actual author login whenever it differs from the git commit author.
-   - **Slack/Glean (delegate to ONE general-purpose subagent).** Give it the window and Nico's current P1/P2/P3 descriptions (from `p-tasks.md`), so it keeps anything touching those epics even when borderline. It should call `mcp__claude_ai_Glean__search` with `query="*"`, `app="slack"`, `from="Nico Korthout"`, `after`/`before` set one day wider than the window on each side (both bounds are exclusive), `num_results=50`, paginating on `hasMoreResults`/cursor until exhausted, then apply the keep/drop rules below itself. For each kept item return structured facts: the verbatim substance (a quote or close paraphrase — never just "discussed X"), public-or-DM, and for public channels the `channel_id`/`message_ts` needed to build the permalink (for DMs, the person's name only — never a link, see Links style guide below). Cluster multi-message threads into one item but report which messages it merged, so the main thread can double-check the clustering. A cluster's permalink legitimately points at the parent message, which can predate the window (per the "link the parent thread" clustering rule) — that's expected, not a reason to drop the item.
-     - **Keep:** support/incident channels (`#inc-*`, `support-*`), CVE channels (`#cve-*`), team DRI/planning posts (iteration planning, rotation swaps, retros), substantive cross-team threads where Nico contributed analysis, escalations.
-     - **Drop:** threads on his own open PRs (already covered by git), personal/reunion/birthday DMs, one-word replies ("Makes sense", "Thanks"), Geekbot self-messages, social chitchat in DMs.
-   - **Conversations (delegate to ONE general-purpose subagent).** `find ~/.claude/projects -maxdepth 2 -name "*.jsonl" -newermt "<window-start> 00:00" ! -newermt "<day-after-window-end> 00:00"` — top-level only, exclude `subagents/`. The files are UUID-named, not date-named, so "date" here means file mtime, not filename. **mtime is only a candidate filter, not proof of in-window activity** — a session can be touched (e.g. by a worktree operation or a later resume) without any new message being added, leaving an mtime inside the window while every actual message timestamp sits days earlier. For each candidate file, the subagent must also check the internal message timestamps (`jq -r '.timestamp' file.jsonl | sort -u | sed -n '1p;$p'` for the first/last) and only report the session as in-window activity if at least one message timestamp actually falls inside `[window-start, window-end]` — report that overlap explicitly (which timestamps are in-window vs. stale) rather than trusting mtime alone. Have it return, per qualifying session: the file's mtime date, the verified in-window message timestamp(s), and a verbatim-or-close-paraphrase of the actual topic/decision discussed (not just "worked on X"), plus any repo/module mentioned, so the main thread can map it to a P-task without re-reading the transcript.
-   - **Meetings (ask directly — required).** Meeting recaps (Aleksander 1:1s, planning calls, customer sessions) are invisible to every automated check above: they're not a commit, and a recap bot posts them under its own name, not `from:"Nico Korthout"`, so the Slack filter structurally cannot find them. Before drafting Yesterday, always ask Nico explicitly, naming the concrete day(s) in the window (e.g. "Any meetings Thursday or Friday I should factor in?") — don't rely on silence from the automated searches to mean nothing happened. If he shares a recap, treat it as a first-class source: map it to the relevant P-task like any other bullet, name the other attendee (no link — meeting recaps aren't public URLs), and pull out the substance (problem discussed, decision made, follow-up date), not just "had a meeting about X."
+### 2. Gather
 
-3. **Synthesize, agree, and post Yesterday — before asking about Today or Blockers.** Map each yesterday-activity item to P1 / P2 / P3 if it relates to that epic; otherwise to **Also** (when unsure, prefer **Also**). Drop trivial follow-up commits (test imports, lint fixups, minor renames) that belong to a larger merged PR — list the PR, not its commits. Every bullet sourced from a **public** Slack channel (design threads, staffing asks, support Q&A) must link the source thread inline — this applies in P1/P2/P3 sections just as much as in Also; don't drop the link just because the item also happens to map to an epic. A bullet sourced from a **DM** gets no link (nobody but the two participants can open it) — just name the person in prose instead.
+Follow `gathering.md`, including its cross-checks.
 
-   Before calling `slack_send_message`, count the blank lines between every P-section block in the composed text — each gap must be **two** blank lines (i.e. `\n\n\n`, not `\n\n`). This is easy to get right in the rendered preview shown to Nico (chat markdown collapses the difference visually) and easy to get wrong in the literal string passed to the tool — the rendered preview is not proof the raw text has the right spacing, so check the string itself, not what it looks like on screen.
+### 3. Draft all three replies
 
-   Show the drafted blob **rendered directly in the chat message itself, not inside a code fence** — never via `AskUserQuestion` or any other tool that hides the actual content behind an option label (Nico cannot approve what he can't see), and never as raw markdown source either (a fenced code block defeats rendering and forces Nico to parse `[text](url)`/backticks/bullets by eye — he's said the rendered form is easier to review). Wait for Nico to agree in his own reply (iterate on wording if he asks for changes), then post it as its own Geekbot reply to the DM conversation at https://camunda.slack.com/archives/D07RWKK2UTG (channel ID `D07RWKK2UTG`) via `mcp__claude_ai_Slack__slack_send_message`. Drop the bold `**For "..."**` label used in earlier versions of this skill when *posting* — that was only needed when Nico copy-pasted manually; use it only when *drafting* a blob for his review, so he knows which Geekbot question it answers.
+Apply `rubric.md` throughout.
+- **Yesterday:** only confirmed activity in the window, mapped to sections, clustered and ranked.
+- **Today:** a forward plan built from these sources:
+  - carry-overs from the previous-plan check
+  - open follow-ups, such as PRs awaiting review or merge, promised replies, and unmerged fixes
+  - today's calendar, especially meetings Nico organizes and their agendas
+  - today's sync notes
+  - the P-task focus
 
-   **Do not ask about today's plan or blockers yet.** Nico reviews and posts one item at a time, in order — Yesterday fully closed out (drafted, agreed, posted, verified — see next step) before Today is even asked about, and Today closed out before Blockers is asked about. Front-loading all three questions before showing any draft is the single biggest friction point in this skill — don't do it, even though the questions are easy to ask early.
+  **Decide today vs later this week.** Use the calendar's free time and Focus blocks, deadlines (e.g. a kickoff tomorrow), and `Absent` days. Put what fits today in the plan. List what you moved to later as an assumption.
+- **Blockers or risks:** `None`, unless the sources show a real blocker, such as a dependency waiting on another team or an Absent day before a deadline. If there is one, draft one or two plain sentences.
+- **Notes (private, not posted):** tag what you inferred: `- Dropped: <item> (<reason>)`, `- Delegated: <item> to <person>`, `- Deferred until <date>: <item>`, `- Done: <item>`. For a multi-day P0, add `- P0: <duty> runs the whole week of <date>` so the next run continues it.
 
-4. **Verify Geekbot actually recorded the post.** Immediately after posting, `slack_read_channel` the DM and check Geekbot's very next message. If it advanced to the next question (e.g. "What are you working on next?") or thanked Nico for the response, the reply was recorded as the official report — continue. If instead Geekbot says something like "nothing you write in this chat is posted or recorded... the standup card was dismissed", the interactive standup session wasn't active when you posted (e.g. an earlier "Tool rejected"/dismissal event on the card). Wait for Geekbot's next "Starting Daily check-in" prompt, then re-post the *identical* content — the content was fine, only the timing was wrong, so don't reword it.
+### 4. Verify
 
-5. **Ask Nico for today's plan** — only now, once Yesterday is posted and verified. One open-ended question. He may say "nothing for P2", give an issue number, or describe a task informally. Synthesize, draft, agree, post, and verify exactly as in steps 3-4 (the blockers/risks item doesn't apply here, and Today needs no DM/public-channel link handling since it's Nico's own plan, not a sourced activity item).
+Check the raw strings against every line of `rubric.md`, including the `\n\n\n` gaps. Then get an independent review of the drafts against the rubric and the gathered sources: does each bullet hold up, was anything sourced dropped, and is any bullet in the wrong section? Use the `advisor` tool if it's available. Otherwise use an Opus subagent (`model: "opus"`), giving it `rubric.md`, `private.md`, the drafts and the gathered facts. Fold in the feedback that holds up.
 
-6. **Ask Nico about blockers or risks** — only now, once Today is posted and verified. One open-ended question, e.g. "Any blockers or risks?" He may say there are none, or describe them freely. This is raw free text — it does not get organized into P1/P2/P3. If Nico gave actual text, post it as-is via Slack (verify per step 4, no bold Geekbot label), then move straight to step 7. If he said there are none, do NOT post anything via Slack for this item — the Slack integration appends a "Sent using @Claude" signature to every message it sends, and on a lone `.` that signature dominates the reply and renders as a garbled/unresolved mention in Geekbot's compiled thread report. Instead, tell Nico he needs to reply `.` to the "Any blockers or risks?" question himself in the DM, then move straight to step 7 — do NOT wait for him to confirm he's done it. He replies on his own schedule; archiving doesn't depend on that reply having landed, since the archive stores what was agreed, not a read-back of the Slack thread.
+### 5. Save the draft
 
-7. **Archive.** Write the three agreed items to `~/.claude/skills/daily-standup/history/<YYYY-MM-DD>.md`, where the date is today's date (the day the stand-up is posted), under plain `## Yesterday` / `## Today` / `## Blockers or risks` headers (a plain header is clearer to skim later than the Geekbot framing). Overwrite silently if the file already exists (a re-run same-day supersedes the earlier draft). This builds a dated archive of what Nico reported each day — useful later for performance-review prep.
+Write the drafts, assumptions and "left out" list to `drafts/<today>.md` before showing anything. If the session gets interrupted, step 0 resumes from this file.
 
-## Style guide
+### 6. The one review
 
-**Section headers** — one per P-section, NO blank line between the header and its first bullet (bullets follow immediately on the next line):
+Send one chat message, rendered as normal markdown (no code fence, and not via `AskUserQuestion`). It contains:
+1. **The full draft of all three replies**, each under a bold label (`**For "What changed since the last update?"**`, and so on). Nico reviews the full text, so never summarize or abbreviate it. Copy it verbatim from `drafts/<today>.md` and post from that same file, so the reviewed text is the posted text (2026-10-20).
+2. **Assumptions:** a numbered list. Each item states the default you took ("3. No trace of the PR #X review; assumed not done, carried into Today"). Nico corrects by number.
+3. **Left out:** one line per notable item you cut, with the reason, so Nico can pull it back.
+4. **Focus block:** one or two lines suggesting what to use the morning Focus Time block for: the one thing from Today that would make the day a success once done, and that needs deep work (designing, coding, writing), not replies or reviews. If the block has already passed, suggest it for the next one. Not posted (2026-11-13).
+5. One closing line: reply `post`, or give corrections.
 
-- `P1 - <Epic name> (<Phase>)` — include phase in parentheses if the P-task description names one (e.g. "Drive Implement phase" → `(Implement)`); omit if the P-task doesn't name a phase. If the P-task is marked completed mid-week (see Mid-week completion above), use `(Completed)` as the phase instead, for the rest of that ISO week.
-- `P2 - [#<num>](url) <short title>` / `P3 - [#<num>](url) <short title>` when the P-task names a single issue (its description ends in `#<num>`) — linked number first, then a short human-readable title (rewrite — do NOT paste the raw issue title verbatim). The issue number is always a markdown link, even in a header — never a bare `#<num>`.
-- `P<n> - <Epic name> (#channel-name)` when the P-task description is a Slack channel reference instead of a GitHub issue (e.g. `#prj-pdp-3462-real-time-agent-visibility`) — put the channel in the header as a plain reference (see Slack channel references below), not repeated on every bullet under that section. Since the header already establishes the source channel, bullets sourced from it don't need their own `(#channel-name)` mention — that would just duplicate the header three or four times over.
-- `Also` — no number, no phase.
+On corrections, apply them and list what changed. For small, specific changes, show only the changed lines. Show the **full** revised draft (no code fence) after larger changes, or when it was last shown 3+ turns ago, with the change list below it (2026-10-23). A tool-call rejection that carries edit instructions is an edit request, not approval (2026-10-12). Carry a correction into another section only when it changes what that section says. A higher risk doesn't change a plan whose session stays the same (2026-11-02). Post only after an explicit go.
 
-**Two** blank lines still separate each P-section block from the next (header + its bullets is one block) — Geekbot doesn't render a single blank line as a paragraph break, so it takes two to show up as one.
+If a correction gives a P-task's tracking issue or says a P-task is completed, update `p-tasks.md` right away. Append `#<num>`, or `(completed <date>)`. Then re-render the headers in the current draft.
 
-**Bullets** — ASCII hyphen + space: `- item`. **NEVER `•`**. **NEVER em-dash `—` bullets**. Nico's clipboard mojibakes Unicode bullets.
+### 7. Post
 
-**Empty P-section** — one bullet:
+Post through `mcp__claude_ai_Slack__slack_send_message` to the Geekbot DM `<geekbot-dm>`, without the bold labels. Before each send, re-check the `\n\n\n` gaps in the raw string, because corrections can break them, and any time-of-day wording ("In this morning's sync") that the review may have outlived.
+1. Read the DM first (`slack_read_channel`). Geekbot's latest message must be today's first question, "What changed since the last update? (progress, completion, or delays)". The other two are "What are you working on next?" (Today) and "Any blockers or risks?". If the questions differ from these, stop and ask Nico. If the check-in was dismissed or expired during the review, wait for the next "Starting Daily check-in" prompt.
+2. Post Yesterday, then read the DM until Geekbot asks the next question. Then post Today the same way. If Geekbot says nothing was recorded, re-post the identical text once the session is live again.
+3. Blockers: if Nico already answered in the DM, skip this step. If the agreed text isn't `None`, post it. If it is `None`, post nothing, and don't post `.` yourself, because the "Sent using @Claude" signature garbles it. Tell Nico to reply `.` himself, then continue without waiting.
 
-- Yesterday: `- Nothing yesterday`
-- Today: `- Nothing planned today`
+A posted message can't be edited, since there is no edit tool. If a mistake is found after posting, ask Nico whether to post a correction.
 
-Always include all three P-sections even if empty.
+### 8. Archive and learn (no questions)
 
-**Links** — GitHub-flavored markdown `[text](url)`. Every issue/PR reference gets a link — no exceptions, including section headers. Three acceptable forms:
+1. Write `history/<today>.md`. Overwrite silently if it exists. Use this structure:
 
-- **Preferred:** `[<Full PR or issue title> #<num>](url)` when the title carries information the reader needs. Example: `[Track multiple element instances per agent instance #51513](https://github.com/camunda/camunda/issues/51513)`.
-- **Shorthand:** `[PR #<num>](url)` when mid-bullet and the surrounding text already conveys the topic. Example: "took over [PR #53028](url)".
-- **Header form:** `[#<num>](url)` — bare linked number, used only in `P2`/`P3` section headers (see Section headers above).
-- **NEVER** Slack-mrkdwn `<url|text>`. **NEVER** bare URLs. **NEVER** `#num` or `(#num)` without a link — this includes section headers, not just prose.
-- **Slack-sourced bullets need the same treatment — but only for public channels.** Any bullet built from a Glean/Slack finding in a **public channel** (a staffing ask, a design thread, a support answer) must carry a `([thread](url))` link to where it happened — the same rule as GitHub issues/PRs, not an optional extra. This applies even when the bullet lives under P1/P2/P3, not just Also. **Never link a DM** — the URL only resolves for the two participants, so it's dead for anyone else reading the Geekbot report (including Nico's manager). For a DM-sourced bullet, name the person instead: "reminded Robert about a stale backport" not a linked `(DM)`.
+   ```markdown
+   ---
+   corrections: <N>
+   ---
+   ## Yesterday
+   ## Today
+   ## Blockers or risks
+   ## Notes
+   ## Corrections
+   ```
 
-**Inline code (backticks)** — apply consistently to:
+   - `## Notes` holds the tags from step 3, updated with what Nico said. Write `- None` if empty.
+   - `## Corrections` holds each change between `drafts/<today>.md` and the posted text, plus each assumption Nico overrode. Write each as one line tagged `rule-gap`, `source-gap` or `one-off`. `N` is their count.
+2. Learn from each correction:
+   - `rule-gap` (would recur): add or edit one dated line in `rubric.md`. Apply the Privacy rule to any line added to a tracked file.
+   - `source-gap` (a gathering miss): fix `gathering.md`.
+   - Process problem: fix this file.
+   - `one-off` (a fact no source could know): Notes only.
 
-- version numbers: `` `3.5.2` ``
-- branch names: `` `stable/8.8` ``, `` `main` ``
-- file names: `` `fetch_audit_data.ts` ``
-- skill/plugin/tool names: `` `reviewing-agent-ready-prs` ``, `` `gh auth refresh` ``
+   Quality comes first, then size. Watch the size of every file a run reads in full (`SKILL.md`, `rubric.md`, `gathering.md`, `examples.md`, `p-tasks.md`, `private.md`): each added line costs context on every run. Before adding a line, weigh it against the existing ones. Add only lessons that are general and likely to recur, and keep narrow ones in Notes. Merge or shorten rather than append, and cut a line that a newer one makes redundant. Files read only in part (`history/`, `drafts/`) don't need this (2026-10-22).
+3. Report in one line: this run's corrections, and the trend over the last 5 `corrections:` values.
+4. If today's posted entry fits a slot in `examples.md` clearly better than the current example, ask in one line whether to swap, with the reason. Only ask on a clear win. This question doesn't block anything, because everything is already posted and archived. A swap changes `examples.md`, so apply the Privacy rule.
 
-**Slack channel references** — when an item maps to a Slack channel (CVEs, project channels), write the channel as plain `#channel-name` — Slack auto-links it. Don't link or backtick. Examples: `#cve-2026-4046-medium-core-features`, `#inc-support-32932-version-of-8-8-that-does-not-have-memory-allocation-issue`.
+### 9. Trim the skill
 
-**CI incident channels are the exception** — when a bullet clusters multiple CI-job-failure incidents (e.g. a wave triaged during a medic shift), give each its own explicit markdown link with short link text: `[#inc-6729](https://camunda.slack.com/archives/<channel_id>/<message_ts>)`, not the bare auto-link form. Nico wants each incident individually clickable from the bullet, and the full channel names for these (`inc-6729-unsuccessful-job-ci-smoke-testslinux-amd64-on-main`) are too long to paste six-at-a-time as plain text anyway. Get `channel_id`/`message_ts` from the Glean Slack search results for that incident.
+Quality comes before size, but cuts needn't be lossless. Re-read the files a run reads in full, and look for:
+- duplicates across files, lines a newer one made redundant, and history notes no longer needed
+- content that only some runs need (load it conditionally)
+- rules whose benefit doesn't pay for their size: weigh how much a rule prevents against a rough estimate of how often it applies. A rule for one rare situation is a candidate to drop.
+- steps that cost more context than needed: look back at this run's tool output and subagent reports, and find a cheaper way to get the same facts.
 
-**Colleagues** — first names only, in parentheticals when crediting a hand-off: `(from Stephan and Deepthi)`. Don't @-mention.
+Quality means the output still meets the skill's goals: accurate, in Nico's voice, few corrections.
 
-**Tone** — concise plain English. Semicolons OK. **No emojis. No section headers like "Yesterday:" or "Today:" inside the content** — Geekbot's prompts provide the framing.
-
-**Clustering** — one bullet per coherent topic. Group related PRs into one bullet ("Took over PR #X, PR #Y, PR #Z (same case)"). Don't list every commit. List the merged PR or user-visible outcome. This also applies across sources: if a DM to person A and a separate DM to person B are the same underlying decision (e.g. Nico floats a problem with A, then tells B the conclusion), merge into one bullet rather than reporting each conversation separately — two bullets about the same event reads as double work.
-
-**State the actual content, not just the action.** A bullet like "gave X a heads-up" or "discussed Y with Z" is meaningless to a reader who wasn't in the thread — name the specific topic/decision/problem, not just that a conversation happened. Re-read the source message for the substance (what's the heads-up *about*?) before drafting, don't infer it from the surrounding metadata (channel name, who reacted).
-
-**Name the support tier on a support-case bullet.** When a bullet describes investigating a support case, say explicitly whether it's L2/L3 (e.g. "Investigated an L2 support case on a..."), don't leave the tier implicit in the incident channel name or omit it — Nico wants that classification stated in the bullet itself.
-
-**Write for the reader, not for yourself.** Bullets sourced from Nico's own working docs or scratchpads often carry shorthand invented for that doc — codenames like "G1", "R1", or "the MAIN-problem" mean nothing to a teammate or manager who never opened the doc. Translate to the actual substance (the real problem, the actual finding, the actual tradeoff) rather than carrying the codename into the stand-up.
-
-**Personal reprioritization, not a team decision.** A bullet saying an epic "is now top priority" or "needs full focus" reads as a team-wide call unless scoped to Nico. If the underlying P-task is Nico's own priority (not necessarily the team's), say "my top priority" / "needs my full focus" so it isn't misread as a broader prioritization decision.
-
-**Verify who actually did the work before crediting it.** A commit's git author isn't proof of authorship — e.g. a squash-merged PR can be bot-authored from someone else's suggested fix, with Nico only reviewing and merging it. Check the PR's actual `user.login` (and the surrounding Slack thread) before writing a bullet like "fixed X" — get the verb right: reviewed/merged vs. wrote/fixed, and name whoever actually supplied the fix.
-
-**Personal/local tooling changes aren't automatically stand-up material.** Something like a local Claude Code permission hook is real work but may not be worth sharing with the team that day. When a yesterday-activity item is purely personal tooling with no team-facing outcome, don't assume it belongs — surface it in the draft and expect Nico may cut it.
-
-**Issue-title rewriting** — when a P-task description is verbose (e.g. `[Bug] Explore solutions for and start breaking down Partitions gets unhealthy if many timers are scheduled #8991`), rewrite to a short header (`P3 - [#8991](https://github.com/camunda/camunda/issues/8991) Partitions unhealthy with many timers`).
-
-## P-tasks file format
-
-`~/.claude/skills/daily-standup/p-tasks.md`:
-
-```markdown
----
-updated: 2026-05-22
-iso_week: 2026-W21
----
-
-- P1: Drive Implement phase for AI Visibility & Explainability epic
-- P2: Assist Business ID Visibility & Filtering epic
-- P3: [Bug] Explore solutions for and start breaking down Partitions gets unhealthy if many timers are scheduled #8991
-```
-
-Refresh trigger: `date +%G-W%V` differs from frontmatter `iso_week`. Compute ISO week with `%G-W%V` (NOT `%Y-W%V` — `%Y` wraps wrong at year boundaries).
-
-## Reference example
-
-See `example.md` for a complete worked stand-up (Nico's 2026-05-21 output) — use it to disambiguate any style question this guide doesn't cover.
-
-## Common mistakes
-
-| Mistake                                                   | Fix                                                                                  |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `•` bullets                                               | `-` — Nico's clipboard mojibakes them                                                |
-| Slack-mrkdwn `<url\|text>` links                          | `[text](url)` markdown                                                               |
-| Listing every commit                                      | Cluster to the merged PR / outcome                                                   |
-| Skipping P2/P3 when empty                                 | Include with `- Nothing yesterday` / `- Nothing planned today`                       |
-| Adding "Yesterday:" / "Today:" inside the content         | Don't — Geekbot prompts provide framing                                              |
-| Forgetting backticks on versions / branches / skill names | Apply consistently                                                                   |
-| Em-dashes in section headers (`P1 — …`)                   | Space-hyphen-space: `P1 - …`                                                         |
-| Pasting raw verbose issue title for P3                    | Rewrite: `P3 - [#<num>](url) <short title>`                                          |
-| Linking with `(#51513)` instead of `[#51513](url)`        | Always provide the URL — including in P2/P3 section headers, not just prose         |
-| Including a trivial fix-up commit as its own bullet       | Drop it — list only the parent PR                                                    |
-| Producing a single combined message                       | Output TWO separable blobs; Nico posts them as separate Geekbot replies              |
-| Skipping Slack — relying only on git                      | Support cases and planning posts have zero commits; always run the Glean Slack query |
-| Having the Slack/GitHub/conversation subagents return prose bullets instead of structured facts | They must return verbatim substance + provenance (permalink components, actual author) — a prose bullet destroys what the main thread needs to apply the Style guide |
-| Delegating the plain git-log sweep to a subagent           | It's already a known-shape, tight query — delegating adds spin-up cost with no context reduction; only the exploratory GitHub/authorship digging is worth hiding |
-| Computing `H` from `ls history \| tail -1` on a same-day re-run | Today's own history file (if this is a re-run) must be excluded, or the window inverts — filter it out and strip `.md` before using the date |
-| Trusting a `.jsonl` file's mtime alone as proof its conversation happened in-window | Check internal message timestamps too — a session can be touched (worktree op, resume) with an in-window mtime while every real message is days older |
-| Stopping at the first 50 Slack results                    | Paginate until `hasMoreResults` is absent or cursor returns empty                    |
-| Blank line between a section header and its first bullet  | No blank line — bullets follow the header on the very next line                     |
-| Only one blank line between P-section blocks               | Use two — Geekbot doesn't render a single blank line as a break                     |
-| Drafting all three items before posting any                | Agree then post one at a time: Yesterday, then Today, then Blockers or risks         |
-| Posting `.` via Claude when there are no blockers/risks     | Don't — the auto-appended "Sent using @Claude" signature garbles a lone `.` in Geekbot's report. Tell Nico to post `.` himself instead |
-| Waiting for Nico to confirm he posted `.` before archiving  | Archive immediately after telling him to post it — don't block step 7 on his confirmation, he replies on his own schedule |
-| Organizing blockers/risks into P1/P2/P3                    | It's raw free text, no epic mapping                                                  |
-| Relying only on git + Slack for GitHub work                | Pure review activity (approve/request-changes, no commit, no Slack mention) is invisible to both — always run the GitHub review-activity search |
-| Asking "does this look right?" via `AskUserQuestion` instead of showing the draft | The draft text must appear directly in the chat message, not hidden behind an option label Nico has to guess at — he can't approve what he can't see |
-| Dropping the public-channel Slack thread link on a P1/P2/P3 bullet (only remembering it for Also) | Every bullet sourced from a public channel needs its `([thread](url))` link, regardless of which section it lands in |
-| Linking a DM thread | Never — no-one but the two participants can open it. Name the person in prose instead |
-| Assuming literal "yesterday" instead of computing the window from `history/` | The window is `[last history file's date, yesterday]` inclusive — deterministic, no need to probe git/Slack for emptiness first |
-| Asking for free-text P1/P2/P3 via `AskUserQuestion` multiple-choice | Ask in a plain chat message — fixed options can't capture arbitrary epic descriptions and just add a round-trip |
-| Adding a one-off P0 (e.g. on-call duty) to `p-tasks.md` | Don't — it isn't a standing epic; give it its own section only for the day(s) it applies |
-| A bullet that only says a conversation happened ("gave a heads-up", "discussed X") without the topic | State the actual substance — what was the heads-up about, what was decided |
-| Reporting the same decision as two separate bullets because it came from two different DMs | Merge into one bullet — cross-reference sources before drafting, not just cluster within one source |
-| Concluding "Nothing yesterday" for a P-task because git/Slack/GitHub found nothing | Always ask Nico directly about meetings first — recap bots don't post `from:` him, so the Slack filter can't see them, and a quiet epic in those three sources isn't proof nothing happened |
-| No way to edit an already-posted Geekbot reply | There is no Slack edit-message tool available (only send/schedule/draft) — if a correction is needed after posting, ask Nico whether to post a follow-up correction or fix it manually, don't assume |
-| Writing CI incident channels as bare `#inc-6729-...` plain text when clustering several in one bullet | Use an explicit `[#inc-6729](url)` link per incident instead — full incident channel names are too long to list plain, and Nico wants each one clickable |
-| Asking about today's plan and/or blockers before Yesterday is drafted, agreed, and posted | Close out each item fully (draft → agree → post → verify) before even asking the next question — don't front-load all three questions early just because they're easy to ask |
-| Assuming a posted Slack message automatically becomes the official Geekbot report | Read the DM back after posting — if Geekbot says the standup card was dismissed and nothing was recorded, wait for a fresh "Starting Daily check-in" prompt and re-post the identical content |
-| Waiting for the next ISO-week refresh to link a tracking issue Nico supplies mid-session | Append `#<num>` to the relevant P-task line in `p-tasks.md` immediately, and fix up any draft/archive already written this session |
-| Carrying internal doc shorthand (codenames like "G1"/"R1"/"the MAIN-problem") into the stand-up | Translate to the actual substance — the reader never saw the working doc it came from |
-| Writing "X is now top priority" for an epic that's only Nico's personal reprioritization | Say "my top priority" / "needs my full focus" — otherwise it reads as a team-wide decision |
-| Crediting whoever's name is on the git commit as the one who found or fixed a bug | Check the PR's actual author and the Slack thread — a squash-merge commit author can differ from who actually diagnosed or supplied the fix |
-| Including personal/local tooling changes (e.g. a Claude Code permission hook) by default | Not all personal-only work belongs in a team stand-up — surface it in the draft, expect it may get cut |
-| Asking about new activity for a P-task Nico already declared completed mid-week | Check `p-tasks.md` for a `(completed <date>)` marker first — if present, use the `(Completed)` header + single bullet pattern instead of probing git/Slack/GitHub for that epic |
-| Showing the draft as raw markdown inside a code fence | Render it directly in the chat message (no code fence) so links, backticks, and bullets actually display — raw source is harder for Nico to review |
-| Repeating `(#channel-name)` on every bullet under a P-section whose P-task IS that channel | Put the channel in the section header instead (`P2 - <Epic name> (#channel-name)`) and drop it from the individual bullets |
-| Waiting for Nico to declare a P0 upfront before creating one | If gathered Yesterday activity clusters into a full day of on-call-shaped work (incidents, alerts, rotation coordination), propose a one-off P0 in the draft even without a prior heads-up |
-| Leaving the support tier (L2/L3) implicit in a support-case bullet | State it explicitly — "Investigated an L2 support case on a..." — don't rely on the incident channel name to imply it |
-| Using a closed `updated:<start>..<end>` range for the GitHub review/comment search | Use an open-ended `updated:>=<start>` and filter client-side on each review's/comment's own `submitted_at`/`created_at` — a closed range drops the whole PR if it's touched again after the window (e.g. a follow-up review the next day), silently losing the in-window review too |
+Propose the cuts in one message with the bytes each saves, and apply them after Nico agrees. Name every rule you drop, and ask separately about any you're unsure of. If nothing is worth cutting, say so in one line. Apply the Privacy rule to every edit, and flag any private information already in a tracked file.
