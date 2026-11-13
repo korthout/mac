@@ -147,7 +147,7 @@ single-PR plan gets one entry. Use this exact row shape per PR:]
      (repo commit guidelines; flag a message that has to list more than 2-3 behaviors as a commit
      doing too much). Run once, over the full red/green/refactor sequence from steps 1-6.
      Triage every finding yourself: delegate clear-cut fixes to a subagent — amend the relevant
-     commit or add a new one, per the global amend-vs-new-commit rule (same intent → amend,
+     commit or add a new one, per the `commit-style` skill's amend-vs-new-commit rule (same intent → amend,
      different intent → new commit). Not confident it's clear-cut? Carry it forward unresolved
      instead of fixing it.
   8. Stop at `⏸ tests reviewed`, summarizing the (now fully checked-off) Test List plus any findings

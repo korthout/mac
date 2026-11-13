@@ -4,6 +4,7 @@
 - Check available skills before starting a task. Update skill definitions when receiving feedback during execution.
 - When a skill's instructions say to use another skill, invoke that skill — don't skip ahead and do the work inline.
 - Verify claims against actual code and changes. Don't speculate — update your analysis when given counter-evidence.
+- I have my own git commit style: before any git commit, amend or history rewrite, use the `commit-style` skill.
 - When something is worth remembering, save it in the repo (docs, skills, CLAUDE.md) if it's repo-specific, otherwise in a personal skill or ~/.claude/CLAUDE.md, not in auto-memory.
 - Write commit messages, code comments, issues, PRs, and GitHub and Slack comments in plain English: short sentences, everyday words, Camunda's terms and the codebase's names for things. Lead each paragraph with its point. Check every draft against this before posting.
 - Ask me one question at a time, the one whose answer changes the most first. Write it in plain English, with the context and options I need to decide without looking things up.
@@ -17,20 +18,6 @@
 - A hook rewrites shell commands to `rtk`. Run `rtk proxy <cmd>` when you need the raw, unfiltered output.
 - For JSON, use `jq` rather than a python script when jq can reasonably do it. jq can't run arbitrary code.
 - In camunda/camunda, when you use the `engine-expert` skill or run `zeebe/qa` integration tests, also read `~/.claude/notes/camunda.md`: my additions, which win where they disagree.
-
-## Commits
-
-- Titles max 72 chars, aim for 50. Explain all considerations in the body.
-- One commit per reason for a change. Choose amend or a new commit by the *reason*, not by which files change or whether behavior changes.
-  - Amend when the change corrects what the commit meant to do: a typo, a wrong assertion, a missed case within the same goal.
-  - Make a new commit when the change has its own reason, even in the same lines with the same behavior: new wanted behavior, a performance gain, more robustness. A bug that this work reveals gets its own failing-test and fix commits too.
-- On backport PRs, never amend the cherry-picked commits; add new ones. Amending breaks the `cherry picked from` link to the original PR and makes reviewers re-read everything.
-- Bug fixes: first commit only the failing test, so reviewers can check out that commit and see it fail. Then commit the fix, including old tests that encoded the buggy behavior. Add a refactor commit between the two only when the fix can't land cleanly without it.
-- Refactors: small strangler-fig commits that each build green. Build the new code next to the old, move callers over one at a time, and delete the old code (and its tests) last. Put the feature that needs the refactor in its own stacked PR. Unused scaffolding in a refactor PR hides which code is live.
-- No issue references like `#123` in commit messages. I rebase often, and every rebase adds another cross-reference to the issue. Put them in the PR.
-- Explain why for every non-default choice, in the body and not in a code comment. For example, `SoftAssertions`: say what would be lost with plain assertions, not just what it does.
-- When you resolved conflicts (merge, rebase, cherry-pick, backport), explain in the body what you changed compared to the original and why. The original message alone misrepresents what the commit contains.
-- After restructuring commits, reread every message. Remove mentions of tests, commits or drafts that are no longer in the history, and describe each change as the final history shows it.
 
 ## Model selection
 
