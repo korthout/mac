@@ -1,4 +1,5 @@
 {
+  "cleanupPeriodDays": 180,
   "attribution": {
     "commit": "",
     "pr": ""
@@ -51,7 +52,32 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus[1m]",
+  "model": "opus",
+  "skillOverrides": {
+    "act-testing": "off",
+    "agentic-workflows": "off",
+    "analytics-exporter": "off",
+    "camunda-api-zod-schemas": "off",
+    "ci-flood-triage": "off",
+    "ci-incident": "name-only",
+    "ci-push-workflow-health": "off",
+    "ci-runner-utilization": "name-only",
+    "ci-scheduled-workflow-health": "off",
+    "ci-security-compliance": "name-only",
+    "ci-workflow-authoring": "name-only",
+    "create-rt-issue": "off",
+    "design-system-migrator": "off",
+    "frontend-docs-screenshots": "name-only",
+    "frontend-feature": "name-only",
+    "frontend-integration-test": "name-only",
+    "frontend-unit-test": "name-only",
+    "load-test-ops": "name-only",
+    "new-stable-load-test": "off",
+    "operate-frontend": "name-only",
+    "session-state": "off",
+    "tasklist-frontend": "name-only",
+    "review-epic": "off"
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -280,10 +306,9 @@
   },
   "enabledPlugins": {
     "claude-hud@claude-hud": true,
-    "superpowers@claude-plugins-official": false,
     "eng-kit@camunda-internal": false,
     "create-architecture-decision@actora": true,
-    "generate-deck@actora": true
+    "generate-deck@actora": false
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
@@ -337,6 +362,13 @@
       "effortLevel": "medium"
     },
     "claude-opus-5": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "high",
+      "autoCompactWindow": 500000
+    },
+    "claude-sonnet-5-5": {
       "effortLevel": "medium"
     }
   },
