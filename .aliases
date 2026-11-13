@@ -52,3 +52,8 @@ alias mvnict='mvni'
 alias mvncist='mvn clean install -Dquickly'
 alias mvnt='mvn test -Dquickly -DskipTests=false -DforkCount=4'
 alias mvnt1='mvn test -Dquickly -DskipTests=false -DforkCount=1'
+
+# Load untracked Claude Code settings that must stay out of this public repo
+if [ -f "$HOME/.claude/settings.private.json" ]; then
+  alias claude='claude --settings "$HOME/.claude/settings.private.json"'
+fi

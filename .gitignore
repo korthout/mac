@@ -1,2 +1,3 @@
 .cfg
 .claude/projects/*/memory/
+.claude/settings.private.json
