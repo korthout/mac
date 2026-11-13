@@ -55,7 +55,7 @@ For voice, length and tone, the ground truth is the entries listed in `examples.
 - A bullet sourced from a public Slack channel carries `([thread](url))`, in any section. Never link a DM; name the person instead.
 - Slack channels as plain `#channel-name` (no link, no backticks).
 - Backticks on versions, branch names, file names, and skill/tool names.
-- Colleagues by first name, no @-mentions; use the nicknames in `private.md`. Never write a raw `@group` handle (it pings); name it as `private.md` says.
+- Colleagues by first name, no @-mentions; use the nicknames in `~/.claude/private.md`. Never write a raw `@group` handle (it pings); name it as `private.md` says.
 
 ## Blockers or risks
 
