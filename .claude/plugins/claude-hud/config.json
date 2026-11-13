@@ -3,16 +3,24 @@
   "showSeparators": false,
   "language": "en",
   "display": {
+    "showProject": false,
     "showTools": false,
     "showAgents": true,
     "showTodos": false,
     "showDuration": true,
-    "showConfigCounts": true,
-    "showSessionName": true,
+    "showConfigCounts": false,
+    "showSessionName": false,
     "showUsage": true,
+    "showTokenBreakdown": true,
+    "showSessionTokens": true,
+    "showCost": true,
     "sevenDayThreshold": 80,
     "showSkills": false,
-    "contextValue": "tokens"
+    "contextValue": "tokens",
+    "showPromptCache": true,
+    "promptCacheTtlSeconds": 3600,
+    "showEffortLevel": true,
+    "effortFormat": "symbol"
   },
   "gitStatus": {
     "enabled": false
