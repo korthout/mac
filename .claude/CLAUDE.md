@@ -14,6 +14,7 @@
 - In tests, prefer obvious over DRY: a failing test should make sense without reading other code. Inline setup and use literal values when the value matters. Extract one helper only for repeated plumbing (like polling until a record is visible), and pass the values that matter as arguments. A helper never acts on the thing under test or hides values that decide the outcome.
 - Run `mvn`, not `./mvnw`, even when a repo says to use the wrapper. My `mvn` shell function picks the right Maven.
 - In chat, link GitHub issues and PRs as `[<full title> #N](url)`. Look up the title; don't guess it.
+- A hook rewrites shell commands to `rtk`. Run `rtk proxy <cmd>` when you need the raw, unfiltered output.
 - For JSON, use `jq` rather than a python script when jq can reasonably do it. jq can't run arbitrary code.
 - In camunda/camunda, when you use the `engine-expert` skill or run `zeebe/qa` integration tests, also read `~/.claude/notes/camunda.md`: my additions, which win where they disagree.
 
@@ -39,5 +40,4 @@
 - Opus: adversarial review/verification, high-stakes or hard-to-reverse decisions (architecture, security/CVE impact, ambiguous scope), synthesis across many sources. Pass `model: "opus"` explicitly for these rather than defaulting the session to it.
 - If an Opus session is doing routine implementation/CI/git work, or a Sonnet session keeps hitting architecture/security/adversarial-review calls, say so once and suggest switching tier — session-level, not per-message.
 
-@RTK.md
 @private.md
