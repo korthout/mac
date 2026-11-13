@@ -5,6 +5,7 @@
 - When a skill's instructions say to use another skill, invoke that skill — don't skip ahead and do the work inline.
 - Verify claims against actual code and changes. Don't speculate — update your analysis when given counter-evidence.
 - I have my own git commit style: before any git commit, amend or history rewrite, use the `commit-style` skill.
+- Files under `~/.claude` (CLAUDE.md, skills) live in my dotfiles repo. Commit and push them with `cfg`, not `git`.
 - When something is worth remembering, save it in the repo (docs, skills, CLAUDE.md) if it's repo-specific, otherwise in a personal skill or ~/.claude/CLAUDE.md, not in auto-memory.
 - Write commit messages, code comments, issues, PRs, and GitHub and Slack comments in plain English: short sentences, everyday words, Camunda's terms and the codebase's names for things. Lead each paragraph with its point. Check every draft against this before posting.
 - Ask me one question at a time, the one whose answer changes the most first. Write it in plain English, with the context and options I need to decide without looking things up.
