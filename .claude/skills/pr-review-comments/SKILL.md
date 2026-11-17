@@ -150,6 +150,13 @@ Why: a `COMMENT` review without blockers leaves the author unsure if you would a
 - `LGTM` in the general body is the trigger. A body that starts with `LGTM 👍` must be submitted as `APPROVE`. A mismatch has to be fixed.
 - Inline 🔧 and 💭 do not downgrade an approval.
 
+## Pending reviews
+
+To prepare a review without sending it, POST `/pulls/{n}/reviews` without `event`. The user sends it from "Finish your review", where they can still edit it.
+
+- To edit a pending comment, use GraphQL `updatePullRequestReviewComment` with the comment's `node_id`. REST PATCH returns 404 until the review is submitted.
+- REST shows pending comments with `line: null`. Check `position` (the line's place in the diff hunk) to confirm where a comment is anchored.
+
 ## Walkthroughs: share your findings first
 
 When you review a PR commit by commit (or any code walkthrough), share your own findings before you ask what the user noticed. For each commit, file, or section:
