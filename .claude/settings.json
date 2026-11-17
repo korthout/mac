@@ -335,13 +335,13 @@
   "sandbox": {
     "network": {
       "allowUnixSockets": [
-        "$HOME/.gnupg/S.gpg-agent",
-        "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+        "~/.gnupg/S.gpg-agent",
+        "~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
       ]
     },
     "filesystem": {
       "allowWrite": [
-        "$HOME/.gnupg"
+        "~/.gnupg"
       ]
     },
     "credentials": {
