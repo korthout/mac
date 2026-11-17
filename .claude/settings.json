@@ -333,6 +333,9 @@
     }
   },
   "sandbox": {
+    "excludedCommands": [
+      "gh *"
+    ],
     "network": {
       "allowUnixSockets": [
         "~/.gnupg/S.gpg-agent",
