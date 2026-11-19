@@ -23,7 +23,7 @@ Use 💭 only for a pure observation. The author is not expected to act on it. E
 
 If you ask the author to do, add, rename, restructure, or even consider something, use 🔧. This holds for "consider X", "worth either X or Y", and "could be a follow-up".
 
-Why: softness of tone does not separate 💭 from 🔧. Whether the comment carries a proposal does. Put the hedge in the words of the 🔧 ("non-blocking, but ..."), not in the emoji.
+Why: softness of tone does not separate 💭 from 🔧. Whether the comment carries a proposal does. Put any hedge in the words of the 🔧 ("I think ..."), not in the emoji.
 
 Check before you tag 💭: does this propose anything? If yes, it is 🔧.
 
@@ -43,7 +43,7 @@ Say why you ask (what triggered the question). Do not attach your own answer. Th
 
 Write "Please add X", "Please replace Y", "Please drop Z". Do not write "Would you mind ...", "Could you ...", or "Did you consider ...".
 
-Why: once you have a proposal, state it. Keep real interrogatives for ❓. The non-blocking tone comes from explicit words ("non-blocking") and from the 🔧 itself, not from phrasing the ask as a question.
+Why: once you have a proposal, state it. Keep real interrogatives for ❓. The non-blocking tone comes from the 🔧 itself, not from phrasing the ask as a question.
 
 - Good: "🔧 Please add a case combining the two."
 - Bad: "🔧 Could you add a case combining the two?" Same request, weaker delivery.
@@ -52,9 +52,9 @@ A 🔧 may carry the change itself. Use a GitHub ` ```suggestion ` block when th
 
 ### Hedge with words
 
-For non-blocking points, use words like "I think", "non-blocking", "Personally, I think". This softens tone without weakening the ask. Use plain declarative voice for ❌ ("This has to change") and keep it for real errors.
+For softer points, use words like "I think" or "Personally, I think". This softens tone without weakening the ask. Use plain declarative voice for ❌ ("This has to change") and keep it for real errors.
 
-Write "non-blocking" only when the author may skip the point or leave it for later. When I want the 🔧 taken along in this PR, leave the hedge out, even when I approve: an approval says I trust the author to apply it, not that it is optional.
+Never write "non-blocking" on a 🔧. Every 🔧 is already non-blocking: a suggestion the author considers and may take along before merging, at their discretion. Saying so again adds noise.
 
 ### Praise is specific
 
