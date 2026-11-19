@@ -54,6 +54,8 @@ A 🔧 may carry the change itself. Use a GitHub ` ```suggestion ` block when th
 
 For non-blocking points, use words like "I think", "non-blocking", "Personally, I think". This softens tone without weakening the ask. Use plain declarative voice for ❌ ("This has to change") and keep it for real errors.
 
+Write "non-blocking" only when the author may skip the point or leave it for later. When I want the 🔧 taken along in this PR, leave the hedge out, even when I approve: an approval says I trust the author to apply it, not that it is optional.
+
 ### Praise is specific
 
 Name what was done well and briefly why. Generic praise adds little.
