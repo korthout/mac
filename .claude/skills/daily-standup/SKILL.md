@@ -111,6 +111,8 @@ A posted message can't be edited, since there is no edit tool. If a mistake is f
    - `one-off` (a fact no source could know): Notes only.
 
    Quality comes first, then size. Watch the size of every file a run reads in full (`SKILL.md`, `rubric.md`, `gathering.md`, `examples.md`, `p-tasks.md`, `private.md`): each added line costs context on every run. Before adding a line, weigh it against the existing ones. Add only lessons that are general and likely to recur, and keep narrow ones in Notes. Merge or shorten rather than append, and cut a line that a newer one makes redundant. Files read only in part (`history/`, `drafts/`) don't need this (2026-10-22).
+
+   After editing this skill's tracked files, commit and push them with `cfg`, using the `commit-style` skill. Nico has approved these commits up front. Commit only this skill's files, never other uncommitted changes in the dotfiles (2026-11-20).
 3. Report in one line: this run's corrections, and the trend over the last 5 `corrections:` values.
 4. If today's posted entry fits a slot in `examples.md` clearly better than the current example, ask in one line whether to swap, with the reason. Only ask on a clear win. This question doesn't block anything, because everything is already posted and archived. A swap changes `examples.md`, so apply the Privacy rule.
 

@@ -113,6 +113,10 @@ House style — `!pdp progress N` then these sections (see template below):
 Append the draft to the reconstruction doc and present it. **Nico posts it himself** (he often makes final
 edits — number, links, mentions). Do **not** post to Slack unless explicitly asked.
 
+When Nico's feedback leads to a change in this skill's tracked files, commit and push it with `cfg`, using
+the `commit-style` skill. Nico has approved these commits up front. Commit only this skill's files, never
+other uncommitted changes in the dotfiles.
+
 ---
 
 ## Reference: confidence rubric (1–5)
