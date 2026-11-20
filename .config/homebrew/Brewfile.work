@@ -190,3 +190,6 @@ brew "atuin"
 cask "intellij-idea"
 # Java heap analyzer
 cask "memoryanalyzer"
+tap "my-monkeys/tap"
+# macOS dictation with local Whisper/Parakeet transcription
+cask "my-monkeys/tap/openmonkeywhisper"
