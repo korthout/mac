@@ -38,7 +38,9 @@ invoke the **grill-me** skill to walk the decision tree; otherwise confirm inlin
 - Latest `!pdp progress N` in the channel (posted by the "Weekly PDP epic update" bot; CloudBot mirrors it
   to `product-hub#3462`). Read its rationale in full — the new update must not contradict it. Reconstruct
   forward from its timestamp.
-- **Read the most recent doc in `previous-runs/`** (this skill dir). It holds the *full reasoning* behind
+- **Read the most recent doc in `previous-runs/` for this project** (this skill dir). Files without a suffix
+  are PDP-3462; other projects use a `-pdp-<number>` suffix (e.g. `2026-11-18-pdp-3782.md`, channel
+  `C0BR66GAEBG`). Name a new run's file the same way. It holds the *full reasoning* behind
   the last update — why risks were rated as they were, what was deferred, the number deliberation, and the
   "Actual outcome" note (what was really posted, since Nico often edits the number/adds links). The terse
   Slack post won't have any of this. Use it for continuity: carry forward open risks, check whether flagged
@@ -97,8 +99,14 @@ House style — `!pdp progress N` then these sections (see template below):
 
 - **Link issues inline**, even in stakeholder text — `<https://github.com/camunda/camunda/issues/NNNNN|short label>`
   — so readers can drill in. Gather the real issue numbers from the reconstruction.
-- **@-mention people with a direct CTA** where the update needs someone to act or align.
+- **@-mention people with a direct CTA** where the update needs someone to act or align, and only people
+  directly involved in the project. Name others (leadership, PMs, engineers from other teams) without a tag,
+  even when the update credits them: a tag reads as noise to busy people outside the project. Without a tag
+  they won't see a thank-you, so leave it out. Don't chase extra approvals when a more senior person already
+  approved (e.g. an SVP's approval covers the directors below them).
 - Keep it tight and stakeholder-readable; lead "Why this rating?" with the honest driver of the number.
+- A few days out of office is not a risk. List an absence only when it hits a deadline (e.g. the last
+  working day before a code freeze) or lasts long enough to move the plan.
 
 ## Step 7 — Hand off; do not post
 
