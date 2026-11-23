@@ -46,10 +46,10 @@ Give it the window and the current P1/P2/P3 descriptions. After an ISO-week roll
 ## Conversations (one subagent)
 
 ```bash
-find ~/.claude/projects -maxdepth 2 -name "*.jsonl" -newermt "<window-start> 00:00" ! -newermt "<day-after-window-end> 00:00"
+find ~/.claude/projects -maxdepth 2 -name "*.jsonl" -newermt "<window-start> 00:00"
 ```
 
-This is top-level only; exclude `subagents/`. mtime only nominates candidates, because a resume or worktree operation touches it. Confirm each candidate has at least one message `timestamp` inside the window (`jq -r '.timestamp' f.jsonl | sort -u`). Return the in-window timestamps, the topic or decision in close paraphrase, and the repo or module involved.
+This is top-level only; exclude `subagents/`. mtime only nominates candidates, because a resume or worktree operation touches it. Don't cap mtime at the window end: a session resumed today still holds in-window work (2026-11-23). Confirm each candidate has at least one message `timestamp` inside the window (`jq -r '.timestamp' f.jsonl | sort -u`). Return the in-window timestamps, the topic or decision in close paraphrase, and the repo or module involved.
 
 ## Calendar (one subagent, `model: "haiku"`)
 
