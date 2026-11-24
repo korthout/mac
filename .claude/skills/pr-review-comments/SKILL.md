@@ -158,6 +158,8 @@ To prepare a review without sending it, POST `/pulls/{n}/reviews` without `event
 
 - To edit a pending comment, use GraphQL `updatePullRequestReviewComment` with the comment's `node_id`. REST PATCH returns 404 until the review is submitted.
 - REST shows pending comments with `line: null`. Check `position` (the line's place in the diff hunk) to confirm where a comment is anchored.
+- The "Finish your review" box does not show the body of a pending review created through the API, though the API stores it. So either leave the body out of the POST and give the user the text to paste into that box, or submit the review yourself with POST `/pulls/{n}/reviews/{id}/events` (`event` plus `body`) once the user says which event to use.
+- To comment on a whole file (for example a pure rename, which has no diff lines), add a thread to the pending review with GraphQL `addPullRequestReviewThread` and `subjectType: FILE`. The REST create-review `comments` array can't do this.
 
 ## Walkthroughs: share your findings first
 
