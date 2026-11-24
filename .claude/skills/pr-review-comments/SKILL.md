@@ -89,6 +89,7 @@ Rules:
 - Use 🚀 or 👏 sparingly. Only for a clear scope, great tests, and a strong description. Default to a plain "Thanks @author".
 - Write one blank-line-separated paragraph per emoji point. Never bunch several 👍, 🔧, or ❓ points into one running paragraph. This holds even when several points share an emoji.
 - Do not add a wrap-up paragraph that repeats the main concern. The inline 🔧 comments carry the detail.
+- Put every point about a line or file in the diff into an inline comment, not the body. The body only holds points with no place in the diff, like the PR description or a file the PR doesn't touch. Recheck this whenever a draft changes form, such as a plain comment that becomes a review: a submitted review can't get inline comments later.
 - End an approval with `LGTM 👍` alone on its line. If a ❓ is still open, end with `Otherwise 👍 LGTM`.
 - Keep the tone brief and warm.
 
