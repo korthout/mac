@@ -29,13 +29,14 @@ Don't read log lines that might contain personal data.
 
 The incident channel has what you need to find the cluster's data.
 
-- **Cluster facts.** Look for the CloudBot reply to `!what <clusterId>` in the channel. It lists the generation (the version), cluster plan, active cluster modifications (like raised Elasticsearch limits), the GCP project, the Kubernetes namespace (`<clusterId>-zeebe`), and links to Grafana and logs. Don't post `!what` or `!kube-access` yourself without the user's approval: they're Slack posts.
+- **Cluster facts.** Look for the CloudBot reply to `!what <clusterId>` in the channel. It lists the generation (the version), cluster plan, active cluster modifications (like raised Elasticsearch limits), the GCP project, the Kubernetes namespace (`<clusterId>-zeebe`), and links to Grafana and logs. To look at metrics or logs, ask the user once per case whether you may, and say this needs `!kube-access`. Once they agree, post `!what <clusterId>` or `!kube-access <clusterId>` in the incident channel yourself, without showing the text first, and go ahead.
 - **Logs.** Read the broker logs from Cloud Logging with `gcloud logging read`. Use the project and namespace from `!what`. If `gcloud` has no active account, ask the user to run `! gcloud auth login`. Auto mode blocks reading a customer's production logs until the user tells you explicitly to run it. Ask once, don't work around it.
   - Filter on a phrase and a narrow time range, print only `timestamp` and `resource.labels.pod_name` (add `jsonPayload.message` for log lines without customer data), and count per hour or per pod with `cut | sort | uniq -c`.
   - Cloud Logging keeps about 30 days.
   - Run queries over more than a few hours in the background. They take minutes.
   - Some warnings are throttled (like `Failed to write received command`, about one line per 15s per broker). Their lines are samples: they show when something happened, not how often.
-- **Metrics.** Grafana sits behind Okta, so you can't open it. Find the panels the user needs in `monitor/grafana/*.json` in camunda/camunda. Give the user a link with the namespace and the time range set (`&from=<epoch ms>&to=<epoch ms>`), name the panels, and say what each result would mean. Ask for screenshots.
+- **Kubernetes.** Run `tsh` and `kubectl` with `TELEPORT_ADD_KEYS_TO_AGENT=no`, or credentials fail with "failed to add one or more keys to the agent". The context is `camunda.teleport.sh-<worker>`, like `camunda.teleport.sh-saas-prod-worker-1`. `!kube-access` posted through the Slack tool got "you cannot access things that do not exist" (25 Nov 2026), while the same text typed by a person works. If that happens, ask the user to post it.
+- **Metrics.** Grafana sits behind Okta, so you can't open it. Thanos runs in the `thanos` namespace of the worker cluster (`thanos-query-frontend`, port 9090), but the default viewer role can't port-forward to it or proxy to it, so the PromQL from the dashboards can't be run directly. Find the panels the user needs in `monitor/grafana/*.json` in camunda/camunda. Give the user a link with the namespace and the time range set (`&from=<epoch ms>&to=<epoch ms>`), name the panels, and say what each result would mean. Ask for screenshots.
 
 ## Analyse each concern as a whole
 
