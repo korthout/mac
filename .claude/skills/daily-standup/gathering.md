@@ -5,7 +5,7 @@ Read this file in step 2 of `SKILL.md`. It holds the briefs for each source. Win
 ## Contract for every subagent
 
 Return **structured facts with provenance, not prose bullets**:
-- the verbatim substance (a quote or close paraphrase, never "discussed X")
+- the verbatim substance (a quote or close paraphrase, never "discussed X"). For a reply, list every ask or concern in it, not just its tone: praise often comes with asks (2026-11-25)
 - the actual actor, when it differs from Nico or from the git commit author. Mark it `unverified` when the thread is ambiguous.
 - for Slack: public or DM, plus `channel_id`/`message_ts` for public channels
 - for GitHub: number, title, URL, verdict, and the date of the action
