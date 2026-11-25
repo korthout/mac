@@ -1,11 +1,41 @@
 ---
 name: support-case
-description: Use when working a customer support case, to analyse the customer's concerns or draft updates for its incident channel.
+description: Use when working a customer support case, to analyse the customer's concerns, root-cause the problem, or draft updates for its incident channel.
 ---
 
 # Support case
 
 Notes on open cases live in `cases/<case>.md`, which git ignores. Read the one for this case if it exists. Keep customer names and customer data only there. Delete the file when the case closes.
+
+## Work a long-running case
+
+Cases run for days and across many sessions, so set up for that from the start.
+
+- **Note where the inputs are.** Record the paths to the logs, configs and code the customer provided in the case notes.
+- **Persist as you go.** Write instructions, findings, open candidates and ruled-out ideas to the case notes as you go. Reread them after context compaction or in a new session.
+- **Keep the main context small.** Delegate log searches and code reading to subagents, and keep only their conclusions.
+- **Follow the incident channel.** Read it for new data from support and the customer.
+- **Raise missing data.** When data that would clearly help the investigation is missing, say what it is and why it helps.
+
+### Customer logs contain PII
+
+Don't read log lines that might contain personal data.
+
+- Search for specific words or phrases, and print only counts or matching fields, not the whole entry.
+- If you need to see entries that might contain PII, write the command and hand it to the user to run and redact.
+- If you see PII anyway, stop and tell the user right away.
+
+### Look into a SaaS cluster
+
+The incident channel has what you need to find the cluster's data.
+
+- **Cluster facts.** Look for the CloudBot reply to `!what <clusterId>` in the channel. It lists the generation (the version), cluster plan, active cluster modifications (like raised Elasticsearch limits), the GCP project, the Kubernetes namespace (`<clusterId>-zeebe`), and links to Grafana and logs. Don't post `!what` or `!kube-access` yourself without the user's approval: they're Slack posts.
+- **Logs.** Read the broker logs from Cloud Logging with `gcloud logging read`. Use the project and namespace from `!what`. If `gcloud` has no active account, ask the user to run `! gcloud auth login`. Auto mode blocks reading a customer's production logs until the user tells you explicitly to run it. Ask once, don't work around it.
+  - Filter on a phrase and a narrow time range, print only `timestamp` and `resource.labels.pod_name` (add `jsonPayload.message` for log lines without customer data), and count per hour or per pod with `cut | sort | uniq -c`.
+  - Cloud Logging keeps about 30 days.
+  - Run queries over more than a few hours in the background. They take minutes.
+  - Some warnings are throttled (like `Failed to write received command`, about one line per 15s per broker). Their lines are samples: they show when something happened, not how often.
+- **Metrics.** Grafana sits behind Okta, so you can't open it. Find the panels the user needs in `monitor/grafana/*.json` in camunda/camunda. Give the user a link with the namespace and the time range set (`&from=<epoch ms>&to=<epoch ms>`), name the panels, and say what each result would mean. Ask for screenshots.
 
 ## Analyse each concern as a whole
 
@@ -23,6 +53,12 @@ Also check:
 - **The process.** Scanner or pentest findings go through the security testing findings process (Infosec point of contact), not a regular support incident. Raise it with support as a question ("did you consider handling this as a security testing finding?"), not as a directive.
 - **Workarounds.** Check that a proposed workaround has a real effect. Setting flags on a cookie that is never read only quiets a scanner and adds no protection. Say so, or drop the workaround.
 - **Suspected bugs.** Confirm them with domain experts before telling support it's a bug. For Core Features, post to #support-sparring-core-features, to the group without tagging anyone.
+
+## Root-cause a hard case
+
+For an urgent case with a hard root cause, like one with churn risk, a long investigation pays off. One such session cost $127 and found the cause plus three ways to reproduce it. The user decides on that spend. If the session isn't on Opus, suggest switching once.
+
+Drive to the end. Try to refute each candidate cause. Don't stop until you find the cause or run out of avenues. Reproduce the cause before you call it found.
 
 ## Keep the incident channel updated
 
