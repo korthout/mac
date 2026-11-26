@@ -30,7 +30,7 @@ If `drafts/<today>.md` exists and `history/<today>.md` doesn't, a previous run w
 
 Questions asked before gathering are cheap, because there's no context yet to lose. Ask in one plain chat message, only when needed, then wait:
 - **ISO week rolled over** (`date +%G-W%V` ≠ `iso_week:` in `p-tasks.md`): ask for the new P1/P2/P3 as free text. Don't ask about a P0 duty: read on-call shifts from the `OpsGenie Shifts` calendar (`outlook_calendar_search` with `calendarName`) and list them as an assumption. First check last week's P-tasks against the last history Notes: for one that is effectively done, propose a successor for this week instead of offering "same" (2026-11-23). Save them in the file's existing format, updating `updated:` and `iso_week:`. Use `%G`, not `%Y`, which wraps wrongly at year boundaries.
-- **The window or today includes a medic day** and no handover summary is in history yet: ask for Nico's medic handover summary. It already holds alert owners and support-case tiers that Slack gets wrong.
+- **The window or today includes a medic day:** read that day's entry in the medic handover canvas (`<medic-handover-canvas>`, `slack_read_canvas`; it's large, so grep the saved output for the `slack_date`). It holds alert owners and support-case tiers that Slack gets wrong. Ask Nico only if the entry is missing (2026-11-26).
 
 Read `private.md`. If it's missing (e.g. a fresh clone), ask for the values its references need and recreate it.
 
