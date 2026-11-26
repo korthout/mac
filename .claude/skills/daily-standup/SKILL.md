@@ -118,10 +118,9 @@ A posted message can't be edited, since there is no edit tool. If a mistake is f
 
 ### 9. Trim the skill
 
-Quality comes before size, but cuts needn't be lossless. Re-read the files a run reads in full, and look for:
+Quality comes before size: propose only cuts that lose nothing important. For each candidate, check what it still covers that no other line or source does, and drop the candidate if that matters (2026-11-26). Re-read the files a run reads in full, and look for:
 - duplicates across files, lines a newer one made redundant, and history notes no longer needed
 - content that only some runs need (load it conditionally)
-- rules whose benefit doesn't pay for their size: weigh how much a rule prevents against a rough estimate of how often it applies. A rule for one rare situation is a candidate to drop.
 - steps that cost more context than needed: look back at this run's tool output and subagent reports, and find a cheaper way to get the same facts.
 
 Quality means the output still meets the skill's goals: accurate, in Nico's voice, few corrections.
