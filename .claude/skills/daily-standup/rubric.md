@@ -10,7 +10,7 @@ For voice, length and tone, the ground truth is the entries listed in `examples.
 - Map by the epic's topic, not the PR title. A PR whose title doesn't name the epic can still belong to it (2026-08-06).
 - When the ISO week rolled over, map Yesterday against LAST week's P-tasks (from the last history file's headers), Today against this week's.
 - CVE and incident-commander work always goes to `Also`, even when a P-task reads "Fix bugs" (2026-09-22).
-- P0 (e.g. medic): read `p0.md` when the window or today has a P0 day, or Yesterday clusters into on-call-shaped work (incidents, alerts, rotation swaps).
+- P0 (e.g. medic): read `p0.md` when the window or today has a P0 day, or Yesterday clusters into on-call-shaped work (incidents, alerts, rotation swaps), or Nico worked an L2+ incident (check the team channel for a top-priority call).
 - A P-task marked `(completed <date>)` in `p-tasks.md`: header phase `(Completed)`, one bullet `- Completed - see the <date> update` in both Yesterday and Today. A P-task that completes inside the window gets `(Completed)` on its Yesterday header too (2026-10-26). If its topic stays Nico's priority for the rest of the week, propose a new P-task he can complete within the week, rather than moving the work to `Also` (2026-11-17).
 
 ## What to include
