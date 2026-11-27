@@ -66,6 +66,8 @@ Drive to the end. Try to refute each candidate cause. Don't stop until you find 
 
 Support and others follow the case in its `#inc-support-*` channel. Work done only in side threads or in chat leaves them unable to act or plan.
 
+Update often, in small posts: one finding or one ask per post, as soon as you have it. Don't batch several findings into one long update.
+
 After real progress (a finding, a question asked elsewhere, a decision), draft a short update with:
 
 - what we know
