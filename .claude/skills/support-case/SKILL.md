@@ -14,7 +14,7 @@ Cases run for days and across many sessions, so set up for that from the start.
 - **Note where the inputs are.** Record the paths to the logs, configs and code the customer provided in the case notes.
 - **Persist as you go.** Write instructions, findings, open candidates and ruled-out ideas to the case notes as you go. Reread them after context compaction or in a new session.
 - **Keep the main context small.** Delegate log searches and code reading to subagents, and keep only their conclusions.
-- **Follow the incident channel.** Read it for new data from support and the customer.
+- **Follow the incident channel.** Read it for new data from support and the customer. Don't poll it with `/loop` or cron: every tick reports even when nothing changed, and Slack is only reachable through MCP, so a silent background script isn't possible. Check it at natural moments instead.
 - **Raise missing data.** When data that would clearly help the investigation is missing, say what it is and why it helps.
 
 ### Customer logs contain PII
