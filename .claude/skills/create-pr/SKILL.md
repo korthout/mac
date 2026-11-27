@@ -10,7 +10,7 @@ Follow these steps in order. Each one exists because a past PR got it wrong.
 ## 1. Title
 
 
-In camunda/camunda, `<type>: <description>`, Conventional Commits, no scope (e.g. `fix: stop the due date checker from blocking the actor`). In camunda/camunda a CI check lints PR titles for release notes. Nico disagrees with that decision but follows it. Don't go back to the old "no prefix" rule. In other repos, don't use Conventional Commits in PR titles.
+In camunda/camunda, `<type>: <description>`, Conventional Commits, no scope (e.g. `fix: stop the due date checker from blocking the actor`). In camunda/camunda a CI check lints PR titles for release notes. Nico disagrees with that decision but follows it. Don't go back to the old "no prefix" rule. In other repos, follow the status quo: check recent merged PR titles (`gh pr list --state merged -L 20`). Use a Conventional Commits prefix if most have one, otherwise none.
 
 Name the effect, not the mechanism, same as a commit header.
 
