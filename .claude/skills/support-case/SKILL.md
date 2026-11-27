@@ -68,6 +68,8 @@ Support and others follow the case in its `#inc-support-*` channel. Work done on
 
 Update often, in small posts: one finding or one ask per post, as soon as you have it. Don't batch several findings into one long update.
 
+Work first on what the incident lead asked for most. When they ask "do we need an interim mitigation?", assess the need (who can exploit it, what it reaches in our setup, what the mitigation costs) before testing how a mitigation would work.
+
 After real progress (a finding, a question asked elsewhere, a decision), draft a short update with:
 
 - what we know
